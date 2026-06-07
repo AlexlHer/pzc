@@ -20,6 +20,8 @@
 export PZC_EDIT_SCRIPTS=${PZC_USER_CONFIG_DIR}/cmake_scripts
 mkdir -p ${PZC_EDIT_SCRIPTS}
 
+export PZC_CMAKE_TEMPLATE_CACHE=${TMP_DIR}/cmake_template_cache
+mkdir -p ${PZC_CMAKE_TEMPLATE_CACHE}
 
 
 # ---------------------------------------------------------------
@@ -610,6 +612,19 @@ function _pzc_common_initcmp()
   mkdir -p "${CMP_INSTALL_DIR}"
 
   cd "${CMP_BUILD_DIR}"
+
+  if [[ ! -e "${CMP_SOURCE_DIR}/CMakeUserPresets.json" ]]
+  then
+    _pzc_info "Generation of CMakeUserPresets.json in ${CMP_PROJECT_NAME} source..."
+    echo "{\"version\":4,\"vendor\":{\"pzc\": {\"cmpProject\":\"${CMP_PROJECT}\"}},\"include\":[\"${PZC_CMAKE_TEMPLATE_CACHE}/${CMP_PROJECT_NAME}.json\"]}" > "${CMP_SOURCE_DIR}/CMakeUserPresets.json"
+    if [[ $? != 0 ]]
+    then
+      _pzc_error "CMakeUserPresets.json cannot be writed. If you are in a container, you can generate it in source with command :"
+      _pzc_pensil_begin
+      echo "echo \"{\\\"version\\\":4,\\\"vendor\\\":{\\\"pzc\\\": {\\\"cmpProject\\\":\\\"${CMP_PROJECT}\\\"}},\\\"include\\\":[\\\"${PZC_CMAKE_TEMPLATE_CACHE}/${CMP_PROJECT_NAME}.json\\\"]}\" > CMakeUserPresets.json"
+      _pzc_pensil_end
+    fi
+  fi
 }
 
 
@@ -658,8 +673,8 @@ function _pzc_common_configcmp()
     return ${RET_CODE}
   fi
 
-  _pzc_info "Generation of CMakeUserPresets.json in ${CMP_PROJECT_NAME} source..."
-  echo "{\"version\":4,\"vendor\":{\"pzc\": {\"cmpProject\":\"${CMP_PROJECT}\"}},\"include\":[\"${_PZC_TMP_GEN_USER_PRESET_PATH}\"]}" > "${CMP_SOURCE_DIR}/CMakeUserPresets.json"
+  _pzc_debug "Generation of the redirection preset in TMP dir..."
+  echo "{\"version\":4,\"include\":[\"${_PZC_TMP_GEN_USER_PRESET_PATH}\"]}" > "${PZC_CMAKE_TEMPLATE_CACHE}/${CMP_PROJECT_NAME}.json"
 
   _pzc_pensil_begin
 
