@@ -10,6 +10,8 @@
 # Main completion section.
 # ------------------------------------------------------------------------------
 
+
+
 if [[ ${_PZC_OMP_AVAILABLE} = 1 ]]
 then
   source ${PZC_PZC_DIR}/plugins/oh-my-posh/oh-my-posh.zsh
