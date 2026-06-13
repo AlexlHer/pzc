@@ -24,6 +24,7 @@ then
   if [[ -v PZC_MISE_BIN ]] && [[ -e ${PZC_MISE_BIN} ]]
   then
     _pzc_debug "PZC_MISE_BIN = ${PZC_MISE_BIN} (user defined)"
+    alias mise='${PZC_MISE_BIN}'
 
   elif [[ -v PZC_MISE_BIN ]]
   then
@@ -47,6 +48,7 @@ then
       PZC_MISE_BIN=${ENVI_DIR}/pzc/progs/mise/mise
       _PZC_MISE_AVAILABLE=1
       _pzc_debug "PZC_MISE_BIN = ${PZC_MISE_BIN} (in pzc)"
+      alias mise='${PZC_MISE_BIN}'
       
     else
       _PZC_MISE_AVAILABLE=0
@@ -125,13 +127,11 @@ fi
 # Activate Mise
 # ------------------------------------------------------------------------------
 
-_PZC_MISE_LOADED=0
 
 if [[ ${_PZC_MISE_START_AT_LAUNCH} = 1 ]]
 then
-  _pzc_debug "Activate mise."
-  eval "$(${PZC_MISE_BIN} activate zsh)"
-  _PZC_MISE_LOADED=1
+  # _pzc_debug "Activate mise."
+  # eval "$(${PZC_MISE_BIN} activate zsh)"
 
 else
   _pzc_debug "Define smise function"
@@ -139,9 +139,5 @@ else
   {
     _pzc_info "Activate mise."
     eval "$(${PZC_MISE_BIN} activate zsh)"
-    _PZC_MISE_LOADED=1
   }
 fi
-
-# TODO : Voir pour demander à mise directement.
-PZC_MISE_INSTALL_DIR=${HOME}/.local/share/mise/installs

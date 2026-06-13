@@ -365,7 +365,7 @@ then
 
       if [[ ${_PZC_MISE_AVAILABLE} = 1 ]]
       then
-        _PZC_OMP_BIN=$(mise which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" oh-my-posh 2&>/dev/null)
+        _PZC_OMP_BIN=$(${PZC_MISE_BIN} which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" oh-my-posh 2&>/dev/null)
       fi
 
       if [[ -n ${_PZC_OMP_BIN} ]] && [[ -e ${_PZC_OMP_BIN} ]]
@@ -430,7 +430,7 @@ then
 
       if [[ ${_PZC_MISE_AVAILABLE} = 1 ]]
       then
-        PZC_EZA_BIN=$(mise which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" eza 2&>/dev/null)
+        PZC_EZA_BIN=$(${PZC_MISE_BIN} which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" eza 2&>/dev/null)
       fi
 
       if [[ -n ${PZC_EZA_BIN} ]] && [[ -e ${PZC_EZA_BIN} ]]
@@ -499,7 +499,7 @@ then
 
       if [[ ${_PZC_MISE_AVAILABLE} = 1 ]]
       then
-        PZC_CCACHE_BIN=$(mise which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" ccache 2&>/dev/null)
+        PZC_CCACHE_BIN=$(${PZC_MISE_BIN} which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" ccache 2&>/dev/null)
       fi
 
       if [[ -n ${PZC_CCACHE_BIN} ]] && [[ -e ${PZC_CCACHE_BIN} ]]
@@ -556,7 +556,7 @@ then
 
       if [[ ${_PZC_MISE_AVAILABLE} = 1 ]]
       then
-        _PZC_MOLD_PATH=$(mise which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" mold 2&>/dev/null)
+        _PZC_MOLD_PATH=$(${PZC_MISE_BIN} which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" mold 2&>/dev/null)
         if [[ -n ${_PZC_MOLD_PATH} ]]
         then
           _PZC_MOLD_PATH=$(dirname "${_PZC_MOLD_PATH}")
@@ -616,7 +616,7 @@ then
 
       if [[ ${_PZC_MISE_AVAILABLE} = 1 ]]
       then
-        _PZC_NINJA_PATH=$(mise which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" ninja 2&>/dev/null)
+        _PZC_NINJA_PATH=$(${PZC_MISE_BIN} which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" ninja 2&>/dev/null)
         if [[ -n ${_PZC_NINJA_PATH} ]]
         then
           _PZC_NINJA_PATH=$(dirname "${_PZC_NINJA_PATH}")
@@ -676,7 +676,7 @@ then
 
       if [[ ${_PZC_MISE_AVAILABLE} = 1 ]]
       then
-        _PZC_CMAKE_PATH=$(mise which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" cmake 2&>/dev/null)
+        _PZC_CMAKE_PATH=$(${PZC_MISE_BIN} which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" cmake 2&>/dev/null)
         if [[ -n ${_PZC_CMAKE_PATH} ]]
         then
           _PZC_CMAKE_PATH=$(dirname "${_PZC_CMAKE_PATH}")
@@ -780,7 +780,7 @@ then
 
       if [[ ${_PZC_MISE_AVAILABLE} = 1 ]]
       then
-        PZC_ATUIN_BIN=$(mise which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" atuin 2&>/dev/null)
+        PZC_ATUIN_BIN=$(${PZC_MISE_BIN} which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" atuin 2&>/dev/null)
       fi
 
       if [[ -n ${PZC_ATUIN_BIN} ]] && [[ -e ${PZC_ATUIN_BIN} ]]
@@ -839,7 +839,7 @@ then
 
       if [[ ${_PZC_MISE_AVAILABLE} = 1 ]]
       then
-        PZC_FZF_BIN=$(mise which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" fzf 2&>/dev/null)
+        PZC_FZF_BIN=$(${PZC_MISE_BIN} which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" fzf 2&>/dev/null)
       fi
 
       if [[ -n ${PZC_FZF_BIN} ]] && [[ -e ${PZC_FZF_BIN} ]]
@@ -898,7 +898,7 @@ then
 
       if [[ ${_PZC_MISE_AVAILABLE} = 1 ]]
       then
-        PZC_YAZI_BIN=$(mise which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" yazi 2&>/dev/null)
+        PZC_YAZI_BIN=$(${PZC_MISE_BIN} which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" yazi 2&>/dev/null)
       fi
 
       if [[ -n ${PZC_YAZI_BIN} ]] && [[ -e ${PZC_YAZI_BIN} ]]
