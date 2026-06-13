@@ -103,7 +103,7 @@ then
     _pzc_info "Installing additionnal packages in container..."
     pm exec $CONTAINER apt-get update
 
-    for i in wget curl zsh unzip git vim gdb xcb libgtk-3-common libasound2 libasound2t64 libdbus-glib-1-2;
+    for i in jq wget curl zsh unzip git vim gdb xcb libgtk-3-common libasound2 libasound2t64 libdbus-glib-1-2;
     do 
       _pzc_info "Installing $i..."
       pm exec -e DEBIAN_FRONTEND=noninteractive $CONTAINER apt-get install -y $i;
