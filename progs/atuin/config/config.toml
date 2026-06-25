@@ -69,12 +69,12 @@ style = "full"
 
 ## the maximum number of lines the interface should take up
 ## set it to 0 to always go full screen
-inline_height = 15
+inline_height = 0
 
 ## the maximum number of lines the interface should take up
 ## when atuin is invoked from a shell up-key binding
 ## the accepted values are identical to those of "inline_height"
-# inline_height_shell_up_key_binding = 0
+inline_height_shell_up_key_binding = 15
 
 ## Invert the UI - put the search bar at the top , Default to `false`
 # invert = false
@@ -125,12 +125,12 @@ inline_height = 15
 ## Configure the maximum height of the preview to show.
 ## Useful when you have long scripts in your history that you want to distinguish
 ## by more than the first few lines.
-# max_preview_height = 4
+max_preview_height = 4
 
 ## Configure whether or not to show the help row, which includes the current Atuin
 ## version (and whether an update is available), a keymap hint, and the total
 ## amount of commands in your history.
-# show_help = true
+show_help = false
 
 ## Configure whether or not to show tabs for search and inspect
 show_tabs = false
@@ -155,7 +155,7 @@ show_tabs = false
 enter_accept = true
 
 ## Defaults to false. If enabled, when triggered after && or ||, Atuin will complete commands to chain rather than replace the current line.
-# command_chaining = false
+command_chaining = true
 
 ## Defaults to "emacs".  This specifies the keymap on the startup of `atuin
 ## search`.  If this is set to "auto", the startup keymap mode in the Atuin
@@ -235,7 +235,7 @@ records = true
 ## auto: length of the selected command.
 ## static: length of the longest command stored in the history.
 ## fixed: use max_preview_height as fixed height.
-# strategy = "auto"
+strategy = "static"
 
 [daemon]
 ## Enables using the daemon to sync. Requires the daemon to be running in the background. Start it with `atuin daemon`
@@ -267,7 +267,7 @@ enabled = false
 ##    https://ogeon.github.io/docs/palette/master/palette/named/index.html
 ## If you provide a custom theme file, it should be  called "NAME.toml" and the theme below
 ## should be the stem, i.e. `theme = "NAME"` for your chosen NAME.
-# name = "autumn"
+name = "autumn"
 
 ## Whether the theme manager should output normal or extra information to help fix themes.
 ## Boolean, true or false. If unset, left up to the theme manager.
