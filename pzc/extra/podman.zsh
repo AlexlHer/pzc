@@ -89,6 +89,7 @@ then
       -v ${_SET_LARGE_DIR}:/root/pzc_dirs:z \
       -e OMPI_ALLOW_RUN_AS_ROOT=1 \
       -e OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1 \
+      -e TERM=xterm-256color \
       -e USER=root \
       -w /root \
       -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix \
