@@ -20,6 +20,11 @@ _pzc_welcome()
 {
   if [[ -v _PZC_DISABLE_WELCOME ]]
   then
+    if [[ ${_PZC_IS_DEV_VERSION} = 1 ]]
+    then
+    echo "Personal ZSH Configuration v${PZC_VERSION[1]}.${PZC_VERSION[2]}.${PZC_VERSION[3]}"
+    echo "DEVELOPMENT VERSION"
+    fi
     return 0
   fi
 
@@ -31,6 +36,10 @@ _pzc_welcome()
   echo "\_|   \_____/\____/ "
   echo ""
   echo "Personal ZSH Configuration v${PZC_VERSION[1]}.${PZC_VERSION[2]}.${PZC_VERSION[3]}"
+  if [[ ${_PZC_IS_DEV_VERSION} = 1 ]]
+  then
+  echo "DEVELOPMENT VERSION"
+  fi
   echo ""
 
   _pzc_debug "Debug mode activated. Edit your pzcrc to disable it."

@@ -20,6 +20,10 @@ source ${PZC_PZC_DIR}/pzc/core/internal.zsh
 _pzc_main()
 {
   source ${PZC_PZC_DIR}/pzc/version.zsh
+  if [[ ${_PZC_FATAL_ERROR} = 1 ]]
+  then
+    return 0
+  fi
 
   source ${PZC_PZC_DIR}/pzc/core/pzc_config.zsh
   _pzc_config

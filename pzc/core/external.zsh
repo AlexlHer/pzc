@@ -331,67 +331,33 @@ else
   PZC_GPU_AVAILABLE=0
 fi
 
+source ${PZC_PZC_DIR}/pzc/core/external_v2.zsh
+
+if [[ ! -e ${PZC_PZC_PKG_LOCATION_FILE} ]]
+then
+  _pzc_error "pkg_location not found"
+else
+  source ${PZC_PZC_PKG_LOCATION_FILE}
+fi
+
 
 
 # ------------------------------------------------------------------------------
 # OhMyPosh
 # ------------------------------------------------------------------------------
 
-if [[ ${_PZC_OMP_AVAILABLE} = 1 ]]
+if [[ "${_PZC_OMP_BIN}" != "" ]]
 then
-
-  if [[ -v _PZC_OMP_BIN ]] && [[ -e ${_PZC_OMP_BIN} ]]
+  if [[ -x "$(command -v ${_PZC_OMP_BIN})" ]]
   then
-    _pzc_debug "_PZC_OMP_BIN = ${_PZC_OMP_BIN} (user defined)"
-
-  elif [[ -v _PZC_OMP_BIN ]]
-  then
-    _pzc_warning "Your Oh-My-Posh is not found. Search other Oh-My-Posh."
-    _pzc_debug "_PZC_OMP_BIN = ${_PZC_OMP_BIN} (unset)"
-    unset _PZC_OMP_BIN
-
+    _pzc_debug "Oh-My-Posh enable"
+    _PZC_OMP_AVAILABLE=1
+  else
+    _pzc_error "Oh-My-Posh not found, call TODO"
   fi
-
-  if [[ ! -v _PZC_OMP_BIN ]]
-  then
-
-    if [[ -x "$(command -v oh-my-posh)" ]]
-    then
-      _PZC_OMP_BIN=oh-my-posh
-      _PZC_OMP_AVAILABLE=1
-      _pzc_debug "Oh-My-Posh found in PATH"
-
-    else
-
-      if [[ ${_PZC_MISE_AVAILABLE} = 1 ]]
-      then
-        _PZC_OMP_BIN=$(${PZC_MISE_BIN} which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" oh-my-posh 2&>/dev/null)
-      fi
-
-      if [[ -n ${_PZC_OMP_BIN} ]] && [[ -e ${_PZC_OMP_BIN} ]]
-      then
-        _PZC_OMP_AVAILABLE=1
-        _pzc_debug "_PZC_OMP_BIN = ${_PZC_OMP_BIN} (with Mise-en-place)"
-
-      elif [[ -e ${PZC_PZC_DIR}/progs/oh-my-posh/oh-my-posh ]]
-      then
-        _pzc_warning "Your installation of Oh-My-Posh is deprecated, please reinstall it with Mise-en-place and remove your actual install (${PZC_PZC_DIR}/progs/oh-my-posh/oh-my-posh)."
-        _pzc_info "You can install Oh-My-Posh with Mise-en-place with this command 'pzc_install_omp'."
-        _PZC_OMP_BIN=${PZC_PZC_DIR}/progs/oh-my-posh/oh-my-posh
-        _PZC_OMP_AVAILABLE=1
-        _pzc_debug "_PZC_OMP_BIN = ${_PZC_OMP_BIN} (in pzc)"
-
-      else
-        _PZC_OMP_AVAILABLE=0
-        _pzc_warning "Oh-My-Posh is not installed (https://github.com/JanDeDobbeleer/oh-my-posh). You can install Oh-My-Posh with Mise-en-place with the command 'pzc_install_omp' or disable Oh-My-Posh search in pzcrc."
-
-      fi
-    fi
-  fi
-
 else
   _pzc_debug "Oh-My-Posh disabled"
-
+  _PZC_OMP_AVAILABLE=0
 fi
 
 
