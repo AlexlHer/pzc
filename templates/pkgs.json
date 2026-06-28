@@ -1,12 +1,67 @@
 {
-  "pzc_config_pkgs": {
+  "pzc_config_general": {
     "version": [8, 0, 0],
+    "large_dir": "${HOME}",
+    "tmp_dir": "/tmp/pzc",
+    "work_dir": "${large_dir}/work",
+    "build_dir": "${large_dir}/build",
+    "install_dir": "${large_dir}/install",
+    "envi_dir": "${large_dir}/environment",
+    "ccache_dir": "${build_dir}/ccache"
+  },
+  "pzc_config_pkgs": {
     "pkgs":{
       "#": "Comment",
-      "oh_my_posh":{
+      "oh_my_posh": {
         "enable": true,
         "executable_path": "",
         "theme_file": ""
+      },
+      "eza": {
+        "enable": true,
+        "executable_path": "",
+        "config_dir": ""
+      },
+      "ccache": {
+        "enable": true,
+        "executable_path": ""
+      },
+      "mold": {
+        "enable": true,
+        "executable_path": ""
+      },
+      "ninja": {
+        "enable": true,
+        "executable_path": ""
+      },
+      "cmake": {
+        "enable": true,
+        "executable_path": ""
+      },
+      "taskwarrior": {
+        "enable": true,
+        "executable_path": ""
+      },
+      "atuin": {
+        "enable": true,
+        "executable_path": "",
+        "config_dir": ""
+      },
+      "fzf": {
+        "enable": true,
+        "executable_path": ""
+      },
+      "yazi": {
+        "enable": true,
+        "executable_path": ""
+      },
+      "python": {
+        "enable": true,
+        "executable_path": ""
+      },
+      "mise_en_place": {
+        "enable": true,
+        "executable_path": ""
       }
     }
   }

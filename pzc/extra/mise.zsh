@@ -14,54 +14,6 @@
 
 mkdir -p "${ENVI_DIR}/pzc/progs/mise"
 
-# ------------------------------------------------------------------------------
-# Search
-# ------------------------------------------------------------------------------
-
-if [[ ${_PZC_MISE_AVAILABLE} = 1 ]]
-then
-
-  if [[ -v PZC_MISE_BIN ]] && [[ -e ${PZC_MISE_BIN} ]]
-  then
-    _pzc_debug "PZC_MISE_BIN = ${PZC_MISE_BIN} (user defined)"
-    alias mise='${PZC_MISE_BIN}'
-
-  elif [[ -v PZC_MISE_BIN ]]
-  then
-    _pzc_warning "Your mise-en-place is not found. Search other mise."
-    _pzc_debug "PZC_MISE_BIN = ${PZC_MISE_BIN} (unset)"
-    unset PZC_MISE_BIN
-
-  fi
-
-  if [[ ! -v PZC_MISE_BIN ]]
-  then
-
-    if [[ -x "$(command -v mise)" ]]
-    then
-      PZC_MISE_BIN=mise
-      _PZC_MISE_AVAILABLE=1
-      _pzc_debug "PZC_MISE_BIN = ${PZC_MISE_BIN} (in PATH)"
-
-    elif [[ -e ${ENVI_DIR}/pzc/progs/mise/mise ]]
-    then
-      PZC_MISE_BIN=${ENVI_DIR}/pzc/progs/mise/mise
-      _PZC_MISE_AVAILABLE=1
-      _pzc_debug "PZC_MISE_BIN = ${PZC_MISE_BIN} (in pzc)"
-      alias mise='${PZC_MISE_BIN}'
-      
-    else
-      _PZC_MISE_AVAILABLE=0
-      _pzc_warning "Mise-en-place is not installed (https://github.com/jdx/mise). You can install mise-en-place in the PZC environment folder with the command 'pzc_install_mise' or disable mise search in pzcrc."
-
-    fi
-  fi
-
-else
-  _pzc_debug "Mise disabled."
-
-fi
-
 
 
 # ------------------------------------------------------------------------------
@@ -111,33 +63,22 @@ then
 fi
 
 # ------------------------------------------------------------------------------
-# ------------------------------------------------------------------------------
-
-if [[ ${_PZC_MISE_AVAILABLE} = 0 ]]
-then
-  return 0
-fi
-
-# ------------------------------------------------------------------------------
-# ------------------------------------------------------------------------------
-
-
-
-# ------------------------------------------------------------------------------
 # Activate Mise
 # ------------------------------------------------------------------------------
 
-
-if [[ ${_PZC_MISE_START_AT_LAUNCH} = 1 ]]
+if [[ ${_PZC_MISE_AVAILABLE} = 1 ]]
 then
-  # _pzc_debug "Activate mise."
-  # eval "$(${PZC_MISE_BIN} activate zsh)"
+  if [[ ${_PZC_MISE_START_AT_LAUNCH} = 1 ]]
+  then
+    # _pzc_debug "Activate mise."
+    # eval "$(${PZC_MISE_BIN} activate zsh)"
 
-else
-  _pzc_debug "Define smise function"
-  function smise()
-  {
-    _pzc_info "Activate mise."
-    eval "$(${PZC_MISE_BIN} activate zsh)"
-  }
+  else
+    _pzc_debug "Define smise function"
+    function smise()
+    {
+      _pzc_info "Activate mise."
+      eval "$(${PZC_MISE_BIN} activate zsh)"
+    }
+  fi
 fi
