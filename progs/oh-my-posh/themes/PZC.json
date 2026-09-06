@@ -135,6 +135,17 @@
         },
         {
           "properties": {
+            "cache_duration": "none"
+          },
+          "template": "{{ if .Env.SPACK_ENV }} \ue8aa {{ base .Env.SPACK_ENV }} {{ end }}",
+          "foreground": "#0E3D7E",
+          "powerline_symbol": "\ue0b0",
+          "background": "#ffea00",
+          "type": "text",
+          "style": "powerline"
+        },
+        {
+          "properties": {
             "cache_duration": "none",
             "fetch_stash_count": true,
             "fetch_status": true,
