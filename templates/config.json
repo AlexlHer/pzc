@@ -47,6 +47,14 @@
   "pzc_config_pkgs": {
     "pkgs":{
       "#": "Comment",
+      "mise_en_place": {
+        "enable": true,
+        "executable_path": ""
+      },
+      "spack": {
+        "enable": true,
+        "src_path": ""
+      },
       "oh_my_posh": {
         "enable": true,
         "executable_path": "",
@@ -91,10 +99,6 @@
         "executable_path": ""
       },
       "python": {
-        "enable": true,
-        "executable_path": ""
-      },
-      "mise_en_place": {
         "enable": true,
         "executable_path": ""
       }

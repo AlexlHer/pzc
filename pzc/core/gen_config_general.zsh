@@ -35,8 +35,6 @@ function _pzc_generate_config_general()
   if [[ ${PZC_DISABLE_WELCOME} = true ]]
   then
     echo "local _PZC_DISABLE_WELCOME=1" >> ${PZC_PZC_CONFIG_FILE}
-  else
-    echo "#local _PZC_DISABLE_WELCOME=1" >> ${PZC_PZC_CONFIG_FILE}
   fi
 
 

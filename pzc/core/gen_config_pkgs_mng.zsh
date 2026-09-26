@@ -66,4 +66,49 @@ function _pzc_generate_config_pkgs_mng()
   then
     echo "alias mise='${PZC_MISE_BIN}'" >> ${PZC_PZC_CONFIG_FILE}
   fi
+
+
+
+  # ---------------------------------------
+  # Spack
+  # ---------------------------------------
+
+  local PZC_ENABLE_SPACK=$(jq -r '.pzc_config_pkgs.pkgs.spack.enable' ${PZC_PZC_CONFIG_FILE_V8})
+  if [[ ${PZC_ENABLE_SPACK} = true ]]
+  then
+    # Attention : Ici, PZC_SPACK_PATH et _PZC_SPACK_AVAILABLE sortent de la fonction. Spack peut être nécessaire pour trouver les autres packages ! 
+    PZC_SPACK_PATH=$(jq -r '.pzc_config_pkgs.pkgs.spack.src_path' ${PZC_PZC_CONFIG_FILE_V8})
+    if [[ "${PZC_SPACK_PATH}" == "null" ]]
+    then
+      PZC_SPACK_PATH=""
+    fi
+    if [[ "${PZC_SPACK_PATH}" != "" ]]
+    then
+      if [[ -e ${PZC_SPACK_PATH}/share/spack/setup-env.sh ]]
+      then
+        _pzc_debug "PZC_SPACK_PATH = ${PZC_SPACK_PATH} (user defined)"
+        _PZC_SPACK_AVAILABLE=1
+      else
+        _pzc_warning "Your Spack is not valid (\"${PZC_SPACK_PATH}/share/spack/setup-env.sh\" not found)."
+        PZC_SPACK_PATH=""
+      fi
+    else
+      PZC_SPACK_PATH="${ENVI_DIR}/spack"
+      if [[ -e ${PZC_SPACK_PATH}/share/spack/setup-env.sh ]]
+      then
+        _pzc_debug "PZC_SPACK_PATH = ${PZC_SPACK_PATH}"
+        _PZC_SPACK_AVAILABLE=1
+      else
+        _pzc_warning "The Spack install is not valid (\"${PZC_SPACK_PATH}/share/spack/setup-env.sh\" not found). You can delete it and reclone Spack."
+        PZC_SPACK_PATH=""
+      fi
+    fi
+    if [[ "${PZC_SPACK_PATH}" == "" ]]
+    then
+      _pzc_info "To initialise Spack, you can call pzc_install_spack function."
+    fi
+  fi
+
+  echo "PZC_SPACK_PATH=\"${PZC_SPACK_PATH}\"" >> ${PZC_PZC_CONFIG_FILE}
+
 }
