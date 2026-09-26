@@ -25,327 +25,6 @@ fi
 
 
 # ------------------------------------------------------------------------------
-# Check compilers
-# ------------------------------------------------------------------------------
-
-if [[ ${_PZC_GCC_AVAILABLE} = 1 ]]
-then
-
-  if [[ -v PZC_C_GCC_BIN ]] && [[ -x "$(command -v ${PZC_C_GCC_BIN})" ]]
-  then
-    _pzc_debug "PZC_C_GCC_BIN = ${PZC_C_GCC_BIN} (user defined)"
-
-  elif [[ -v PZC_C_GCC_BIN ]]
-  then
-    _pzc_warning "Your gcc is not found. Search other gcc."
-    _pzc_debug "PZC_C_GCC_BIN = ${PZC_C_GCC_BIN} (unset)"
-    unset PZC_C_GCC_BIN
-
-  fi
-
-  if [[ ! -v PZC_C_GCC_BIN ]]
-  then
-
-    if [[ -x "$(command -v gcc)" ]]
-    then
-      PZC_C_GCC_BIN=gcc
-      _PZC_GCC_AVAILABLE=1
-      _pzc_debug "PZC_C_GCC_BIN = ${PZC_C_GCC_BIN} (in PATH)"
-      
-    else
-      _PZC_GCC_AVAILABLE=0
-      _pzc_warning "GCC is not installed. You can disable gcc search in pzcrc."
-
-    fi
-  fi
-else
-  _pzc_debug "GCC disabled."
-
-fi
-
-if [[ ${_PZC_GCC_AVAILABLE} = 1 ]]
-then
-
-  if [[ -v PZC_CXX_GCC_BIN ]] && [[ -x "$(command -v ${PZC_CXX_GCC_BIN})" ]]
-  then
-    _pzc_debug "PZC_CXX_GCC_BIN = ${PZC_CXX_GCC_BIN} (user defined)"
-
-  elif [[ -v PZC_CXX_GCC_BIN ]]
-  then
-    _pzc_warning "Your g++ is not found. Search other g++."
-    _pzc_debug "PZC_CXX_GCC_BIN = ${PZC_CXX_GCC_BIN} (unset)"
-    unset PZC_CXX_GCC_BIN
-
-  fi
-
-  if [[ ! -v PZC_CXX_GCC_BIN ]]
-  then
-
-    if [[ -x "$(command -v g++)" ]]
-    then
-      PZC_CXX_GCC_BIN=g++
-      _PZC_GCC_AVAILABLE=1
-      _pzc_debug "PZC_CXX_GCC_BIN = ${PZC_CXX_GCC_BIN} (in PATH)"
-      
-    else
-      _PZC_GCC_AVAILABLE=0
-      _pzc_warning "G++ is not installed. You can disable g++ search in pzcrc."
-
-    fi
-  fi
-else
-  _pzc_debug "G++ disabled."
-
-fi
-
-if [[ ${_PZC_CLANG_AVAILABLE} = 1 ]]
-then
-
-  if [[ -v PZC_C_CLANG_BIN ]] && [[ -x "$(command -v ${PZC_C_CLANG_BIN})" ]]
-  then
-    _pzc_debug "PZC_C_CLANG_BIN = ${PZC_C_CLANG_BIN} (user defined)"
-
-  elif [[ -v PZC_C_CLANG_BIN ]]
-  then
-    _pzc_warning "Your clang is not found. Search other clang."
-    _pzc_debug "PZC_C_CLANG_BIN = ${PZC_C_CLANG_BIN} (unset)"
-    unset PZC_C_CLANG_BIN
-
-  fi
-
-  if [[ ! -v PZC_C_CLANG_BIN ]]
-  then
-
-    if [[ -x "$(command -v clang)" ]]
-    then
-      PZC_C_CLANG_BIN=clang
-      _PZC_CLANG_AVAILABLE=1
-      _pzc_debug "PZC_C_CLANG_BIN = ${PZC_C_CLANG_BIN} (in PATH)"
-      
-    else
-      _PZC_CLANG_AVAILABLE=0
-      _pzc_warning "CLang is not installed. You can disable clang search in pzcrc."
-
-    fi
-  fi
-else
-  _pzc_debug "CLang disabled."
-
-fi
-
-if [[ ${_PZC_CLANG_AVAILABLE} = 1 ]]
-then
-
-  if [[ -v PZC_CXX_CLANG_BIN ]] && [[ -x "$(command -v ${PZC_CXX_CLANG_BIN})" ]]
-  then
-    _pzc_debug "PZC_CXX_CLANG_BIN = ${PZC_CXX_CLANG_BIN} (user defined)"
-
-  elif [[ -v PZC_CXX_CLANG_BIN ]]
-  then
-    _pzc_warning "Your clang++ is not found. Search other clang++."
-    _pzc_debug "PZC_CXX_CLANG_BIN = ${PZC_CXX_CLANG_BIN} (unset)"
-    unset PZC_CXX_CLANG_BIN
-
-  fi
-
-  if [[ ! -v PZC_CXX_CLANG_BIN ]]
-  then
-
-    if [[ -x "$(command -v clang++)" ]]
-    then
-      PZC_CXX_CLANG_BIN=clang++
-      _PZC_CLANG_AVAILABLE=1
-      _pzc_debug "PZC_CXX_CLANG_BIN = ${PZC_CXX_CLANG_BIN} (in PATH)"
-      
-    else
-      _PZC_CLANG_AVAILABLE=0
-      _pzc_warning "CLang++ is not installed. You can disable clang++ search in pzcrc."
-
-    fi
-  fi
-else
-  _pzc_debug "CLang++ disabled."
-
-fi
-
-if [[ ${_PZC_NVCC_BIN_AVAILABLE} = 1 ]]
-then
-
-  if [[ -v PZC_NVCC_BIN ]] && [[ -x "$(command -v ${PZC_NVCC_BIN})" ]]
-  then
-    _pzc_debug "PZC_NVCC_BIN = ${PZC_NVCC_BIN} (user defined)"
-
-  elif [[ -v PZC_NVCC_BIN ]]
-  then
-    _pzc_warning "Your nvcc is not found. Search other nvcc."
-    _pzc_debug "PZC_NVCC_BIN = ${PZC_NVCC_BIN} (unset)"
-    unset PZC_NVCC_BIN
-
-  fi
-
-  if [[ ! -v PZC_NVCC_BIN ]]
-  then
-
-    if [[ -x "$(command -v nvcc)" ]]
-    then
-      PZC_NVCC_BIN=nvcc
-      _PZC_NVCC_BIN_AVAILABLE=1
-      _pzc_debug "PZC_NVCC_BIN = ${PZC_NVCC_BIN} (in PATH)"
-      
-    else
-      _PZC_NVCC_BIN_AVAILABLE=0
-      _pzc_warning "NVCC is not installed. You can disable nvcc search in pzcrc."
-
-    fi
-  fi
-
-  if [[ ${_PZC_NVCC_BIN_AVAILABLE} = 1 ]]
-  then
-
-    if [[ -v PZC_NVCC_HOST_COMPILER_BIN ]] && [[ -x "$(command -v ${PZC_NVCC_HOST_COMPILER_BIN})" ]]
-    then
-      _pzc_debug "PZC_NVCC_HOST_COMPILER_BIN = ${PZC_NVCC_HOST_COMPILER_BIN} (user defined)"
-
-    elif [[ -v PZC_NVCC_HOST_COMPILER_BIN ]]
-    then
-      _pzc_warning "Your host compiler for nvcc is not found. Search other one."
-      _pzc_debug "PZC_NVCC_HOST_COMPILER_BIN = ${PZC_NVCC_HOST_COMPILER_BIN} (unset)"
-      unset PZC_NVCC_HOST_COMPILER_BIN
-
-    fi
-
-    if [[ ! -v PZC_NVCC_HOST_COMPILER_BIN ]]
-    then
-
-      if [[ ${_PZC_GCC_AVAILABLE} = 1 ]]
-      then
-        PZC_NVCC_HOST_COMPILER_BIN=${PZC_CXX_GCC_BIN}
-        _PZC_NVCC_BIN_AVAILABLE=1
-        _pzc_debug "PZC_NVCC_HOST_COMPILER_BIN = ${PZC_NVCC_HOST_COMPILER_BIN} (G++) (in PATH)"
-
-      elif [[ ${_PZC_CLANG_AVAILABLE} = 1 ]]
-      then
-        PZC_NVCC_HOST_COMPILER_BIN=${PZC_CXX_CLANG_BIN}
-        _PZC_NVCC_BIN_AVAILABLE=1
-        _pzc_debug "PZC_NVCC_HOST_COMPILER_BIN = ${PZC_NVCC_HOST_COMPILER_BIN} (CLang++) (in PATH)"
-
-      else
-        _PZC_NVCC_BIN_AVAILABLE=0
-        _pzc_warning "Host compiler for nvcc is not found. You can disable nvcc search in pzcrc."
-
-      fi
-    fi
-  fi
-else
-  _pzc_debug "NVCC disabled."
-
-fi
-
-if [[ ${_PZC_SYCL_BIN_AVAILABLE} = 1 ]]
-then
-
-  if [[ -v PZC_SYCL_BIN ]] && [[ -x "$(command -v ${PZC_SYCL_BIN})" ]]
-  then
-    _pzc_debug "PZC_SYCL_BIN = ${PZC_SYCL_BIN} (user defined)"
-
-  elif [[ -v PZC_SYCL_BIN ]]
-  then
-    _pzc_warning "Your sycl is not found. Search other sycl."
-    _pzc_debug "PZC_SYCL_BIN = ${PZC_SYCL_BIN} (unset)"
-    unset PZC_SYCL_BIN
-
-  fi
-
-  if [[ ! -v PZC_SYCL_BIN ]]
-  then
-
-    if [[ -x "$(command -v sycl)" ]]
-    then
-      PZC_SYCL_BIN=sycl
-      _PZC_SYCL_BIN_AVAILABLE=1
-      _pzc_debug "PZC_SYCL_BIN = ${PZC_SYCL_BIN} (in PATH)"
-      
-    else
-      _PZC_SYCL_BIN_AVAILABLE=0
-      _pzc_warning "Sycl is not installed. You can disable sycl search in pzcrc."
-
-    fi
-  fi
-
-  if [[ ${_PZC_SYCL_BIN_AVAILABLE} = 1 ]]
-  then
-
-    if [[ -v PZC_SYCL_HOST_COMPILER_BIN ]] && [[ -x "$(command -v ${PZC_SYCL_HOST_COMPILER_BIN})" ]]
-    then
-      _pzc_debug "PZC_SYCL_HOST_COMPILER_BIN = ${PZC_SYCL_HOST_COMPILER_BIN} (user defined)"
-
-    elif [[ -v PZC_SYCL_HOST_COMPILER_BIN ]]
-    then
-      _pzc_warning "Your host compiler for sycl is not found. Search other one."
-      _pzc_debug "PZC_SYCL_HOST_COMPILER_BIN = ${PZC_SYCL_HOST_COMPILER_BIN} (unset)"
-      unset PZC_SYCL_HOST_COMPILER_BIN
-
-    fi
-
-    if [[ ! -v PZC_SYCL_HOST_COMPILER_BIN ]]
-    then
-
-      if [[ ${_PZC_CLANG_AVAILABLE} = 1 ]]
-      then
-        PZC_SYCL_HOST_COMPILER_BIN=${PZC_CXX_CLANG_BIN}
-        _PZC_SYCL_BIN_AVAILABLE=1
-        _pzc_debug "PZC_SYCL_HOST_COMPILER_BIN = ${PZC_SYCL_HOST_COMPILER_BIN} (CLang++) (in PATH)"
-
-      elif [[ ${_PZC_GCC_AVAILABLE} = 1 ]]
-      then
-        PZC_SYCL_HOST_COMPILER_BIN=${PZC_CXX_GCC_BIN}
-        _PZC_SYCL_BIN_AVAILABLE=1
-        _pzc_debug "PZC_SYCL_HOST_COMPILER_BIN = ${PZC_SYCL_HOST_COMPILER_BIN} (G++) (in PATH)"
-
-      else
-        _PZC_SYCL_BIN_AVAILABLE=0
-        _pzc_warning "Host compiler for sycl is not found. You can disable sycl search in pzcrc."
-
-      fi
-    fi
-  fi
-
-else
-  _pzc_debug "SYCL disabled."
-
-fi
-
-if [[ ${_PZC_GCC_AVAILABLE} = 1 ]] || [[ ${_PZC_CLANG_AVAILABLE} = 1 ]]
-then
-  PZC_C_CXX_AVAILABLE=1
-
-else
-  PZC_C_CXX_AVAILABLE=0
-fi
-
-if [[ ${_PZC_NVCC_BIN_AVAILABLE} = 1 ]] || [[ ${_PZC_SYCL_BIN_AVAILABLE} = 1 ]]
-then
-  PZC_GPU_AVAILABLE=1
-
-else
-  PZC_GPU_AVAILABLE=0
-fi
-
-# ------------------------------------------------------------------------------
-# ------------------------------------------------------------------------------
-
-source ${PZC_PZC_DIR}/pzc/core/external_v2.zsh
-
-if [[ ! -e ${PZC_PZC_PKG_LOCATION_FILE} ]]
-then
-  _pzc_error "pkg_location not found"
-else
-  source ${PZC_PZC_PKG_LOCATION_FILE}
-fi
-
-
-
-# ------------------------------------------------------------------------------
 # OhMyPosh
 # ------------------------------------------------------------------------------
 
@@ -611,6 +290,108 @@ then
 else
   _pzc_debug "Mise disabled"
   _PZC_MISE_AVAILABLE=0
+fi
+
+
+
+# ------------------------------------------------------------------------------
+# GCC/G++
+# ------------------------------------------------------------------------------
+
+if [[ "${PZC_C_GCC_BIN}" != "" ]]
+then
+  if [[ -x "$(command -v ${PZC_C_GCC_BIN})" ]] && [[ -x "$(command -v ${PZC_CXX_GCC_BIN})" ]]
+  then
+    _pzc_debug "GCC enable"
+    _PZC_GCC_AVAILABLE=1
+  else
+    _pzc_error "GCC not found, call TODO"
+  fi
+else
+  _pzc_debug "GCC disabled"
+  _PZC_GCC_AVAILABLE=0
+fi
+
+
+
+# ------------------------------------------------------------------------------
+# Clang/Clang++
+# ------------------------------------------------------------------------------
+
+if [[ "${PZC_C_CLANG_BIN}" != "" ]]
+then
+  if [[ -x "$(command -v ${PZC_C_CLANG_BIN})" ]] && [[ -x "$(command -v ${PZC_CXX_CLANG_BIN})" ]]
+  then
+    _pzc_debug "Clang enable"
+    _PZC_CLANG_AVAILABLE=1
+  else
+    _pzc_error "Clang not found, call TODO"
+  fi
+else
+  _pzc_debug "Clang disabled"
+  _PZC_CLANG_AVAILABLE=0
+fi
+
+
+
+# ------------------------------------------------------------------------------
+# NVCC
+# ------------------------------------------------------------------------------
+
+if [[ "${PZC_NVCC_BIN}" != "" ]]
+then
+  if [[ -x "$(command -v ${PZC_NVCC_BIN})" ]]
+  then
+    _pzc_debug "NVCC enable"
+    _PZC_NVCC_BIN_AVAILABLE=1
+  else
+    _pzc_error "NVCC not found, call TODO"
+  fi
+else
+  _pzc_debug "NVCC disabled"
+  _PZC_NVCC_BIN_AVAILABLE=0
+fi
+
+
+
+# ------------------------------------------------------------------------------
+# SYCL
+# ------------------------------------------------------------------------------
+
+if [[ "${PZC_SYCL_BIN}" != "" ]]
+then
+  if [[ -x "$(command -v ${PZC_SYCL_BIN})" ]]
+  then
+    _pzc_debug "SYCL enable"
+    _PZC_SYCL_BIN_AVAILABLE=1
+  else
+    _pzc_error "SYCL not found, call TODO"
+  fi
+else
+  _pzc_debug "SYCL disabled"
+  _PZC_SYCL_BIN_AVAILABLE=0
+fi
+
+
+
+# ------------------------------------------------------------------------------
+# Final check compilers
+# ------------------------------------------------------------------------------
+
+if [[ ${_PZC_GCC_AVAILABLE} = 1 ]] || [[ ${_PZC_CLANG_AVAILABLE} = 1 ]]
+then
+  PZC_C_CXX_AVAILABLE=1
+
+else
+  PZC_C_CXX_AVAILABLE=0
+fi
+
+if [[ ${_PZC_NVCC_BIN_AVAILABLE} = 1 ]] || [[ ${_PZC_SYCL_BIN_AVAILABLE} = 1 ]]
+then
+  PZC_GPU_AVAILABLE=1
+
+else
+  PZC_GPU_AVAILABLE=0
 fi
 
 

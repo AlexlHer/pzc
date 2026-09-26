@@ -1,13 +1,48 @@
 {
   "pzc_config_general": {
     "version": [8, 0, 0],
+    "file_editor": "vim",
+    "disable_welcome": false,
+    "log_info": true,
+    "log_warning": true,
+    "log_error": true,
+    "log_debug": false
+  },
+  "pzc_config_dirs": {
     "large_dir": "${HOME}",
     "tmp_dir": "/tmp/pzc",
-    "work_dir": "${large_dir}/work",
-    "build_dir": "${large_dir}/build",
-    "install_dir": "${large_dir}/install",
-    "envi_dir": "${large_dir}/environment",
-    "ccache_dir": "${build_dir}/ccache"
+    "work_dir": "${LARGE_DIR}/work",
+    "build_dir": "${LARGE_DIR}/build",
+    "install_dir": "${LARGE_DIR}/install",
+    "envi_dir": "${LARGE_DIR}/environment",
+    "ccache_dir": "${BUILD_DIR}/ccache"
+  },
+  "pzc_config_compiler": {
+    "#1": "GCC or CLANG",
+    "c_cxx_default_compiler": "GCC",
+    "gcc": {
+      "available": true,
+      "c_executable_path": "gcc",
+      "cc_executable_path": "g++"
+    },
+    "clang": {
+      "available": true,
+      "c_executable_path": "clang",
+      "cc_executable_path": "clang++"
+    },
+    "#2": "NVCC or SYCL",
+    "gpu_default_compiler": "NVCC",
+    "gpu_target_arch": "89",
+    "nvcc": {
+      "available": true,
+      "executable_path": "nvcc",
+      "host_executable_path": "g++12"
+    },
+    "sycl": {
+      "available": true,
+      "executable_path": "sycl",
+      "host_executable_path": "clang++"
+    }
   },
   "pzc_config_pkgs": {
     "pkgs":{
