@@ -19,7 +19,7 @@ function _pzc_generate_config_general()
   # ---------------------------------------
 
   local PZC_FILE_EDITOR=$(jq -r '.pzc_config_general.file_editor' ${PZC_PZC_CONFIG_FILE_V8})
-  if [[ "${PZC_FILE_EDITOR}" == "" ]]
+  if [[ "${PZC_FILE_EDITOR}" == "" ]] || [[ "${PZC_FILE_EDITOR}" == "null" ]]
   then
     PZC_FILE_EDITOR='vim'
   fi
@@ -102,7 +102,7 @@ function _pzc_generate_config_general()
   # ---------------------------------------
 
   local PZC_LARGE_DIR=$(jq -r '.pzc_config_dirs.large_dir' ${PZC_PZC_CONFIG_FILE_V8})
-  if [[ "${PZC_LARGE_DIR}" == "" ]]
+  if [[ "${PZC_LARGE_DIR}" == "" ]] || [[ "${PZC_LARGE_DIR}" == "null" ]]
   then
     PZC_LARGE_DIR='${HOME}'
   fi
@@ -115,7 +115,7 @@ function _pzc_generate_config_general()
   # ---------------------------------------
 
   local PZC_TMP_DIR=$(jq -r '.pzc_config_dirs.tmp_dir' ${PZC_PZC_CONFIG_FILE_V8})
-  if [[ "${PZC_TMP_DIR}" == "" ]]
+  if [[ "${PZC_TMP_DIR}" == "" ]] || [[ "${PZC_TMP_DIR}" == "null" ]]
   then
     if [[ -v TMPDIR ]]
     then
@@ -133,7 +133,7 @@ function _pzc_generate_config_general()
   # ---------------------------------------
 
   local PZC_WORK_DIR=$(jq -r '.pzc_config_dirs.work_dir' ${PZC_PZC_CONFIG_FILE_V8})
-  if [[ "${PZC_WORK_DIR}" == "" ]]
+  if [[ "${PZC_WORK_DIR}" == "" ]] || [[ "${PZC_WORK_DIR}" == "null" ]]
   then
     PZC_WORK_DIR='${LARGE_DIR}/work'
   fi
@@ -146,7 +146,7 @@ function _pzc_generate_config_general()
   # ---------------------------------------
 
   local PZC_BUILD_DIR=$(jq -r '.pzc_config_dirs.build_dir' ${PZC_PZC_CONFIG_FILE_V8})
-  if [[ "${PZC_BUILD_DIR}" == "" ]]
+  if [[ "${PZC_BUILD_DIR}" == "" ]] || [[ "${PZC_BUILD_DIR}" == "null" ]]
   then
     PZC_BUILD_DIR='${LARGE_DIR}/build'
   fi
@@ -159,7 +159,7 @@ function _pzc_generate_config_general()
   # ---------------------------------------
 
   local PZC_INSTALL_DIR=$(jq -r '.pzc_config_dirs.install_dir' ${PZC_PZC_CONFIG_FILE_V8})
-  if [[ "${PZC_INSTALL_DIR}" == "" ]]
+  if [[ "${PZC_INSTALL_DIR}" == "" ]] || [[ "${PZC_INSTALL_DIR}" == "null" ]]
   then
     PZC_INSTALL_DIR='${LARGE_DIR}/install'
   fi
@@ -172,7 +172,7 @@ function _pzc_generate_config_general()
   # ---------------------------------------
 
   local PZC_ENVI_DIR=$(jq -r '.pzc_config_dirs.envi_dir' ${PZC_PZC_CONFIG_FILE_V8})
-  if [[ "${PZC_ENVI_DIR}" == "" ]]
+  if [[ "${PZC_ENVI_DIR}" == "" ]] || [[ "${PZC_ENVI_DIR}" == "null" ]]
   then
     PZC_ENVI_DIR='${LARGE_DIR}/environment'
   fi
@@ -185,7 +185,7 @@ function _pzc_generate_config_general()
   # ---------------------------------------
 
   local PZC_CCACHE_DIR=$(jq -r '.pzc_config_dirs.ccache_dir' ${PZC_PZC_CONFIG_FILE_V8})
-  if [[ "${PZC_CCACHE_DIR}" == "" ]]
+  if [[ "${PZC_CCACHE_DIR}" == "" ]] || [[ "${PZC_CCACHE_DIR}" == "null" ]]
   then
     PZC_CCACHE_DIR='${BUILD_DIR}/ccache'
   fi

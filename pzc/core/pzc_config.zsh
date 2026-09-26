@@ -56,6 +56,16 @@ function pzc_regenerate_config()
 
   # ---------------------------------------
 
+  source ${PZC_PZC_DIR}/pzc/core/gen_config_pkgs_mng.zsh
+  _pzc_generate_config_pkgs_mng
+  if [[ ${_PZC_FATAL_ERROR} = 1 ]]
+  then
+    return 0
+  fi
+  unfunction _pzc_generate_config_pkgs_mng
+
+  # ---------------------------------------
+
   source ${PZC_PZC_DIR}/pzc/core/gen_config_pkgs.zsh
   _pzc_generate_config_pkgs
   if [[ ${_PZC_FATAL_ERROR} = 1 ]]
