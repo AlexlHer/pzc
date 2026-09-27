@@ -18,12 +18,12 @@ function _pzc_generate_config_pkgs_mng()
   # Mise-en-place
   # ---------------------------------------
 
-  local PZC_ENABLE_MISE=$(jq -r '.pzc_config_pkgs.pkgs.mise_en_place.enable' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_ENABLE_MISE=$(jq -r '.pzc_config_pkgs.mise_en_place.enable' ${PZC_PZC_CONFIG_FILE_V8})
   local PZC_ALIAS_MISE=0
   if [[ ${PZC_ENABLE_MISE} = true ]]
   then
     # Attention : Ici, PZC_MISE_BIN et _PZC_MISE_AVAILABLE sortent de la fonction. Mise peut être nécessaire pour trouver les autres packages ! 
-    PZC_MISE_BIN=$(jq -r '.pzc_config_pkgs.pkgs.mise_en_place.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    PZC_MISE_BIN=$(jq -r '.pzc_config_pkgs.mise_en_place.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_MISE_BIN}" == "null" ]]
     then
       PZC_MISE_BIN=""
@@ -32,7 +32,7 @@ function _pzc_generate_config_pkgs_mng()
     then
       if [[ -e ${PZC_MISE_BIN} ]] || [[ -x "$(command -v ${PZC_MISE_BIN})" ]]
       then
-        _pzc_debug "PZC_MISE_BIN = ${PZC_MISE_BIN} (user defined)"
+        _pzc_info "PZC_MISE_BIN = ${PZC_MISE_BIN} (user defined)"
         PZC_ALIAS_MISE=1
         _PZC_MISE_AVAILABLE=1
       else
@@ -45,12 +45,12 @@ function _pzc_generate_config_pkgs_mng()
       if [[ -x "$(command -v mise)" ]]
       then
         PZC_MISE_BIN=mise
-        _pzc_debug "PZC_MISE_BIN = ${PZC_MISE_BIN} (Path)"
+        _pzc_info "PZC_MISE_BIN = ${PZC_MISE_BIN} (Path)"
         _PZC_MISE_AVAILABLE=1
       elif [[ -e ${ENVI_DIR}/pzc/progs/mise/mise ]]
       then
         PZC_MISE_BIN=${ENVI_DIR}/pzc/progs/mise/mise
-        _pzc_debug "PZC_MISE_BIN = ${PZC_MISE_BIN} (in pzc)"
+        _pzc_info "PZC_MISE_BIN = ${PZC_MISE_BIN} (in pzc)"
         _PZC_MISE_AVAILABLE=1
         PZC_ALIAS_MISE=1
       fi
@@ -73,11 +73,11 @@ function _pzc_generate_config_pkgs_mng()
   # Spack
   # ---------------------------------------
 
-  local PZC_ENABLE_SPACK=$(jq -r '.pzc_config_pkgs.pkgs.spack.enable' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_ENABLE_SPACK=$(jq -r '.pzc_config_pkgs.spack.enable' ${PZC_PZC_CONFIG_FILE_V8})
   if [[ ${PZC_ENABLE_SPACK} = true ]]
   then
     # Attention : Ici, PZC_SPACK_PATH et _PZC_SPACK_AVAILABLE sortent de la fonction. Spack peut être nécessaire pour trouver les autres packages ! 
-    PZC_SPACK_PATH=$(jq -r '.pzc_config_pkgs.pkgs.spack.src_path' ${PZC_PZC_CONFIG_FILE_V8})
+    PZC_SPACK_PATH=$(jq -r '.pzc_config_pkgs.spack.src_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_SPACK_PATH}" == "null" ]]
     then
       PZC_SPACK_PATH=""
@@ -86,7 +86,7 @@ function _pzc_generate_config_pkgs_mng()
     then
       if [[ -e ${PZC_SPACK_PATH}/share/spack/setup-env.sh ]]
       then
-        _pzc_debug "PZC_SPACK_PATH = ${PZC_SPACK_PATH} (user defined)"
+        _pzc_info "PZC_SPACK_PATH = ${PZC_SPACK_PATH} (user defined)"
         _PZC_SPACK_AVAILABLE=1
       else
         _pzc_warning "Your Spack is not valid (\"${PZC_SPACK_PATH}/share/spack/setup-env.sh\" not found)."
@@ -96,7 +96,7 @@ function _pzc_generate_config_pkgs_mng()
       PZC_SPACK_PATH="${ENVI_DIR}/spack"
       if [[ -e ${PZC_SPACK_PATH}/share/spack/setup-env.sh ]]
       then
-        _pzc_debug "PZC_SPACK_PATH = ${PZC_SPACK_PATH}"
+        _pzc_info "PZC_SPACK_PATH = ${PZC_SPACK_PATH} (default)"
         _PZC_SPACK_AVAILABLE=1
       else
         _pzc_warning "The Spack install is not valid (\"${PZC_SPACK_PATH}/share/spack/setup-env.sh\" not found). You can delete it and reclone Spack."
@@ -106,6 +106,14 @@ function _pzc_generate_config_pkgs_mng()
     if [[ "${PZC_SPACK_PATH}" == "" ]]
     then
       _pzc_info "To initialise Spack, you can call pzc_install_spack function."
+    else
+      local PZC_SPACK_START_AT_LAUNCH=$(jq -r '.pzc_config_pkgs.spack.start_at_launch' ${PZC_PZC_CONFIG_FILE_V8})
+      if [[ ${PZC_SPACK_START_AT_LAUNCH} = true ]]
+      then
+        echo "local _PZC_SPACK_START_AT_LAUNCH=1" >> ${PZC_PZC_CONFIG_FILE}
+      else
+        echo "local _PZC_SPACK_START_AT_LAUNCH=0" >> ${PZC_PZC_CONFIG_FILE}
+      fi
     fi
   fi
 

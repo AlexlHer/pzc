@@ -52,8 +52,13 @@ then
     if [[ $? = 0 ]]
     then
       _pzc_info "Enabling Mise..."
-      sed -i 's/local _PZC_MISE_AVAILABLE=0/local _PZC_MISE_AVAILABLE=1/g' ${PZC_PZC_CONFIG_FILE}
+      jq '.pzc_config_pkgs.mise_en_place.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
+      if [[ $? = 0 ]]
+      then
+        \mv "${PZC_PZC_CONFIG_FILE_V8}.tmp" "${PZC_PZC_CONFIG_FILE_V8}"
+      fi
 
+      pzc_regenerate_config
       _pzc_info "Reload ZSH..."
       exec zsh
     else

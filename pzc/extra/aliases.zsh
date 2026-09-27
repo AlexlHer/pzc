@@ -125,4 +125,4 @@ fi
 # ------------------------------------------------------------------------------
 
 alias c='clear'
-alias pzc_config='_pzc_coal_eval "${PZC_FILE_EDITOR} ${PZC_PZC_CONFIG_FILE}"'
+alias pzc_config='_pzc_coal_eval "${PZC_FILE_EDITOR} ${PZC_PZC_CONFIG_FILE_V8}"; _pzc_info "Call pzc_regenerate_config to regenerate the configuration."'

@@ -419,13 +419,18 @@ then
       if [[ $? = 0 ]]
       then
         _pzc_info "Enabling Oh-My-Posh..."
-        _pzc_coal_eval "sed -i 's/local _PZC_OMP_AVAILABLE=0/local _PZC_OMP_AVAILABLE=1/g' ${PZC_PZC_CONFIG_FILE}"
+        jq '.pzc_config_pkgs.oh_my_posh.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
+        if [[ $? = 0 ]]
+        then
+          \mv "${PZC_PZC_CONFIG_FILE_V8}.tmp" "${PZC_PZC_CONFIG_FILE_V8}"
+        fi
 
         _pzc_info "Update PZC's mise.toml..."
         _pzc_coal_eval "${PZC_MISE_BIN} use -p \"${ENVI_DIR}/pzc/progs/mise/mise.${HOST}.toml\" oh-my-posh"
 
         if [[ ! -n ${_PZC_PKG_RESTART} ]] || [[ ${_PZC_PKG_RESTART} = 1 ]]
         then
+          pzc_regenerate_config
           _pzc_info "Reloading ZSH..."
           exec zsh
         fi
@@ -457,13 +462,18 @@ then
       if [[ $? = 0 ]]
       then
         _pzc_info "Enabling EZA..."
-        _pzc_coal_eval "sed -i 's/local _PZC_EZA_AVAILABLE=0/local _PZC_EZA_AVAILABLE=1/g' ${PZC_PZC_CONFIG_FILE}"
+        jq '.pzc_config_pkgs.eza.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
+        if [[ $? = 0 ]]
+        then
+          \mv "${PZC_PZC_CONFIG_FILE_V8}.tmp" "${PZC_PZC_CONFIG_FILE_V8}"
+        fi
 
         _pzc_info "Update PZC's mise.toml..."
         _pzc_coal_eval "${PZC_MISE_BIN} use -p \"${ENVI_DIR}/pzc/progs/mise/mise.${HOST}.toml\" eza"
 
         if [[ ! -n ${_PZC_PKG_RESTART} ]] || [[ ${_PZC_PKG_RESTART} = 1 ]]
         then
+          pzc_regenerate_config
           _pzc_info "Reloading ZSH..."
           exec zsh
         fi
@@ -495,13 +505,18 @@ then
       if [[ $? = 0 ]]
       then
         _pzc_info "Enabling CCache..."
-        _pzc_coal_eval "sed -i 's/local _PZC_CCACHE_AVAILABLE=0/local _PZC_CCACHE_AVAILABLE=1/g' ${PZC_PZC_CONFIG_FILE}"
+        jq '.pzc_config_pkgs.ccache.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
+        if [[ $? = 0 ]]
+        then
+          \mv "${PZC_PZC_CONFIG_FILE_V8}.tmp" "${PZC_PZC_CONFIG_FILE_V8}"
+        fi
 
         _pzc_info "Update PZC's mise.toml..."
         _pzc_coal_eval "${PZC_MISE_BIN} use -p \"${ENVI_DIR}/pzc/progs/mise/mise.${HOST}.toml\" ccache"
 
         if [[ ! -n ${_PZC_PKG_RESTART} ]] || [[ ${_PZC_PKG_RESTART} = 1 ]]
         then
+          pzc_regenerate_config
           _pzc_info "Reloading ZSH..."
           exec zsh
         fi
@@ -533,13 +548,18 @@ then
       if [[ $? = 0 ]]
       then
         _pzc_info "Enabling Mold..."
-        _pzc_coal_eval "sed -i 's/local _PZC_MOLD_AVAILABLE=0/local _PZC_MOLD_AVAILABLE=1/g' ${PZC_PZC_CONFIG_FILE}"
+        jq '.pzc_config_pkgs.mold.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
+        if [[ $? = 0 ]]
+        then
+          \mv "${PZC_PZC_CONFIG_FILE_V8}.tmp" "${PZC_PZC_CONFIG_FILE_V8}"
+        fi
 
         _pzc_info "Update PZC's mise.toml..."
         _pzc_coal_eval "${PZC_MISE_BIN} use -p \"${ENVI_DIR}/pzc/progs/mise/mise.${HOST}.toml\" mold"
 
         if [[ ! -n ${_PZC_PKG_RESTART} ]] || [[ ${_PZC_PKG_RESTART} = 1 ]]
         then
+          pzc_regenerate_config
           _pzc_info "Reloading ZSH..."
           exec zsh
         fi
@@ -571,13 +591,18 @@ then
       if [[ $? = 0 ]]
       then
         _pzc_info "Enabling Ninja..."
-        _pzc_coal_eval "sed -i 's/local _PZC_NINJA_AVAILABLE=0/local _PZC_NINJA_AVAILABLE=1/g' ${PZC_PZC_CONFIG_FILE}"
+        jq '.pzc_config_pkgs.ninja.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
+        if [[ $? = 0 ]]
+        then
+          \mv "${PZC_PZC_CONFIG_FILE_V8}.tmp" "${PZC_PZC_CONFIG_FILE_V8}"
+        fi
 
         _pzc_info "Update PZC's mise.toml..."
         _pzc_coal_eval "${PZC_MISE_BIN} use -p \"${ENVI_DIR}/pzc/progs/mise/mise.${HOST}.toml\" ninja"
 
         if [[ ! -n ${_PZC_PKG_RESTART} ]] || [[ ${_PZC_PKG_RESTART} = 1 ]]
         then
+          pzc_regenerate_config
           _pzc_info "Reloading ZSH..."
           exec zsh
         fi
@@ -609,13 +634,18 @@ then
       if [[ $? = 0 ]]
       then
         _pzc_info "Enabling CMake..."
-        _pzc_coal_eval "sed -i 's/local _PZC_CMAKE_AVAILABLE=0/local _PZC_CMAKE_AVAILABLE=1/g' ${PZC_PZC_CONFIG_FILE}"
+        jq '.pzc_config_pkgs.cmake.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
+        if [[ $? = 0 ]]
+        then
+          \mv "${PZC_PZC_CONFIG_FILE_V8}.tmp" "${PZC_PZC_CONFIG_FILE_V8}"
+        fi
 
         _pzc_info "Update PZC's mise.toml..."
         _pzc_coal_eval "${PZC_MISE_BIN} use -p \"${ENVI_DIR}/pzc/progs/mise/mise.${HOST}.toml\" cmake"
 
         if [[ ! -n ${_PZC_PKG_RESTART} ]] || [[ ${_PZC_PKG_RESTART} = 1 ]]
         then
+          pzc_regenerate_config
           _pzc_info "Reloading ZSH..."
           exec zsh
         fi
@@ -647,13 +677,18 @@ then
       if [[ $? = 0 ]]
       then
         _pzc_info "Enabling Atuin..."
-        _pzc_coal_eval "sed -i 's/local _PZC_ATUIN_AVAILABLE=0/local _PZC_ATUIN_AVAILABLE=1/g' ${PZC_PZC_CONFIG_FILE}"
+        jq '.pzc_config_pkgs.atuin.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
+        if [[ $? = 0 ]]
+        then
+          \mv "${PZC_PZC_CONFIG_FILE_V8}.tmp" "${PZC_PZC_CONFIG_FILE_V8}"
+        fi
 
         _pzc_info "Update PZC's mise.toml..."
         _pzc_coal_eval "${PZC_MISE_BIN} use -p \"${ENVI_DIR}/pzc/progs/mise/mise.${HOST}.toml\" atuin"
 
         if [[ ! -n ${_PZC_PKG_RESTART} ]] || [[ ${_PZC_PKG_RESTART} = 1 ]]
         then
+          pzc_regenerate_config
           _pzc_info "Reloading ZSH..."
           exec zsh
         fi
@@ -685,13 +720,18 @@ then
       if [[ $? = 0 ]]
       then
         _pzc_info "Enabling Fzf..."
-        _pzc_coal_eval "sed -i 's/local _PZC_FZF_AVAILABLE=0/local _PZC_FZF_AVAILABLE=1/g' ${PZC_PZC_CONFIG_FILE}"
+        jq '.pzc_config_pkgs.fzf.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
+        if [[ $? = 0 ]]
+        then
+          \mv "${PZC_PZC_CONFIG_FILE_V8}.tmp" "${PZC_PZC_CONFIG_FILE_V8}"
+        fi
 
         _pzc_info "Update PZC's mise.toml..."
         _pzc_coal_eval "${PZC_MISE_BIN} use -p \"${ENVI_DIR}/pzc/progs/mise/mise.${HOST}.toml\" fzf"
 
         if [[ ! -n ${_PZC_PKG_RESTART} ]] || [[ ${_PZC_PKG_RESTART} = 1 ]]
         then
+          pzc_regenerate_config
           _pzc_info "Reloading ZSH..."
           exec zsh
         fi
@@ -718,13 +758,18 @@ then
       if [[ $? = 0 ]]
       then
         _pzc_info "Enabling Yazi..."
-        _pzc_coal_eval "sed -i 's/local _PZC_YAZI_AVAILABLE=0/local _PZC_YAZI_AVAILABLE=1/g' ${PZC_PZC_CONFIG_FILE}"
+        jq '.pzc_config_pkgs.yazi.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
+        if [[ $? = 0 ]]
+        then
+          \mv "${PZC_PZC_CONFIG_FILE_V8}.tmp" "${PZC_PZC_CONFIG_FILE_V8}"
+        fi
 
         _pzc_info "Update PZC's mise.toml..."
         _pzc_coal_eval "${PZC_MISE_BIN} use -p \"${ENVI_DIR}/pzc/progs/mise/mise.${HOST}.toml\" yazi"
 
         if [[ ! -n ${_PZC_PKG_RESTART} ]] || [[ ${_PZC_PKG_RESTART} = 1 ]]
         then
+          pzc_regenerate_config
           _pzc_info "Reloading ZSH..."
           exec zsh
         fi
@@ -749,6 +794,7 @@ then
     pzc_install_fzf
     pzc_install_yazi
 
+    pzc_regenerate_config
     _pzc_info "Reloading ZSH..."
     exec zsh
   }

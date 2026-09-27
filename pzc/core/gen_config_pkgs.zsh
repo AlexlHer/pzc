@@ -18,10 +18,10 @@ function _pzc_generate_config_pkgs()
   # OhMyPosh
   # ---------------------------------------
 
-  local PZC_ENABLE_OMP=$(jq -r '.pzc_config_pkgs.pkgs.oh_my_posh.enable' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_ENABLE_OMP=$(jq -r '.pzc_config_pkgs.oh_my_posh.enable' ${PZC_PZC_CONFIG_FILE_V8})
   if [[ ${PZC_ENABLE_OMP} = true ]]
   then
-    local PZC_OMP_BIN=$(jq -r '.pzc_config_pkgs.pkgs.oh_my_posh.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    local PZC_OMP_BIN=$(jq -r '.pzc_config_pkgs.oh_my_posh.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_OMP_BIN}" == "null" ]]
     then
       PZC_OMP_BIN=""
@@ -30,7 +30,7 @@ function _pzc_generate_config_pkgs()
     then
       if [[ -e ${PZC_OMP_BIN} ]] || [[ -x "$(command -v ${PZC_OMP_BIN})" ]]
       then
-        _pzc_debug "PZC_OMP_BIN = ${PZC_OMP_BIN} (user defined)"
+        _pzc_info "PZC_OMP_BIN = ${PZC_OMP_BIN} (user defined)"
       else
         _pzc_warning "Your Oh-My-Posh is not found. Search other Oh-My-Posh."
         PZC_OMP_BIN=""
@@ -43,7 +43,7 @@ function _pzc_generate_config_pkgs()
         PZC_OMP_BIN=$(${PZC_MISE_BIN} which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" oh-my-posh 2&>/dev/null)
         if [[ $? == 0 ]]
         then
-          _pzc_debug "PZC_OMP_BIN = ${PZC_OMP_BIN} (Mise-en-place)"
+          _pzc_info "PZC_OMP_BIN = ${PZC_OMP_BIN} (Mise-en-place)"
         fi
       fi
     fi
@@ -52,7 +52,7 @@ function _pzc_generate_config_pkgs()
       if [[ -x "$(command -v oh-my-posh)" ]]
       then
         PZC_OMP_BIN=oh-my-posh
-        _pzc_debug "PZC_OMP_BIN = ${PZC_OMP_BIN} (Path)"
+        _pzc_info "PZC_OMP_BIN = ${PZC_OMP_BIN} (Path)"
       fi
     fi
     if [[ "${PZC_OMP_BIN}" == "" ]]
@@ -60,7 +60,7 @@ function _pzc_generate_config_pkgs()
       _pzc_warning "Oh-My-Posh is not installed (https://github.com/JanDeDobbeleer/oh-my-posh). You can install Oh-My-Posh with Mise-en-place with the command 'pzc_install_omp' or disable Oh-My-Posh search in pzcrc."
     fi
 
-    local PZC_OMP_THEME_FILE=$(jq -r '.pzc_config_pkgs.pkgs.oh_my_posh.theme_file' ${PZC_PZC_CONFIG_FILE_V8})
+    local PZC_OMP_THEME_FILE=$(jq -r '.pzc_config_pkgs.oh_my_posh.theme_file' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_OMP_THEME_FILE}" == "null" ]]
     then
       PZC_OMP_THEME_FILE=""
@@ -69,7 +69,7 @@ function _pzc_generate_config_pkgs()
     then
       if [[ -e ${PZC_OMP_THEME_FILE} ]]
       then
-        _pzc_debug "PZC_OMP_THEME_FILE = ${PZC_OMP_THEME_FILE} (user defined)"
+        _pzc_info "PZC_OMP_THEME_FILE = ${PZC_OMP_THEME_FILE} (user defined)"
       else
         _pzc_warning "Your Oh-My-Posh theme is not found. Set default Oh-My-Posh theme."
         PZC_OMP_THEME_FILE=""
@@ -78,7 +78,7 @@ function _pzc_generate_config_pkgs()
     if [[ "${PZC_OMP_THEME_FILE}" == "" ]]
     then
       PZC_OMP_THEME_FILE=${PZC_PZC_DIR}/progs/oh-my-posh/themes/PZC.json
-      _pzc_debug "PZC_OMP_THEME_FILE = ${PZC_OMP_THEME_FILE} (default)"
+      _pzc_info "PZC_OMP_THEME_FILE = ${PZC_OMP_THEME_FILE} (default)"
     fi
   fi
 
@@ -91,11 +91,11 @@ function _pzc_generate_config_pkgs()
   # EZA-LS
   # ---------------------------------------
 
-  local PZC_ENABLE_EZA=$(jq -r '.pzc_config_pkgs.pkgs.eza.enable' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_ENABLE_EZA=$(jq -r '.pzc_config_pkgs.eza.enable' ${PZC_PZC_CONFIG_FILE_V8})
   local PZC_ALIAS_EZA=0
   if [[ ${PZC_ENABLE_EZA} = true ]]
   then
-    local PZC_EZA_BIN=$(jq -r '.pzc_config_pkgs.pkgs.eza.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    local PZC_EZA_BIN=$(jq -r '.pzc_config_pkgs.eza.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_EZA_BIN}" == "null" ]]
     then
       PZC_EZA_BIN=""
@@ -104,7 +104,7 @@ function _pzc_generate_config_pkgs()
     then
       if [[ -e ${PZC_EZA_BIN} ]] || [[ -x "$(command -v ${PZC_EZA_BIN})" ]]
       then
-        _pzc_debug "PZC_EZA_BIN = ${PZC_EZA_BIN} (user defined)"
+        _pzc_info "PZC_EZA_BIN = ${PZC_EZA_BIN} (user defined)"
         PZC_ALIAS_EZA=1
       else
         _pzc_warning "Your EZA is not found. Search other EZA."
@@ -118,7 +118,7 @@ function _pzc_generate_config_pkgs()
         PZC_EZA_BIN=$(${PZC_MISE_BIN} which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" eza 2&>/dev/null)
         if [[ $? == 0 ]]
         then
-          _pzc_debug "PZC_EZA_BIN = ${PZC_EZA_BIN} (Mise-en-place)"
+          _pzc_info "PZC_EZA_BIN = ${PZC_EZA_BIN} (Mise-en-place)"
           PZC_ALIAS_EZA=1
         fi
       fi
@@ -128,7 +128,7 @@ function _pzc_generate_config_pkgs()
       if [[ -x "$(command -v eza)" ]]
       then
         PZC_EZA_BIN=eza
-        _pzc_debug "PZC_EZA_BIN = ${PZC_EZA_BIN} (Path)"
+        _pzc_info "PZC_EZA_BIN = ${PZC_EZA_BIN} (Path)"
       fi
     fi
     if [[ "${PZC_EZA_BIN}" == "" ]]
@@ -136,7 +136,7 @@ function _pzc_generate_config_pkgs()
       _pzc_warning "Eza is not installed (https://github.com/eza-community/eza). You can install eza with Mise-en-place with the command 'pzc_install_eza' or disable eza search in pzcrc."
     fi
 
-    local PZC_EZA_CONFIG_DIR=$(jq -r '.pzc_config_pkgs.pkgs.eza.config_dir' ${PZC_PZC_CONFIG_FILE_V8})
+    local PZC_EZA_CONFIG_DIR=$(jq -r '.pzc_config_pkgs.eza.config_dir' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_EZA_CONFIG_DIR}" == "null" ]]
     then
       PZC_EZA_CONFIG_DIR=""
@@ -145,7 +145,7 @@ function _pzc_generate_config_pkgs()
     then
       if [[ -d ${PZC_EZA_CONFIG_DIR} ]]
       then
-        _pzc_debug "PZC_EZA_CONFIG_DIR = ${PZC_EZA_CONFIG_DIR} (user defined)"
+        _pzc_info "PZC_EZA_CONFIG_DIR = ${PZC_EZA_CONFIG_DIR} (user defined)"
       else
         _pzc_warning "Your EZA config dir is not found. Search default EZA config dir."
         PZC_EZA_CONFIG_DIR=""
@@ -154,7 +154,7 @@ function _pzc_generate_config_pkgs()
     if [[ "${PZC_EZA_CONFIG_DIR}" == "" ]]
     then
       PZC_EZA_CONFIG_DIR=${PZC_PZC_DIR}/progs/eza/config
-      _pzc_debug "PZC_EZA_CONFIG_DIR = ${PZC_EZA_CONFIG_DIR} (default)"
+      _pzc_info "PZC_EZA_CONFIG_DIR = ${PZC_EZA_CONFIG_DIR} (default)"
     fi
   fi
 
@@ -172,11 +172,11 @@ function _pzc_generate_config_pkgs()
   # CCache
   # ---------------------------------------
 
-  local PZC_ENABLE_CCACHE=$(jq -r '.pzc_config_pkgs.pkgs.ccache.enable' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_ENABLE_CCACHE=$(jq -r '.pzc_config_pkgs.ccache.enable' ${PZC_PZC_CONFIG_FILE_V8})
   local PZC_ALIAS_CCACHE=0
   if [[ ${PZC_ENABLE_CCACHE} = true ]]
   then
-    local PZC_CCACHE_BIN=$(jq -r '.pzc_config_pkgs.pkgs.ccache.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    local PZC_CCACHE_BIN=$(jq -r '.pzc_config_pkgs.ccache.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_CCACHE_BIN}" == "null" ]]
     then
       PZC_CCACHE_BIN=""
@@ -185,7 +185,7 @@ function _pzc_generate_config_pkgs()
     then
       if [[ -e ${PZC_CCACHE_BIN} ]] || [[ -x "$(command -v ${PZC_CCACHE_BIN})" ]]
       then
-        _pzc_debug "PZC_CCACHE_BIN = ${PZC_CCACHE_BIN} (user defined)"
+        _pzc_info "PZC_CCACHE_BIN = ${PZC_CCACHE_BIN} (user defined)"
         PZC_ALIAS_CCACHE=1
       else
         _pzc_warning "Your CCache is not found. Search other CCache."
@@ -199,7 +199,7 @@ function _pzc_generate_config_pkgs()
         PZC_CCACHE_BIN=$(${PZC_MISE_BIN} which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" ccache 2&>/dev/null)
         if [[ $? == 0 ]]
         then
-          _pzc_debug "PZC_CCACHE_BIN = ${PZC_CCACHE_BIN} (Mise-en-place)"
+          _pzc_info "PZC_CCACHE_BIN = ${PZC_CCACHE_BIN} (Mise-en-place)"
           PZC_ALIAS_CCACHE=1
         fi
       fi
@@ -209,7 +209,7 @@ function _pzc_generate_config_pkgs()
       if [[ -x "$(command -v ccache)" ]]
       then
         PZC_CCACHE_BIN=ccache
-        _pzc_debug "PZC_CCACHE_BIN = ${PZC_CCACHE_BIN} (Path)"
+        _pzc_info "PZC_CCACHE_BIN = ${PZC_CCACHE_BIN} (Path)"
       fi
     fi
     if [[ "${PZC_CCACHE_BIN}" == "" ]]
@@ -230,11 +230,11 @@ function _pzc_generate_config_pkgs()
   # Mold
   # ---------------------------------------
 
-  local PZC_ENABLE_MOLD=$(jq -r '.pzc_config_pkgs.pkgs.mold.enable' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_ENABLE_MOLD=$(jq -r '.pzc_config_pkgs.mold.enable' ${PZC_PZC_CONFIG_FILE_V8})
 
   if [[ ${PZC_ENABLE_MOLD} = true ]]
   then
-    local PZC_MOLD_BIN=$(jq -r '.pzc_config_pkgs.pkgs.mold.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    local PZC_MOLD_BIN=$(jq -r '.pzc_config_pkgs.mold.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_MOLD_BIN}" == "null" ]]
     then
       PZC_MOLD_BIN=""
@@ -243,7 +243,7 @@ function _pzc_generate_config_pkgs()
     then
       if [[ -e ${PZC_MOLD_BIN} ]] || [[ -x "$(command -v ${PZC_MOLD_BIN})" ]]
       then
-        _pzc_debug "PZC_MOLD_BIN = ${PZC_MOLD_BIN} (user defined)"
+        _pzc_info "PZC_MOLD_BIN = ${PZC_MOLD_BIN} (user defined)"
       else
         _pzc_warning "Your Mold is not found. Search other Mold."
         PZC_MOLD_BIN=""
@@ -256,7 +256,7 @@ function _pzc_generate_config_pkgs()
         PZC_MOLD_BIN=$(${PZC_MISE_BIN} which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" mold 2&>/dev/null)
         if [[ $? == 0 ]]
         then
-          _pzc_debug "PZC_MOLD_BIN = ${PZC_MOLD_BIN} (Mise-en-place)"
+          _pzc_info "PZC_MOLD_BIN = ${PZC_MOLD_BIN} (Mise-en-place)"
         fi
       fi
     fi
@@ -265,7 +265,7 @@ function _pzc_generate_config_pkgs()
       if [[ -x "$(command -v mold)" ]]
       then
         PZC_MOLD_BIN="mold"
-        _pzc_debug "PZC_MOLD_BIN = ${PZC_MOLD_BIN} (Path)"
+        _pzc_info "PZC_MOLD_BIN = ${PZC_MOLD_BIN} (Path)"
       fi
     fi
     if [[ "${PZC_MOLD_BIN}" == "" ]]
@@ -282,11 +282,11 @@ function _pzc_generate_config_pkgs()
   # Ninja
   # ---------------------------------------
 
-  local PZC_ENABLE_NINJA=$(jq -r '.pzc_config_pkgs.pkgs.ninja.enable' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_ENABLE_NINJA=$(jq -r '.pzc_config_pkgs.ninja.enable' ${PZC_PZC_CONFIG_FILE_V8})
 
   if [[ ${PZC_ENABLE_NINJA} = true ]]
   then
-    local PZC_NINJA_BIN=$(jq -r '.pzc_config_pkgs.pkgs.ninja.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    local PZC_NINJA_BIN=$(jq -r '.pzc_config_pkgs.ninja.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_NINJA_BIN}" == "null" ]]
     then
       PZC_NINJA_BIN=""
@@ -295,7 +295,7 @@ function _pzc_generate_config_pkgs()
     then
       if [[ -e ${PZC_NINJA_BIN} ]] || [[ -x "$(command -v ${PZC_NINJA_BIN})" ]]
       then
-        _pzc_debug "PZC_NINJA_BIN = ${PZC_NINJA_BIN} (user defined)"
+        _pzc_info "PZC_NINJA_BIN = ${PZC_NINJA_BIN} (user defined)"
       else
         _pzc_warning "Your Ninja is not found. Search other Ninja."
         PZC_NINJA_BIN=""
@@ -308,7 +308,7 @@ function _pzc_generate_config_pkgs()
         PZC_NINJA_BIN=$(${PZC_MISE_BIN} which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" ninja 2&>/dev/null)
         if [[ $? == 0 ]]
         then
-          _pzc_debug "PZC_NINJA_BIN = ${PZC_NINJA_BIN} (Mise-en-place)"
+          _pzc_info "PZC_NINJA_BIN = ${PZC_NINJA_BIN} (Mise-en-place)"
         fi
       fi
     fi
@@ -317,7 +317,7 @@ function _pzc_generate_config_pkgs()
       if [[ -x "$(command -v ninja)" ]]
       then
         PZC_NINJA_BIN="ninja"
-        _pzc_debug "PZC_NINJA_BIN = ${PZC_NINJA_BIN} (Path)"
+        _pzc_info "PZC_NINJA_BIN = ${PZC_NINJA_BIN} (Path)"
       fi
     fi
     if [[ "${PZC_NINJA_BIN}" == "" ]]
@@ -334,11 +334,11 @@ function _pzc_generate_config_pkgs()
   # CMake
   # ---------------------------------------
 
-  local PZC_ENABLE_CMAKE=$(jq -r '.pzc_config_pkgs.pkgs.cmake.enable' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_ENABLE_CMAKE=$(jq -r '.pzc_config_pkgs.cmake.enable' ${PZC_PZC_CONFIG_FILE_V8})
 
   if [[ ${PZC_ENABLE_CMAKE} = true ]]
   then
-    local PZC_CMAKE_BIN=$(jq -r '.pzc_config_pkgs.pkgs.cmake.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    local PZC_CMAKE_BIN=$(jq -r '.pzc_config_pkgs.cmake.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_CMAKE_BIN}" == "null" ]]
     then
       PZC_CMAKE_BIN=""
@@ -347,7 +347,7 @@ function _pzc_generate_config_pkgs()
     then
       if [[ -e ${PZC_CMAKE_BIN} ]] || [[ -x "$(command -v ${PZC_CMAKE_BIN})" ]]
       then
-        _pzc_debug "PZC_CMAKE_BIN = ${PZC_CMAKE_BIN} (user defined)"
+        _pzc_info "PZC_CMAKE_BIN = ${PZC_CMAKE_BIN} (user defined)"
       else
         _pzc_warning "Your CMake is not found. Search other CMake."
         PZC_CMAKE_BIN=""
@@ -360,7 +360,7 @@ function _pzc_generate_config_pkgs()
         PZC_CMAKE_BIN=$(${PZC_MISE_BIN} which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" cmake 2&>/dev/null)
         if [[ $? == 0 ]]
         then
-          _pzc_debug "PZC_CMAKE_BIN = ${PZC_CMAKE_BIN} (Mise-en-place)"
+          _pzc_info "PZC_CMAKE_BIN = ${PZC_CMAKE_BIN} (Mise-en-place)"
         fi
       fi
     fi
@@ -369,7 +369,7 @@ function _pzc_generate_config_pkgs()
       if [[ -x "$(command -v cmake)" ]]
       then
         PZC_CMAKE_BIN="cmake"
-        _pzc_debug "PZC_CMAKE_BIN = ${PZC_CMAKE_BIN} (Path)"
+        _pzc_info "PZC_CMAKE_BIN = ${PZC_CMAKE_BIN} (Path)"
       fi
     fi
     if [[ "${PZC_CMAKE_BIN}" == "" ]]
@@ -386,11 +386,11 @@ function _pzc_generate_config_pkgs()
   # Taskwarrior
   # ---------------------------------------
 
-  local PZC_ENABLE_TASK=$(jq -r '.pzc_config_pkgs.pkgs.taskwarrior.enable' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_ENABLE_TASK=$(jq -r '.pzc_config_pkgs.taskwarrior.enable' ${PZC_PZC_CONFIG_FILE_V8})
 
   if [[ ${PZC_ENABLE_TASK} = true ]]
   then
-    local PZC_TASK_BIN=$(jq -r '.pzc_config_pkgs.pkgs.taskwarrior.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    local PZC_TASK_BIN=$(jq -r '.pzc_config_pkgs.taskwarrior.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_TASK_BIN}" == "null" ]]
     then
       PZC_TASK_BIN=""
@@ -399,7 +399,7 @@ function _pzc_generate_config_pkgs()
     then
       if [[ -e ${PZC_TASK_BIN} ]] || [[ -x "$(command -v ${PZC_TASK_BIN})" ]]
       then
-        _pzc_debug "PZC_TASK_BIN = ${PZC_TASK_BIN} (user defined)"
+        _pzc_info "PZC_TASK_BIN = ${PZC_TASK_BIN} (user defined)"
       else
         _pzc_warning "Your Taskwarrior is not found. Search other Taskwarrior."
         PZC_TASK_BIN=""
@@ -410,7 +410,7 @@ function _pzc_generate_config_pkgs()
       if [[ -x "$(command -v task)" ]]
       then
         PZC_TASK_BIN="task"
-        _pzc_debug "PZC_TASK_BIN = ${PZC_TASK_BIN} (Path)"
+        _pzc_info "PZC_TASK_BIN = ${PZC_TASK_BIN} (Path)"
       fi
     fi
     if [[ "${PZC_TASK_BIN}" == "" ]]
@@ -427,11 +427,11 @@ function _pzc_generate_config_pkgs()
   # Atuin
   # ---------------------------------------
 
-  local PZC_ENABLE_ATUIN=$(jq -r '.pzc_config_pkgs.pkgs.atuin.enable' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_ENABLE_ATUIN=$(jq -r '.pzc_config_pkgs.atuin.enable' ${PZC_PZC_CONFIG_FILE_V8})
   local PZC_ALIAS_ATUIN=0
   if [[ ${PZC_ENABLE_ATUIN} = true ]]
   then
-    local PZC_ATUIN_BIN=$(jq -r '.pzc_config_pkgs.pkgs.atuin.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    local PZC_ATUIN_BIN=$(jq -r '.pzc_config_pkgs.atuin.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_ATUIN_BIN}" == "null" ]]
     then
       PZC_ATUIN_BIN=""
@@ -440,7 +440,7 @@ function _pzc_generate_config_pkgs()
     then
       if [[ -e ${PZC_ATUIN_BIN} ]] || [[ -x "$(command -v ${PZC_ATUIN_BIN})" ]]
       then
-        _pzc_debug "PZC_ATUIN_BIN = ${PZC_ATUIN_BIN} (user defined)"
+        _pzc_info "PZC_ATUIN_BIN = ${PZC_ATUIN_BIN} (user defined)"
         PZC_ALIAS_ATUIN=1
       else
         _pzc_warning "Your Atuin is not found. Search other Atuin."
@@ -454,7 +454,7 @@ function _pzc_generate_config_pkgs()
         PZC_ATUIN_BIN=$(${PZC_MISE_BIN} which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" atuin 2&>/dev/null)
         if [[ $? == 0 ]]
         then
-          _pzc_debug "PZC_ATUIN_BIN = ${PZC_ATUIN_BIN} (Mise-en-place)"
+          _pzc_info "PZC_ATUIN_BIN = ${PZC_ATUIN_BIN} (Mise-en-place)"
           PZC_ALIAS_ATUIN=1
         fi
       fi
@@ -464,7 +464,7 @@ function _pzc_generate_config_pkgs()
       if [[ -x "$(command -v atuin)" ]]
       then
         PZC_ATUIN_BIN=atuin
-        _pzc_debug "PZC_ATUIN_BIN = ${PZC_ATUIN_BIN} (Path)"
+        _pzc_info "PZC_ATUIN_BIN = ${PZC_ATUIN_BIN} (Path)"
       fi
     fi
     if [[ "${PZC_ATUIN_BIN}" == "" ]]
@@ -472,7 +472,7 @@ function _pzc_generate_config_pkgs()
       _pzc_warning "Atuin is not installed (https://github.com/atuinsh/atuin). You can install atuin with Mise-en-place with the command 'pzc_install_atuin' or disable atuin search in pzcrc."
     fi
 
-    local PZC_ATUIN_CONFIG_DIR=$(jq -r '.pzc_config_pkgs.pkgs.atuin.config_dir' ${PZC_PZC_CONFIG_FILE_V8})
+    local PZC_ATUIN_CONFIG_DIR=$(jq -r '.pzc_config_pkgs.atuin.config_dir' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_ATUIN_CONFIG_DIR}" == "null" ]]
     then
       PZC_ATUIN_CONFIG_DIR=""
@@ -481,7 +481,7 @@ function _pzc_generate_config_pkgs()
     then
       if [[ -d ${PZC_ATUIN_CONFIG_DIR} ]]
       then
-        _pzc_debug "PZC_ATUIN_CONFIG_DIR = ${PZC_ATUIN_CONFIG_DIR} (user defined)"
+        _pzc_info "PZC_ATUIN_CONFIG_DIR = ${PZC_ATUIN_CONFIG_DIR} (user defined)"
       else
         _pzc_warning "Your Atuin config dir is not found. Search default Atuin config dir."
         PZC_ATUIN_CONFIG_DIR=""
@@ -490,7 +490,7 @@ function _pzc_generate_config_pkgs()
     if [[ "${PZC_ATUIN_CONFIG_DIR}" == "" ]]
     then
       PZC_ATUIN_CONFIG_DIR=${PZC_PZC_DIR}/progs/atuin/config
-      _pzc_debug "PZC_ATUIN_CONFIG_DIR = ${PZC_ATUIN_CONFIG_DIR} (default)"
+      _pzc_info "PZC_ATUIN_CONFIG_DIR = ${PZC_ATUIN_CONFIG_DIR} (default)"
     fi
   fi
 
@@ -508,11 +508,11 @@ function _pzc_generate_config_pkgs()
   # Fzf
   # ---------------------------------------
 
-  local PZC_ENABLE_FZF=$(jq -r '.pzc_config_pkgs.pkgs.fzf.enable' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_ENABLE_FZF=$(jq -r '.pzc_config_pkgs.fzf.enable' ${PZC_PZC_CONFIG_FILE_V8})
   local PZC_ALIAS_FZF=0
   if [[ ${PZC_ENABLE_FZF} = true ]]
   then
-    local PZC_FZF_BIN=$(jq -r '.pzc_config_pkgs.pkgs.fzf.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    local PZC_FZF_BIN=$(jq -r '.pzc_config_pkgs.fzf.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_FZF_BIN}" == "null" ]]
     then
       PZC_FZF_BIN=""
@@ -521,7 +521,7 @@ function _pzc_generate_config_pkgs()
     then
       if [[ -e ${PZC_FZF_BIN} ]] || [[ -x "$(command -v ${PZC_FZF_BIN})" ]]
       then
-        _pzc_debug "PZC_FZF_BIN = ${PZC_FZF_BIN} (user defined)"
+        _pzc_info "PZC_FZF_BIN = ${PZC_FZF_BIN} (user defined)"
         PZC_ALIAS_FZF=1
       else
         _pzc_warning "Your Fzf is not found. Search other Fzf."
@@ -535,7 +535,7 @@ function _pzc_generate_config_pkgs()
         PZC_FZF_BIN=$(${PZC_MISE_BIN} which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" fzf 2&>/dev/null)
         if [[ $? == 0 ]]
         then
-          _pzc_debug "PZC_FZF_BIN = ${PZC_FZF_BIN} (Mise-en-place)"
+          _pzc_info "PZC_FZF_BIN = ${PZC_FZF_BIN} (Mise-en-place)"
           PZC_ALIAS_FZF=1
         fi
       fi
@@ -545,7 +545,7 @@ function _pzc_generate_config_pkgs()
       if [[ -x "$(command -v fzf)" ]]
       then
         PZC_FZF_BIN=fzf
-        _pzc_debug "PZC_FZF_BIN = ${PZC_FZF_BIN} (Path)"
+        _pzc_info "PZC_FZF_BIN = ${PZC_FZF_BIN} (Path)"
       fi
     fi
     if [[ "${PZC_FZF_BIN}" == "" ]]
@@ -566,11 +566,11 @@ function _pzc_generate_config_pkgs()
   # Yazi
   # ---------------------------------------
 
-  local PZC_ENABLE_YAZI=$(jq -r '.pzc_config_pkgs.pkgs.yazi.enable' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_ENABLE_YAZI=$(jq -r '.pzc_config_pkgs.yazi.enable' ${PZC_PZC_CONFIG_FILE_V8})
   local PZC_ALIAS_YAZI=0
   if [[ ${PZC_ENABLE_YAZI} = true ]]
   then
-    local PZC_YAZI_BIN=$(jq -r '.pzc_config_pkgs.pkgs.yazi.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    local PZC_YAZI_BIN=$(jq -r '.pzc_config_pkgs.yazi.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_YAZI_BIN}" == "null" ]]
     then
       PZC_YAZI_BIN=""
@@ -579,7 +579,7 @@ function _pzc_generate_config_pkgs()
     then
       if [[ -e ${PZC_YAZI_BIN} ]] || [[ -x "$(command -v ${PZC_YAZI_BIN})" ]]
       then
-        _pzc_debug "PZC_YAZI_BIN = ${PZC_YAZI_BIN} (user defined)"
+        _pzc_info "PZC_YAZI_BIN = ${PZC_YAZI_BIN} (user defined)"
         PZC_ALIAS_YAZI=1
       else
         _pzc_warning "Your Yazi is not found. Search other Yazi."
@@ -593,7 +593,7 @@ function _pzc_generate_config_pkgs()
         PZC_YAZI_BIN=$(${PZC_MISE_BIN} which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" yazi 2&>/dev/null)
         if [[ $? == 0 ]]
         then
-          _pzc_debug "PZC_YAZI_BIN = ${PZC_YAZI_BIN} (Mise-en-place)"
+          _pzc_info "PZC_YAZI_BIN = ${PZC_YAZI_BIN} (Mise-en-place)"
           PZC_ALIAS_YAZI=1
         fi
       fi
@@ -603,7 +603,7 @@ function _pzc_generate_config_pkgs()
       if [[ -x "$(command -v yazi)" ]]
       then
         PZC_YAZI_BIN=yazi
-        _pzc_debug "PZC_YAZI_BIN = ${PZC_YAZI_BIN} (Path)"
+        _pzc_info "PZC_YAZI_BIN = ${PZC_YAZI_BIN} (Path)"
       fi
     fi
     if [[ "${PZC_YAZI_BIN}" == "" ]]
@@ -624,10 +624,10 @@ function _pzc_generate_config_pkgs()
   # Python
   # ---------------------------------------
 
-  local PZC_ENABLE_PYTHON=$(jq -r '.pzc_config_pkgs.pkgs.python.enable' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_ENABLE_PYTHON=$(jq -r '.pzc_config_pkgs.python.enable' ${PZC_PZC_CONFIG_FILE_V8})
   if [[ ${PZC_ENABLE_PYTHON} = true ]]
   then
-    local PZC_PYTHON_BIN=$(jq -r '.pzc_config_pkgs.pkgs.python.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    local PZC_PYTHON_BIN=$(jq -r '.pzc_config_pkgs.python.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_PYTHON_BIN}" == "null" ]]
     then
       PZC_PYTHON_BIN=""
@@ -636,7 +636,7 @@ function _pzc_generate_config_pkgs()
     then
       if [[ -e ${PZC_PYTHON_BIN} ]] || [[ -x "$(command -v ${PZC_PYTHON_BIN})" ]]
       then
-        _pzc_debug "PZC_PYTHON_BIN = ${PZC_PYTHON_BIN} (user defined)"
+        _pzc_info "PZC_PYTHON_BIN = ${PZC_PYTHON_BIN} (user defined)"
       else
         _pzc_warning "Your Python is not found. Search other Python."
         PZC_PYTHON_BIN=""
@@ -649,7 +649,7 @@ function _pzc_generate_config_pkgs()
         PZC_PYTHON_BIN=$(${PZC_MISE_BIN} which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" python 2&>/dev/null)
         if [[ $? == 0 ]]
         then
-          _pzc_debug "PZC_PYTHON_BIN = ${PZC_PYTHON_BIN} (Mise-en-place)"
+          _pzc_info "PZC_PYTHON_BIN = ${PZC_PYTHON_BIN} (Mise-en-place)"
         fi
       fi
     fi
@@ -658,11 +658,11 @@ function _pzc_generate_config_pkgs()
       if [[ -x "$(command -v python)" ]]
       then
         PZC_PYTHON_BIN=python
-        _pzc_debug "PZC_PYTHON_BIN = ${PZC_PYTHON_BIN} (Path)"
+        _pzc_info "PZC_PYTHON_BIN = ${PZC_PYTHON_BIN} (Path)"
       elif [[ -x "$(command -v python3)" ]]
       then
         PZC_PYTHON_BIN=python3
-        _pzc_debug "PZC_PYTHON_BIN = ${PZC_PYTHON_BIN} (Path)"
+        _pzc_info "PZC_PYTHON_BIN = ${PZC_PYTHON_BIN} (Path)"
       fi
     fi
     if [[ "${PZC_PYTHON_BIN}" == "" ]]
@@ -710,7 +710,7 @@ function _pzc_generate_config_pkgs()
     then
       if [[ -e ${PZC_C_GCC_BIN} ]] || [[ -x "$(command -v ${PZC_C_GCC_BIN})" ]]
       then
-        _pzc_debug "PZC_C_GCC_BIN = ${PZC_C_GCC_BIN} (user defined)"
+        _pzc_info "PZC_C_GCC_BIN = ${PZC_C_GCC_BIN} (user defined)"
       else
         _pzc_warning "Your gcc is not found. Search other gcc."
         PZC_C_GCC_BIN=""
@@ -721,7 +721,7 @@ function _pzc_generate_config_pkgs()
       if [[ -x "$(command -v gcc)" ]]
       then
         PZC_C_GCC_BIN=gcc
-        _pzc_debug "PZC_C_GCC_BIN = ${PZC_C_GCC_BIN} (Path)"
+        _pzc_info "PZC_C_GCC_BIN = ${PZC_C_GCC_BIN} (Path)"
       fi
     fi
     if [[ "${PZC_C_GCC_BIN}" == "" ]]
@@ -742,7 +742,7 @@ function _pzc_generate_config_pkgs()
     then
       if [[ -e ${PZC_CXX_GCC_BIN} ]] || [[ -x "$(command -v ${PZC_CXX_GCC_BIN})" ]]
       then
-        _pzc_debug "PZC_CXX_GCC_BIN = ${PZC_CXX_GCC_BIN} (user defined)"
+        _pzc_info "PZC_CXX_GCC_BIN = ${PZC_CXX_GCC_BIN} (user defined)"
       else
         _pzc_warning "Your g++ is not found. Search other g++."
         PZC_CXX_GCC_BIN=""
@@ -753,7 +753,7 @@ function _pzc_generate_config_pkgs()
       if [[ -x "$(command -v g++)" ]]
       then
         PZC_CXX_GCC_BIN=g++
-        _pzc_debug "PZC_CXX_GCC_BIN = ${PZC_CXX_GCC_BIN} (Path)"
+        _pzc_info "PZC_CXX_GCC_BIN = ${PZC_CXX_GCC_BIN} (Path)"
       fi
     fi
     if [[ "${PZC_CXX_GCC_BIN}" == "" ]]
@@ -790,7 +790,7 @@ function _pzc_generate_config_pkgs()
     then
       if [[ -e ${PZC_C_CLANG_BIN} ]] || [[ -x "$(command -v ${PZC_C_CLANG_BIN})" ]]
       then
-        _pzc_debug "PZC_C_CLANG_BIN = ${PZC_C_CLANG_BIN} (user defined)"
+        _pzc_info "PZC_C_CLANG_BIN = ${PZC_C_CLANG_BIN} (user defined)"
       else
         _pzc_warning "Your clang is not found. Search other clang."
         PZC_C_CLANG_BIN=""
@@ -801,7 +801,7 @@ function _pzc_generate_config_pkgs()
       if [[ -x "$(command -v clang)" ]]
       then
         PZC_C_CLANG_BIN=clang
-        _pzc_debug "PZC_C_CLANG_BIN = ${PZC_C_CLANG_BIN} (Path)"
+        _pzc_info "PZC_C_CLANG_BIN = ${PZC_C_CLANG_BIN} (Path)"
       fi
     fi
     if [[ "${PZC_C_CLANG_BIN}" == "" ]]
@@ -822,7 +822,7 @@ function _pzc_generate_config_pkgs()
     then
       if [[ -e ${PZC_CXX_CLANG_BIN} ]] || [[ -x "$(command -v ${PZC_CXX_CLANG_BIN})" ]]
       then
-        _pzc_debug "PZC_CXX_CLANG_BIN = ${PZC_CXX_CLANG_BIN} (user defined)"
+        _pzc_info "PZC_CXX_CLANG_BIN = ${PZC_CXX_CLANG_BIN} (user defined)"
       else
         _pzc_warning "Your clang++ is not found. Search other clang++."
         PZC_CXX_CLANG_BIN=""
@@ -833,7 +833,7 @@ function _pzc_generate_config_pkgs()
       if [[ -x "$(command -v clang++)" ]]
       then
         PZC_CXX_CLANG_BIN=clang++
-        _pzc_debug "PZC_CXX_CLANG_BIN = ${PZC_CXX_CLANG_BIN} (Path)"
+        _pzc_info "PZC_CXX_CLANG_BIN = ${PZC_CXX_CLANG_BIN} (Path)"
       fi
     fi
     if [[ "${PZC_CXX_CLANG_BIN}" == "" ]]
@@ -897,7 +897,7 @@ function _pzc_generate_config_pkgs()
     then
       if [[ -e ${PZC_NVCC_BIN} ]] || [[ -x "$(command -v ${PZC_NVCC_BIN})" ]]
       then
-        _pzc_debug "PZC_NVCC_BIN = ${PZC_NVCC_BIN} (user defined)"
+        _pzc_info "PZC_NVCC_BIN = ${PZC_NVCC_BIN} (user defined)"
       else
         _pzc_warning "Your nvcc is not found. Search other nvcc."
         PZC_NVCC_BIN=""
@@ -908,7 +908,7 @@ function _pzc_generate_config_pkgs()
       if [[ -x "$(command -v nvcc)" ]]
       then
         PZC_NVCC_BIN=nvcc
-        _pzc_debug "PZC_NVCC_BIN = ${PZC_NVCC_BIN} (Path)"
+        _pzc_info "PZC_NVCC_BIN = ${PZC_NVCC_BIN} (Path)"
       fi
     fi
     if [[ "${PZC_NVCC_BIN}" == "" ]]
@@ -930,7 +930,7 @@ function _pzc_generate_config_pkgs()
     then
       if [[ -e ${PZC_NVCC_HOST_COMPILER_BIN} ]] || [[ -x "$(command -v ${PZC_NVCC_HOST_COMPILER_BIN})" ]]
       then
-        _pzc_debug "PZC_NVCC_HOST_COMPILER_BIN = ${PZC_NVCC_HOST_COMPILER_BIN} (user defined)"
+        _pzc_info "PZC_NVCC_HOST_COMPILER_BIN = ${PZC_NVCC_HOST_COMPILER_BIN} (user defined)"
         echo "PZC_NVCC_HOST_COMPILER_BIN=\"${PZC_CXX_GCC_BIN}\"" >> ${PZC_PZC_CONFIG_FILE}
       else
         _pzc_warning "Your nvcc host compiler is not found."
@@ -962,7 +962,7 @@ function _pzc_generate_config_pkgs()
     then
       if [[ -e ${PZC_SYCL_BIN} ]] || [[ -x "$(command -v ${PZC_SYCL_BIN})" ]]
       then
-        _pzc_debug "PZC_SYCL_BIN = ${PZC_SYCL_BIN} (user defined)"
+        _pzc_info "PZC_SYCL_BIN = ${PZC_SYCL_BIN} (user defined)"
       else
         _pzc_warning "Your sycl is not found. Search other sycl."
         PZC_SYCL_BIN=""
@@ -973,7 +973,7 @@ function _pzc_generate_config_pkgs()
       if [[ -x "$(command -v sycl)" ]]
       then
         PZC_SYCL_BIN=sycl
-        _pzc_debug "PZC_SYCL_BIN = ${PZC_SYCL_BIN} (Path)"
+        _pzc_info "PZC_SYCL_BIN = ${PZC_SYCL_BIN} (Path)"
       fi
     fi
     if [[ "${PZC_SYCL_BIN}" == "" ]]
@@ -995,7 +995,7 @@ function _pzc_generate_config_pkgs()
     then
       if [[ -e ${PZC_SYCL_HOST_COMPILER_BIN} ]] || [[ -x "$(command -v ${PZC_SYCL_HOST_COMPILER_BIN})" ]]
       then
-        _pzc_debug "PZC_SYCL_HOST_COMPILER_BIN = ${PZC_SYCL_HOST_COMPILER_BIN} (user defined)"
+        _pzc_info "PZC_SYCL_HOST_COMPILER_BIN = ${PZC_SYCL_HOST_COMPILER_BIN} (user defined)"
         echo "PZC_SYCL_HOST_COMPILER_BIN=\"${PZC_CXX_GCC_BIN}\"" >> ${PZC_PZC_CONFIG_FILE}
       else
         _pzc_warning "Your sycl host compiler is not found."

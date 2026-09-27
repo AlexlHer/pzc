@@ -45,63 +45,62 @@
     }
   },
   "pzc_config_pkgs": {
-    "pkgs":{
-      "#": "Comment",
-      "mise_en_place": {
-        "enable": true,
-        "executable_path": ""
-      },
-      "spack": {
-        "enable": true,
-        "src_path": ""
-      },
-      "oh_my_posh": {
-        "enable": true,
-        "executable_path": "",
-        "theme_file": ""
-      },
-      "eza": {
-        "enable": true,
-        "executable_path": "",
-        "config_dir": ""
-      },
-      "ccache": {
-        "enable": true,
-        "executable_path": ""
-      },
-      "mold": {
-        "enable": true,
-        "executable_path": ""
-      },
-      "ninja": {
-        "enable": true,
-        "executable_path": ""
-      },
-      "cmake": {
-        "enable": true,
-        "executable_path": ""
-      },
-      "taskwarrior": {
-        "enable": true,
-        "executable_path": ""
-      },
-      "atuin": {
-        "enable": true,
-        "executable_path": "",
-        "config_dir": ""
-      },
-      "fzf": {
-        "enable": true,
-        "executable_path": ""
-      },
-      "yazi": {
-        "enable": true,
-        "executable_path": ""
-      },
-      "python": {
-        "enable": true,
-        "executable_path": ""
-      }
+    "#": "Comment",
+    "mise_en_place": {
+      "enable": true,
+      "executable_path": ""
+    },
+    "spack": {
+      "enable": true,
+      "src_path": "",
+      "start_at_launch": false
+    },
+    "oh_my_posh": {
+      "enable": true,
+      "executable_path": "",
+      "theme_file": ""
+    },
+    "eza": {
+      "enable": true,
+      "executable_path": "",
+      "config_dir": ""
+    },
+    "ccache": {
+      "enable": true,
+      "executable_path": ""
+    },
+    "mold": {
+      "enable": true,
+      "executable_path": ""
+    },
+    "ninja": {
+      "enable": true,
+      "executable_path": ""
+    },
+    "cmake": {
+      "enable": true,
+      "executable_path": ""
+    },
+    "taskwarrior": {
+      "enable": true,
+      "executable_path": ""
+    },
+    "atuin": {
+      "enable": true,
+      "executable_path": "",
+      "config_dir": ""
+    },
+    "fzf": {
+      "enable": true,
+      "executable_path": ""
+    },
+    "yazi": {
+      "enable": true,
+      "executable_path": ""
+    },
+    "python": {
+      "enable": true,
+      "executable_path": ""
     }
   }
 }
