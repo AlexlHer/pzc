@@ -14,6 +14,23 @@
 
 function _pzc_generate_config_pkgs_mng()
 {
+
+  local LARGE_DIR=$(jq -r '.pzc_config_dirs.large_dir' ${PZC_PZC_CONFIG_FILE_V8})
+  if [[ "${LARGE_DIR}" == "" ]] || [[ "${LARGE_DIR}" == "null" ]]
+  then
+    LARGE_DIR="${HOME}"
+  else
+    LARGE_DIR=$(eval "echo \"${LARGE_DIR}\"")
+  fi
+
+  local PZC_ENVI_DIR=$(jq -r '.pzc_config_dirs.envi_dir' ${PZC_PZC_CONFIG_FILE_V8})
+  if [[ "${PZC_ENVI_DIR}" == "" ]] || [[ "${PZC_ENVI_DIR}" == "null" ]]
+  then
+    PZC_ENVI_DIR="${LARGE_DIR}/environment"
+  else
+    PZC_ENVI_DIR=$(eval "echo \"${PZC_ENVI_DIR}\"")
+  fi
+
   # ---------------------------------------
   # Mise-en-place
   # ---------------------------------------
@@ -47,9 +64,9 @@ function _pzc_generate_config_pkgs_mng()
         PZC_MISE_BIN=mise
         _pzc_info "PZC_MISE_BIN = ${PZC_MISE_BIN} (Path)"
         _PZC_MISE_AVAILABLE=1
-      elif [[ -e ${ENVI_DIR}/pzc/progs/mise/mise ]]
+      elif [[ -e ${PZC_ENVI_DIR}/pzc/progs/mise/mise ]]
       then
-        PZC_MISE_BIN=${ENVI_DIR}/pzc/progs/mise/mise
+        PZC_MISE_BIN=${PZC_ENVI_DIR}/pzc/progs/mise/mise
         _pzc_info "PZC_MISE_BIN = ${PZC_MISE_BIN} (in pzc)"
         _PZC_MISE_AVAILABLE=1
         PZC_ALIAS_MISE=1
@@ -93,7 +110,7 @@ function _pzc_generate_config_pkgs_mng()
         PZC_SPACK_PATH=""
       fi
     else
-      PZC_SPACK_PATH="${ENVI_DIR}/spack"
+      PZC_SPACK_PATH="${PZC_ENVI_DIR}/spack"
       if [[ -e ${PZC_SPACK_PATH}/share/spack/setup-env.sh ]]
       then
         _pzc_info "PZC_SPACK_PATH = ${PZC_SPACK_PATH} (default)"

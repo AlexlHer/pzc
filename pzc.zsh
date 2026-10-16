@@ -32,16 +32,6 @@ _pzc_main()
   source "${PZC_PZC_CONFIG_FILE}"
 
 
-  # Check update...
-  source ${PZC_PZC_DIR}/pzc/core/pzc_update.zsh
-  _pzc_check_update
-  if [[ ${_PZC_FATAL_ERROR} = 1 ]]
-  then
-    return 0
-  fi
-  unfunction _pzc_check_update
-
-
   # Configuration done. Launching PZC...
   source ${PZC_PZC_DIR}/pzc/core/launcher.zsh
 

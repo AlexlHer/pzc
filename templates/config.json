@@ -17,7 +17,7 @@
     "envi_dir": "${LARGE_DIR}/environment",
     "ccache_dir": "${BUILD_DIR}/ccache"
   },
-  "pzc_config_compiler": {
+  "pzc_config_compilers": {
     "#1": "GCC or CLANG",
     "c_cxx_default_compiler": "GCC",
     "gcc": {

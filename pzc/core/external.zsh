@@ -295,6 +295,27 @@ fi
 
 
 # ------------------------------------------------------------------------------
+# Spack
+# ------------------------------------------------------------------------------
+
+if [[ "${PZC_SPACK_PATH}" != "" ]]
+then
+  if [[ -e ${PZC_SPACK_PATH}/share/spack/setup-env.sh ]]
+  then
+    _pzc_debug "Spack enable"
+    _PZC_SPACK_AVAILABLE=1
+  else
+    _pzc_error "The Spack install is not valid (\"${PZC_SPACK_PATH}/share/spack/setup-env.sh\" not found). You can delete it and reclone Spack."
+    _PZC_SPACK_AVAILABLE=0
+  fi
+else
+  _pzc_debug "Spack disabled"
+  _PZC_SPACK_AVAILABLE=0
+fi
+
+
+
+# ------------------------------------------------------------------------------
 # GCC/G++
 # ------------------------------------------------------------------------------
 

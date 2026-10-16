@@ -679,7 +679,7 @@ function _pzc_generate_config_pkgs()
   # c_cxx_default_compiler
   # ---------------------------------------
 
-  local PZC_C_CXX_DEFAULT_COMPILER=$(jq -r '.pzc_config_compiler.c_cxx_default_compiler' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_C_CXX_DEFAULT_COMPILER=$(jq -r '.pzc_config_compilers.c_cxx_default_compiler' ${PZC_PZC_CONFIG_FILE_V8})
   if [[ "${PZC_C_CXX_DEFAULT_COMPILER}" == "GCC" ]]
   then
     echo "local _PZC_C_CXX_DEFAULT_COMPILER=\"GCC\"" >> ${PZC_PZC_CONFIG_FILE}
@@ -695,13 +695,13 @@ function _pzc_generate_config_pkgs()
   # gcc
   # ---------------------------------------
 
-  local PZC_ENABLE_GCC=$(jq -r '.pzc_config_compiler.gcc.available' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_ENABLE_GCC=$(jq -r '.pzc_config_compilers.gcc.available' ${PZC_PZC_CONFIG_FILE_V8})
   local PZC_C_GCC_BIN=""
   local PZC_CXX_GCC_BIN=""
 
   if [[ ${PZC_ENABLE_GCC} = true ]]
   then
-    PZC_C_GCC_BIN=$(jq -r '.pzc_config_compiler.gcc.c_executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    PZC_C_GCC_BIN=$(jq -r '.pzc_config_compilers.gcc.c_executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_C_GCC_BIN}" == "null" ]]
     then
       PZC_C_GCC_BIN=""
@@ -733,7 +733,7 @@ function _pzc_generate_config_pkgs()
 
   if [[ ${PZC_ENABLE_GCC} = true ]]
   then
-    PZC_CXX_GCC_BIN=$(jq -r '.pzc_config_compiler.gcc.cc_executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    PZC_CXX_GCC_BIN=$(jq -r '.pzc_config_compilers.gcc.cc_executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_CXX_GCC_BIN}" == "null" ]]
     then
       PZC_CXX_GCC_BIN=""
@@ -775,13 +775,13 @@ function _pzc_generate_config_pkgs()
   # clang
   # ---------------------------------------
 
-  local PZC_ENABLE_CLANG=$(jq -r '.pzc_config_compiler.clang.available' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_ENABLE_CLANG=$(jq -r '.pzc_config_compilers.clang.available' ${PZC_PZC_CONFIG_FILE_V8})
   local PZC_C_CLANG_BIN=""
   local PZC_CXX_CLANG_BIN=""
 
   if [[ ${PZC_ENABLE_CLANG} = true ]]
   then
-    PZC_C_CLANG_BIN=$(jq -r '.pzc_config_compiler.clang.c_executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    PZC_C_CLANG_BIN=$(jq -r '.pzc_config_compilers.clang.c_executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_C_CLANG_BIN}" == "null" ]]
     then
       PZC_C_CLANG_BIN=""
@@ -813,7 +813,7 @@ function _pzc_generate_config_pkgs()
   
   if [[ ${PZC_ENABLE_CLANG} = true ]]
   then
-    PZC_CXX_CLANG_BIN=$(jq -r '.pzc_config_compiler.clang.cc_executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    PZC_CXX_CLANG_BIN=$(jq -r '.pzc_config_compilers.clang.cc_executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_CXX_CLANG_BIN}" == "null" ]]
     then
       PZC_CXX_CLANG_BIN=""
@@ -855,7 +855,7 @@ function _pzc_generate_config_pkgs()
   # gpu_default_compiler
   # ---------------------------------------
 
-  local PZC_GPU_DEFAULT_COMPILER=$(jq -r '.pzc_config_compiler.gpu_default_compiler' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_GPU_DEFAULT_COMPILER=$(jq -r '.pzc_config_compilers.gpu_default_compiler' ${PZC_PZC_CONFIG_FILE_V8})
   if [[ "${PZC_GPU_DEFAULT_COMPILER}" == "NVCC" ]]
   then
     echo "PZC_GPU_DEFAULT_COMPILER=\"NVCC\"" >> ${PZC_PZC_CONFIG_FILE}
@@ -870,7 +870,7 @@ function _pzc_generate_config_pkgs()
   # gpu_target_arch
   # ---------------------------------------
 
-  local PZC_GPU_TARGET_ARCH=$(jq -r '.pzc_config_compiler.gpu_target_arch' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_GPU_TARGET_ARCH=$(jq -r '.pzc_config_compilers.gpu_target_arch' ${PZC_PZC_CONFIG_FILE_V8})
   if [[ "${PZC_GPU_TARGET_ARCH}" != "" ]] && [[ "${PZC_GPU_TARGET_ARCH}" != "null" ]]
   then
     echo "PZC_GPU_TARGET_ARCH=\"${PZC_GPU_TARGET_ARCH}\"" >> ${PZC_PZC_CONFIG_FILE}
@@ -883,12 +883,12 @@ function _pzc_generate_config_pkgs()
   # nvcc
   # ---------------------------------------
 
-  local PZC_ENABLE_NVCC=$(jq -r '.pzc_config_compiler.nvcc.available' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_ENABLE_NVCC=$(jq -r '.pzc_config_compilers.nvcc.available' ${PZC_PZC_CONFIG_FILE_V8})
   local PZC_NVCC_BIN=""
 
   if [[ ${PZC_ENABLE_NVCC} = true ]]
   then
-    PZC_NVCC_BIN=$(jq -r '.pzc_config_compiler.nvcc.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    PZC_NVCC_BIN=$(jq -r '.pzc_config_compilers.nvcc.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_NVCC_BIN}" == "null" ]]
     then
       PZC_NVCC_BIN=""
@@ -925,7 +925,7 @@ function _pzc_generate_config_pkgs()
 
   if [[ ${PZC_ENABLE_NVCC} = true ]]
   then
-    local PZC_NVCC_HOST_COMPILER_BIN=$(jq -r '.pzc_config_compiler.nvcc.host_executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    local PZC_NVCC_HOST_COMPILER_BIN=$(jq -r '.pzc_config_compilers.nvcc.host_executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_NVCC_HOST_COMPILER_BIN}" != "" ]] && [[ "${PZC_NVCC_HOST_COMPILER_BIN}" != "null" ]]
     then
       if [[ -e ${PZC_NVCC_HOST_COMPILER_BIN} ]] || [[ -x "$(command -v ${PZC_NVCC_HOST_COMPILER_BIN})" ]]
@@ -948,12 +948,12 @@ function _pzc_generate_config_pkgs()
   # sycl
   # ---------------------------------------
 
-  local PZC_ENABLE_SYCL=$(jq -r '.pzc_config_compiler.sycl.available' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_ENABLE_SYCL=$(jq -r '.pzc_config_compilers.sycl.available' ${PZC_PZC_CONFIG_FILE_V8})
   local PZC_SYCL_BIN=""
 
   if [[ ${PZC_ENABLE_SYCL} = true ]]
   then
-    PZC_SYCL_BIN=$(jq -r '.pzc_config_compiler.sycl.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    PZC_SYCL_BIN=$(jq -r '.pzc_config_compilers.sycl.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_SYCL_BIN}" == "null" ]]
     then
       PZC_SYCL_BIN=""
@@ -990,7 +990,7 @@ function _pzc_generate_config_pkgs()
 
   if [[ ${PZC_ENABLE_SYCL} = true ]]
   then
-    local PZC_SYCL_HOST_COMPILER_BIN=$(jq -r '.pzc_config_compiler.sycl.host_executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    local PZC_SYCL_HOST_COMPILER_BIN=$(jq -r '.pzc_config_compilers.sycl.host_executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_SYCL_HOST_COMPILER_BIN}" != "" ]] && [[ "${PZC_SYCL_HOST_COMPILER_BIN}" != "null" ]]
     then
       if [[ -e ${PZC_SYCL_HOST_COMPILER_BIN} ]] || [[ -x "$(command -v ${PZC_SYCL_HOST_COMPILER_BIN})" ]]
