@@ -10,9 +10,13 @@
 # Core functions to update PZC configuration file.
 # ------------------------------------------------------------------------------
 
+
+
+
 _pzc_check_update()
 {
-  if [[ ! -e "${PZC_PZC_CONFIG_DIR}/config.json" ]]
+  # Maj avant v8.
+  if [[ ! -e "${PZC_PZC_CONFIG_FILE_V8}" ]]
   then
     if [[ -e "${PZC_PZC_CONFIG_DIR}/pzcrc" ]]
     then
@@ -51,16 +55,25 @@ _pzc_check_update()
     read -s -k $'?Press any key to continue.\n'
     echo ""
     
-    pzc_regenerate_config
+    _pzc_regenerate_config
 
     echo ""
     _pzc_info "Update done. Restarting zsh to continue..."
     read -s -k $'?Press any key to continue.\n'
     exec zsh
+    # Ne devrait pas aller ici.
+    _PZC_FATAL_ERROR=1
+
+  # Maj après v8.
+  else
+    source ${PZC_PZC_DIR}/pzc/core/update/after_v8.zsh
+    _pzc_check_update_json
+    if [[ ${_PZC_FATAL_ERROR} = 1 ]]
+    then
+      _pzc_error "Error update"
+      _PZC_FATAL_ERROR=1
+      return 0
+    fi
+    unfunction _pzc_check_update_json
   fi
-
-
-  #TODO
-  
-
 }

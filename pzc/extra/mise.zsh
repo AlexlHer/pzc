@@ -59,8 +59,6 @@ then
       fi
 
       pzc_regenerate_config
-      _pzc_info "Reload ZSH..."
-      exec zsh
     else
       _pzc_error "Error with wget call."
     fi

@@ -27,7 +27,7 @@ PZC_PZC_CONFIG_FILE_V8=${PZC_PZC_CONFIG_DIR}/config.json
 
 
 
-function pzc_regenerate_config()
+function _pzc_regenerate_config()
 {
   source ${PZC_PZC_DIR}/pzc/version.zsh
   if [[ ! -e ${PZC_PZC_CONFIG_FILE_V8} ]]
@@ -74,6 +74,34 @@ function pzc_regenerate_config()
   fi
   unfunction _pzc_generate_config_pkgs
 }
+
+
+
+function pzc_regenerate_config()
+{
+  _pzc_regenerate_config
+  _pzc_info "Reloading ZSH..."
+  exec zsh
+}
+
+
+
+function pzc_config
+{
+  _pzc_coal_eval "${PZC_FILE_EDITOR} ${PZC_PZC_CONFIG_FILE_V8}"
+  _pzc_info "Call pzc_regenerate_config to regenerate the configuration ?"
+
+  read -q "REPLY?(y/n)"
+  echo ""
+  if [[ ${REPLY} != "y" ]]
+  then
+    unset REPLY
+    return 0
+  fi
+  unset REPLY
+  pzc_regenerate_config
+}
+
 
 
 
@@ -132,6 +160,6 @@ function _pzc_config()
   if [[ ! -e "${PZC_PZC_CONFIG_FILE}" ]]
   then
     _pzc_info "Internal configuration file not found. Creating this file..."
-    pzc_regenerate_config
+    _pzc_regenerate_config
   fi
 }

@@ -678,7 +678,7 @@ _pzc_update_pzcrc_790()
   ' ${_PZC_OUTPUT_FILE_TMP} > ${_PZC_OUTPUT_FILE}
 }
 
-_pzc_launch_pzc_update()
+_pzc_launch_pzc_update_before_v8()
 {
   mv ${PZC_PZC_OLD_CONFIG_FILE} ${PZC_PZC_OLD_CONFIG_FILE}.old
   _pzc_info "A copy of your old pzcrc is available here: ${PZC_PZC_OLD_CONFIG_FILE}.old"
@@ -1301,10 +1301,7 @@ _pzc_check_update_before_v8()
   if [[ ${_PZC_VERSION_CHECKER_RET} = 2 ]]
   then
     PZC_LOG_ERROR=1
-    _pzc_error "PZC v${PZC_VERSION[1]}.${PZC_VERSION[2]}.${PZC_VERSION[3]} is too old to read your config file pzcrc. "
-    echo "\033[0;101m\033[30m           Please update PZC ('cd \${PZC_PZC_DIR}' and 'git pull'). "
-    echo "\033[0;101m\033[30m           Your pzcrc version:                           v${_PZC_CONFIG_VERSION[1]}.${_PZC_CONFIG_VERSION[2]}.${_PZC_CONFIG_VERSION[3]}    "
-    echo "\033[0;101m\033[30m           Latest version supported by your PZC version: v${_PZC_CONFIG_LAST_VERSION[1]}.${_PZC_CONFIG_LAST_VERSION[2]}.${_PZC_CONFIG_LAST_VERSION[3]}    \033[0m"
+    _pzc_error "Internal error."
     _PZC_FATAL_ERROR=1
     return 0
 
@@ -1316,7 +1313,7 @@ _pzc_check_update_before_v8()
 
     _pzc_info "Your pzcrc file was created by PZC before v8."
     _pzc_info "It's an old format file (ZSH script) and we must update it to the latest version (v7.9.0) before generate new format file (JSON)."
-    _pzc_launch_pzc_update
+    _pzc_launch_pzc_update_before_v8
     # Ne devrait pas aller ici.
     _PZC_FATAL_ERROR=1
     return 0
@@ -1333,5 +1330,5 @@ _pzc_check_update_before_v8()
   unfunction _pzc_version_checker
 
   unfunction _pzc_update_pzcrc_5
-  unfunction _pzc_launch_pzc_update
+  unfunction _pzc_launch_pzc_update_before_v8
 }

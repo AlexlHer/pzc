@@ -452,8 +452,6 @@ then
         if [[ ! -n ${_PZC_PKG_RESTART} ]] || [[ ${_PZC_PKG_RESTART} = 1 ]]
         then
           pzc_regenerate_config
-          _pzc_info "Reloading ZSH..."
-          exec zsh
         fi
       else
         _pzc_error "Error with Mise-en-place."
@@ -495,8 +493,6 @@ then
         if [[ ! -n ${_PZC_PKG_RESTART} ]] || [[ ${_PZC_PKG_RESTART} = 1 ]]
         then
           pzc_regenerate_config
-          _pzc_info "Reloading ZSH..."
-          exec zsh
         fi
       else
         _pzc_error "Error with Mise-en-place."
@@ -538,8 +534,6 @@ then
         if [[ ! -n ${_PZC_PKG_RESTART} ]] || [[ ${_PZC_PKG_RESTART} = 1 ]]
         then
           pzc_regenerate_config
-          _pzc_info "Reloading ZSH..."
-          exec zsh
         fi
       else
         _pzc_error "Error with Mise-en-place."
@@ -581,8 +575,6 @@ then
         if [[ ! -n ${_PZC_PKG_RESTART} ]] || [[ ${_PZC_PKG_RESTART} = 1 ]]
         then
           pzc_regenerate_config
-          _pzc_info "Reloading ZSH..."
-          exec zsh
         fi
       else
         _pzc_error "Error with Mise-en-place."
@@ -624,8 +616,6 @@ then
         if [[ ! -n ${_PZC_PKG_RESTART} ]] || [[ ${_PZC_PKG_RESTART} = 1 ]]
         then
           pzc_regenerate_config
-          _pzc_info "Reloading ZSH..."
-          exec zsh
         fi
       else
         _pzc_error "Error with Mise-en-place."
@@ -667,8 +657,6 @@ then
         if [[ ! -n ${_PZC_PKG_RESTART} ]] || [[ ${_PZC_PKG_RESTART} = 1 ]]
         then
           pzc_regenerate_config
-          _pzc_info "Reloading ZSH..."
-          exec zsh
         fi
       else
         _pzc_error "Error with Mise-en-place."
@@ -710,8 +698,6 @@ then
         if [[ ! -n ${_PZC_PKG_RESTART} ]] || [[ ${_PZC_PKG_RESTART} = 1 ]]
         then
           pzc_regenerate_config
-          _pzc_info "Reloading ZSH..."
-          exec zsh
         fi
       else
         _pzc_error "Error with Mise-en-place."
@@ -753,8 +739,6 @@ then
         if [[ ! -n ${_PZC_PKG_RESTART} ]] || [[ ${_PZC_PKG_RESTART} = 1 ]]
         then
           pzc_regenerate_config
-          _pzc_info "Reloading ZSH..."
-          exec zsh
         fi
       else
         _pzc_error "Error with Mise-en-place."
@@ -791,8 +775,6 @@ then
         if [[ ! -n ${_PZC_PKG_RESTART} ]] || [[ ${_PZC_PKG_RESTART} = 1 ]]
         then
           pzc_regenerate_config
-          _pzc_info "Reloading ZSH..."
-          exec zsh
         fi
       else
         _pzc_error "Error with Mise-en-place."
@@ -816,8 +798,6 @@ then
     pzc_install_yazi
 
     pzc_regenerate_config
-    _pzc_info "Reloading ZSH..."
-    exec zsh
   }
 
 fi
