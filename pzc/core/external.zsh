@@ -35,7 +35,7 @@ then
     _pzc_debug "Oh-My-Posh enable"
     _PZC_OMP_AVAILABLE=1
   else
-    _pzc_error "Oh-My-Posh not found, call TODO"
+    _pzc_error "Oh-My-Posh not found, call 'pzc_regenerate_config' to update the internal config."
   fi
 else
   _pzc_debug "Oh-My-Posh disabled"
@@ -55,7 +55,7 @@ then
     _pzc_debug "EZA enable"
     _PZC_EZA_AVAILABLE=1
   else
-    _pzc_error "EZA not found, call TODO"
+    _pzc_error "EZA not found, call 'pzc_regenerate_config' to update the internal config."
   fi
 else
   _pzc_debug "EZA disabled"
@@ -75,7 +75,7 @@ then
     _pzc_debug "CCache enable"
     _PZC_CCACHE_AVAILABLE=1
   else
-    _pzc_error "CCache not found, call TODO"
+    _pzc_error "CCache not found, call 'pzc_regenerate_config' to update the internal config."
   fi
 else
   _pzc_debug "CCache disabled"
@@ -101,7 +101,7 @@ then
       _pzc_debug "Edit PATH to add Mold"
     fi
   else
-    _pzc_error "Mold not found, call TODO"
+    _pzc_error "Mold not found, call 'pzc_regenerate_config' to update the internal config."
   fi
 else
   _pzc_debug "Mold disabled"
@@ -127,7 +127,7 @@ then
       _pzc_debug "Edit PATH to add Ninja"
     fi
   else
-    _pzc_error "Ninja not found, call TODO"
+    _pzc_error "Ninja not found, call 'pzc_regenerate_config' to update the internal config."
   fi
 else
   _pzc_debug "Ninja disabled"
@@ -153,7 +153,7 @@ then
       _pzc_debug "Edit PATH to add CMake"
     fi
   else
-    _pzc_error "CMake not found, call TODO"
+    _pzc_error "CMake not found, call 'pzc_regenerate_config' to update the internal config."
   fi
 else
   _pzc_debug "CMake disabled"
@@ -179,7 +179,7 @@ then
       _pzc_debug "Edit PATH to add Taskwarrior"
     fi
   else
-    _pzc_error "Taskwarrior not found, call TODO"
+    _pzc_error "Taskwarrior not found, call 'pzc_regenerate_config' to update the internal config."
   fi
 else
   _pzc_debug "Taskwarrior disabled"
@@ -199,7 +199,7 @@ then
     _pzc_debug "Atuin enable"
     _PZC_ATUIN_AVAILABLE=1
   else
-    _pzc_error "Atuin not found, call TODO"
+    _pzc_error "Atuin not found, call 'pzc_regenerate_config' to update the internal config."
   fi
 else
   _pzc_debug "Atuin disabled"
@@ -219,7 +219,7 @@ then
     _pzc_debug "Fzf enable"
     _PZC_FZF_AVAILABLE=1
   else
-    _pzc_error "Fzf not found, call TODO"
+    _pzc_error "Fzf not found, call 'pzc_regenerate_config' to update the internal config."
   fi
 else
   _pzc_debug "Fzf disabled"
@@ -239,7 +239,7 @@ then
     _pzc_debug "Yazi enable"
     _PZC_YAZI_AVAILABLE=1
   else
-    _pzc_error "Yazi not found, call TODO"
+    _pzc_error "Yazi not found, call 'pzc_regenerate_config' to update the internal config."
   fi
 else
   _pzc_debug "Yazi disabled"
@@ -265,7 +265,7 @@ then
       _pzc_debug "Edit PATH to add Python"
     fi
   else
-    _pzc_error "Python not found, call TODO"
+    _pzc_error "Python not found, call 'pzc_regenerate_config' to update the internal config."
   fi
 else
   _pzc_debug "Python disabled"
@@ -285,7 +285,7 @@ then
     _pzc_debug "Mise enable"
     _PZC_MISE_AVAILABLE=1
   else
-    _pzc_error "Mise not found, call TODO"
+    _pzc_error "Mise not found, call 'pzc_regenerate_config' to update the internal config."
   fi
 else
   _pzc_debug "Mise disabled"
@@ -326,7 +326,7 @@ then
     _pzc_debug "GCC enable"
     _PZC_GCC_AVAILABLE=1
   else
-    _pzc_error "GCC not found, call TODO"
+    _pzc_error "GCC not found, call 'pzc_regenerate_config' to update the internal config."
   fi
 else
   _pzc_debug "GCC disabled"
@@ -346,7 +346,7 @@ then
     _pzc_debug "Clang enable"
     _PZC_CLANG_AVAILABLE=1
   else
-    _pzc_error "Clang not found, call TODO"
+    _pzc_error "Clang not found, call 'pzc_regenerate_config' to update the internal config."
   fi
 else
   _pzc_debug "Clang disabled"
@@ -366,7 +366,7 @@ then
     _pzc_debug "NVCC enable"
     _PZC_NVCC_BIN_AVAILABLE=1
   else
-    _pzc_error "NVCC not found, call TODO"
+    _pzc_error "NVCC not found, call 'pzc_regenerate_config' to update the internal config."
   fi
 else
   _pzc_debug "NVCC disabled"
@@ -386,7 +386,7 @@ then
     _pzc_debug "SYCL enable"
     _PZC_SYCL_BIN_AVAILABLE=1
   else
-    _pzc_error "SYCL not found, call TODO"
+    _pzc_error "SYCL not found, call 'pzc_regenerate_config' to update the internal config."
   fi
 else
   _pzc_debug "SYCL disabled"

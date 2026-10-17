@@ -28,13 +28,6 @@ _pzc_check_update()
       return 0
     fi
 
-    if [[ $? != 0 ]]
-    then
-      _pzc_error "Error source TODO"
-      _PZC_FATAL_ERROR=1
-      return 0
-    fi
-
     source ${PZC_PZC_DIR}/pzc/core/update/before_v8.zsh
     _pzc_check_update_before_v8
     if [[ ${_PZC_FATAL_ERROR} = 1 ]]

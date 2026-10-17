@@ -77,4 +77,6 @@ _pzc_check_update_json()
   else
     _pzc_debug "json config file Checker OK"
   fi
+  
+  unfunction _pzc_version_checker
 }

@@ -96,6 +96,7 @@ function pzc_config
   if [[ ${REPLY} != "y" ]]
   then
     unset REPLY
+    echo "n"
     return 0
   fi
   unset REPLY

@@ -45,7 +45,6 @@
     }
   },
   "pzc_config_pkgs": {
-    "#": "Comment",
     "mise_en_place": {
       "enable": true,
       "executable_path": ""

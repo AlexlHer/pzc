@@ -1292,7 +1292,7 @@ _pzc_check_update_before_v8()
 {
   source "${PZC_PZC_OLD_CONFIG_FILE}"
 
-  source ${PZC_PZC_DIR}/pzc/version.zsh
+  local _PZC_CONFIG_LAST_VERSION=(7 9 0)
   source ${PZC_PZC_DIR}/pzc/core/update/version_checker.zsh
 
   local _PZC_VERSION_CHECKER_RET=0
