@@ -14,11 +14,13 @@
 
 if [[ ! -v PZC_PZC_CONFIG_DIR ]]
 then
+  mkdir -p ${HOME}/.config/pzc
   PZC_PZC_CONFIG_DIR=${HOME}/.config/pzc
 fi
 
 if [[ ! -v PZC_PZC_CACHE_DIR ]]
 then
+  mkdir -p ${HOME}/.cache/pzc
   PZC_PZC_CACHE_DIR=${HOME}/.cache/pzc
 fi
 
@@ -73,6 +75,8 @@ function _pzc_regenerate_config()
     return 0
   fi
   unfunction _pzc_generate_config_pkgs
+
+  _pzc_info "Internal config file generated. If there are warnings, you can edit the json config file with command 'pzc_config'."
 }
 
 
