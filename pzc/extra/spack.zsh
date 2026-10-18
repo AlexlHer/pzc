@@ -13,59 +13,6 @@
 
 
 # ------------------------------------------------------------------------------
-# Search
-# ------------------------------------------------------------------------------
-
-if [[ ${_PZC_SPACK_AVAILABLE} = 1 ]]
-then
-
-  if [[ -v PZC_SPACK_PATH ]]
-  then
-    if [[ -e ${PZC_SPACK_PATH}/share/spack/setup-env.sh ]]
-    then
-      _pzc_debug "PZC_SPACK_PATH = ${PZC_SPACK_PATH}"
-
-    else
-      _pzc_warning "Your Spack is not valid (\"${PZC_SPACK_PATH}/share/spack/setup-env.sh\" not found)."
-      _pzc_debug "PZC_SPACK_PATH = ${PZC_SPACK_PATH} (unset)"
-      unset PZC_SPACK_PATH
-      _PZC_SPACK_AVAILABLE=0
-      
-    fi
-
-  else
-
-    PZC_SPACK_PATH="${ENVI_DIR}/spack"
-
-    if [[ -e ${PZC_SPACK_PATH} ]]
-    then
-      if [[ -e ${PZC_SPACK_PATH}/share/spack/setup-env.sh ]]
-      then
-        _pzc_debug "PZC_SPACK_PATH = ${PZC_SPACK_PATH}"
-
-      else
-        _pzc_warning "The Spack install is not valid (\"${PZC_SPACK_PATH}/share/spack/setup-env.sh\" not found). You can delete it and reclone Spack."
-        _pzc_debug "PZC_SPACK_PATH = ${PZC_SPACK_PATH} (unset)"
-        unset PZC_SPACK_PATH
-        _PZC_SPACK_AVAILABLE=0
-      fi
-
-    else
-      _pzc_info "To initialise Spack, you can call pzc_install_spack function."
-      _PZC_SPACK_AVAILABLE=0
-
-    fi
-
-  fi
-
-else
-  _pzc_debug "Spack disabled."
-
-fi
-
-
-
-# ------------------------------------------------------------------------------
 # Install
 # ------------------------------------------------------------------------------
 

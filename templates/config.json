@@ -1,0 +1,105 @@
+{
+  "pzc_config_general": {
+    "version": [8, 0, 0],
+    "file_editor": "vim",
+    "disable_welcome": false,
+    "log_info": true,
+    "log_warning": true,
+    "log_error": true,
+    "log_debug": false
+  },
+  "pzc_config_dirs": {
+    "large_dir": "${HOME}",
+    "tmp_dir": "/tmp/pzc",
+    "work_dir": "${LARGE_DIR}/work",
+    "build_dir": "${LARGE_DIR}/build",
+    "install_dir": "${LARGE_DIR}/install",
+    "envi_dir": "${LARGE_DIR}/environment",
+    "ccache_dir": "${BUILD_DIR}/ccache"
+  },
+  "pzc_config_compilers": {
+    "#1": "GCC or CLANG",
+    "c_cxx_default_compiler": "GCC",
+    "gcc": {
+      "available": true,
+      "c_executable_path": "gcc",
+      "cc_executable_path": "g++"
+    },
+    "clang": {
+      "available": true,
+      "c_executable_path": "clang",
+      "cc_executable_path": "clang++"
+    },
+    "#2": "NVCC or SYCL",
+    "gpu_default_compiler": "NVCC",
+    "gpu_target_arch": "89",
+    "nvcc": {
+      "available": true,
+      "executable_path": "nvcc",
+      "host_executable_path": "g++12"
+    },
+    "sycl": {
+      "available": true,
+      "executable_path": "sycl",
+      "host_executable_path": "clang++"
+    }
+  },
+  "pzc_config_pkgs": {
+    "mise_en_place": {
+      "enable": true,
+      "executable_path": ""
+    },
+    "spack": {
+      "enable": true,
+      "src_path": "",
+      "start_at_launch": false
+    },
+    "oh_my_posh": {
+      "enable": true,
+      "executable_path": "",
+      "theme_file": ""
+    },
+    "eza": {
+      "enable": true,
+      "executable_path": "",
+      "config_dir": ""
+    },
+    "ccache": {
+      "enable": true,
+      "executable_path": ""
+    },
+    "mold": {
+      "enable": true,
+      "executable_path": ""
+    },
+    "ninja": {
+      "enable": true,
+      "executable_path": ""
+    },
+    "cmake": {
+      "enable": true,
+      "executable_path": ""
+    },
+    "taskwarrior": {
+      "enable": true,
+      "executable_path": ""
+    },
+    "atuin": {
+      "enable": true,
+      "executable_path": "",
+      "config_dir": ""
+    },
+    "fzf": {
+      "enable": true,
+      "executable_path": ""
+    },
+    "yazi": {
+      "enable": true,
+      "executable_path": ""
+    },
+    "python": {
+      "enable": true,
+      "executable_path": ""
+    }
+  }
+}

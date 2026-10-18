@@ -18,6 +18,9 @@ PZC_PZC_DIR=${HOME}/.pzc
 # [TODO] You can edit pzc config dir.
 #PZC_PZC_CONFIG_DIR=${HOME}/.config/pzc
 
+# [TODO] Uncomment and complete if you have a custom installation of jq (which is not in PATH).
+#PZC_JQ_BIN=/usr/bin/jq
+
 # ----------------------------------
 # -------- Launching PZC... --------
 # ----------------------------------

@@ -25,295 +25,379 @@ fi
 
 
 # ------------------------------------------------------------------------------
-# Check compilers
+# OhMyPosh
 # ------------------------------------------------------------------------------
 
-if [[ ${_PZC_GCC_AVAILABLE} = 1 ]]
+if [[ "${_PZC_OMP_BIN}" != "" ]]
 then
-
-  if [[ -v PZC_C_GCC_BIN ]] && [[ -x "$(command -v ${PZC_C_GCC_BIN})" ]]
+  if [[ -x "$(command -v ${_PZC_OMP_BIN})" ]]
   then
-    _pzc_debug "PZC_C_GCC_BIN = ${PZC_C_GCC_BIN} (user defined)"
-
-  elif [[ -v PZC_C_GCC_BIN ]]
-  then
-    _pzc_warning "Your gcc is not found. Search other gcc."
-    _pzc_debug "PZC_C_GCC_BIN = ${PZC_C_GCC_BIN} (unset)"
-    unset PZC_C_GCC_BIN
-
-  fi
-
-  if [[ ! -v PZC_C_GCC_BIN ]]
-  then
-
-    if [[ -x "$(command -v gcc)" ]]
-    then
-      PZC_C_GCC_BIN=gcc
-      _PZC_GCC_AVAILABLE=1
-      _pzc_debug "PZC_C_GCC_BIN = ${PZC_C_GCC_BIN} (in PATH)"
-      
-    else
-      _PZC_GCC_AVAILABLE=0
-      _pzc_warning "GCC is not installed. You can disable gcc search in pzcrc."
-
-    fi
+    _pzc_debug "Oh-My-Posh enable"
+    _PZC_OMP_AVAILABLE=1
+  else
+    _pzc_error "Oh-My-Posh not found, call 'pzc_regenerate_config' to update the internal config."
   fi
 else
-  _pzc_debug "GCC disabled."
-
+  _pzc_debug "Oh-My-Posh disabled"
+  _PZC_OMP_AVAILABLE=0
 fi
 
-if [[ ${_PZC_GCC_AVAILABLE} = 1 ]]
+
+
+# ------------------------------------------------------------------------------
+# EZA-LS
+# ------------------------------------------------------------------------------
+
+if [[ "${PZC_EZA_BIN}" != "" ]]
 then
-
-  if [[ -v PZC_CXX_GCC_BIN ]] && [[ -x "$(command -v ${PZC_CXX_GCC_BIN})" ]]
+  if [[ -x "$(command -v ${PZC_EZA_BIN})" ]]
   then
-    _pzc_debug "PZC_CXX_GCC_BIN = ${PZC_CXX_GCC_BIN} (user defined)"
-
-  elif [[ -v PZC_CXX_GCC_BIN ]]
-  then
-    _pzc_warning "Your g++ is not found. Search other g++."
-    _pzc_debug "PZC_CXX_GCC_BIN = ${PZC_CXX_GCC_BIN} (unset)"
-    unset PZC_CXX_GCC_BIN
-
-  fi
-
-  if [[ ! -v PZC_CXX_GCC_BIN ]]
-  then
-
-    if [[ -x "$(command -v g++)" ]]
-    then
-      PZC_CXX_GCC_BIN=g++
-      _PZC_GCC_AVAILABLE=1
-      _pzc_debug "PZC_CXX_GCC_BIN = ${PZC_CXX_GCC_BIN} (in PATH)"
-      
-    else
-      _PZC_GCC_AVAILABLE=0
-      _pzc_warning "G++ is not installed. You can disable g++ search in pzcrc."
-
-    fi
+    _pzc_debug "EZA enable"
+    _PZC_EZA_AVAILABLE=1
+  else
+    _pzc_error "EZA not found, call 'pzc_regenerate_config' to update the internal config."
   fi
 else
-  _pzc_debug "G++ disabled."
-
+  _pzc_debug "EZA disabled"
+  _PZC_EZA_AVAILABLE=0
 fi
 
-if [[ ${_PZC_CLANG_AVAILABLE} = 1 ]]
+
+
+# ------------------------------------------------------------------------------
+# CCache
+# ------------------------------------------------------------------------------
+
+if [[ "${PZC_CCACHE_BIN}" != "" ]]
 then
-
-  if [[ -v PZC_C_CLANG_BIN ]] && [[ -x "$(command -v ${PZC_C_CLANG_BIN})" ]]
+  if [[ -x "$(command -v ${PZC_CCACHE_BIN})" ]]
   then
-    _pzc_debug "PZC_C_CLANG_BIN = ${PZC_C_CLANG_BIN} (user defined)"
-
-  elif [[ -v PZC_C_CLANG_BIN ]]
-  then
-    _pzc_warning "Your clang is not found. Search other clang."
-    _pzc_debug "PZC_C_CLANG_BIN = ${PZC_C_CLANG_BIN} (unset)"
-    unset PZC_C_CLANG_BIN
-
-  fi
-
-  if [[ ! -v PZC_C_CLANG_BIN ]]
-  then
-
-    if [[ -x "$(command -v clang)" ]]
-    then
-      PZC_C_CLANG_BIN=clang
-      _PZC_CLANG_AVAILABLE=1
-      _pzc_debug "PZC_C_CLANG_BIN = ${PZC_C_CLANG_BIN} (in PATH)"
-      
-    else
-      _PZC_CLANG_AVAILABLE=0
-      _pzc_warning "CLang is not installed. You can disable clang search in pzcrc."
-
-    fi
+    _pzc_debug "CCache enable"
+    _PZC_CCACHE_AVAILABLE=1
+  else
+    _pzc_error "CCache not found, call 'pzc_regenerate_config' to update the internal config."
   fi
 else
-  _pzc_debug "CLang disabled."
-
+  _pzc_debug "CCache disabled"
+  _PZC_CCACHE_AVAILABLE=0
 fi
 
-if [[ ${_PZC_CLANG_AVAILABLE} = 1 ]]
+
+
+# ------------------------------------------------------------------------------
+# Mold
+# ------------------------------------------------------------------------------
+
+if [[ "${PZC_MOLD_BIN}" != "" ]]
 then
-
-  if [[ -v PZC_CXX_CLANG_BIN ]] && [[ -x "$(command -v ${PZC_CXX_CLANG_BIN})" ]]
+  if [[ -x "$(command -v ${PZC_MOLD_BIN})" ]]
   then
-    _pzc_debug "PZC_CXX_CLANG_BIN = ${PZC_CXX_CLANG_BIN} (user defined)"
-
-  elif [[ -v PZC_CXX_CLANG_BIN ]]
-  then
-    _pzc_warning "Your clang++ is not found. Search other clang++."
-    _pzc_debug "PZC_CXX_CLANG_BIN = ${PZC_CXX_CLANG_BIN} (unset)"
-    unset PZC_CXX_CLANG_BIN
-
-  fi
-
-  if [[ ! -v PZC_CXX_CLANG_BIN ]]
-  then
-
-    if [[ -x "$(command -v clang++)" ]]
+    _pzc_debug "Mold enable"
+    _PZC_MOLD_AVAILABLE=1
+    local PZC_MOLD_PATH=$(dirname "${PZC_MOLD_BIN}")
+    if [[ "${PZC_MOLD_PATH}" != "." ]]
     then
-      PZC_CXX_CLANG_BIN=clang++
-      _PZC_CLANG_AVAILABLE=1
-      _pzc_debug "PZC_CXX_CLANG_BIN = ${PZC_CXX_CLANG_BIN} (in PATH)"
-      
-    else
-      _PZC_CLANG_AVAILABLE=0
-      _pzc_warning "CLang++ is not installed. You can disable clang++ search in pzcrc."
-
+      export PATH=${PZC_MOLD_PATH}:${PATH}
+      _pzc_debug "Edit PATH to add Mold"
     fi
+  else
+    _pzc_error "Mold not found, call 'pzc_regenerate_config' to update the internal config."
   fi
 else
-  _pzc_debug "CLang++ disabled."
-
+  _pzc_debug "Mold disabled"
+  _PZC_MOLD_AVAILABLE=0
 fi
 
-if [[ ${_PZC_NVCC_BIN_AVAILABLE} = 1 ]]
+
+
+# ------------------------------------------------------------------------------
+# Ninja
+# ------------------------------------------------------------------------------
+
+if [[ "${PZC_NINJA_BIN}" != "" ]]
 then
-
-  if [[ -v PZC_NVCC_BIN ]] && [[ -x "$(command -v ${PZC_NVCC_BIN})" ]]
+  if [[ -x "$(command -v ${PZC_NINJA_BIN})" ]]
   then
-    _pzc_debug "PZC_NVCC_BIN = ${PZC_NVCC_BIN} (user defined)"
-
-  elif [[ -v PZC_NVCC_BIN ]]
-  then
-    _pzc_warning "Your nvcc is not found. Search other nvcc."
-    _pzc_debug "PZC_NVCC_BIN = ${PZC_NVCC_BIN} (unset)"
-    unset PZC_NVCC_BIN
-
-  fi
-
-  if [[ ! -v PZC_NVCC_BIN ]]
-  then
-
-    if [[ -x "$(command -v nvcc)" ]]
+    _pzc_debug "Ninja enable"
+    _PZC_NINJA_AVAILABLE=1
+    local PZC_NINJA_PATH=$(dirname "${PZC_NINJA_BIN}")
+    if [[ "${PZC_NINJA_PATH}" != "." ]]
     then
-      PZC_NVCC_BIN=nvcc
-      _PZC_NVCC_BIN_AVAILABLE=1
-      _pzc_debug "PZC_NVCC_BIN = ${PZC_NVCC_BIN} (in PATH)"
-      
-    else
-      _PZC_NVCC_BIN_AVAILABLE=0
-      _pzc_warning "NVCC is not installed. You can disable nvcc search in pzcrc."
-
+      export PATH=${PZC_NINJA_PATH}:${PATH}
+      _pzc_debug "Edit PATH to add Ninja"
     fi
-  fi
-
-  if [[ ${_PZC_NVCC_BIN_AVAILABLE} = 1 ]]
-  then
-
-    if [[ -v PZC_NVCC_HOST_COMPILER_BIN ]] && [[ -x "$(command -v ${PZC_NVCC_HOST_COMPILER_BIN})" ]]
-    then
-      _pzc_debug "PZC_NVCC_HOST_COMPILER_BIN = ${PZC_NVCC_HOST_COMPILER_BIN} (user defined)"
-
-    elif [[ -v PZC_NVCC_HOST_COMPILER_BIN ]]
-    then
-      _pzc_warning "Your host compiler for nvcc is not found. Search other one."
-      _pzc_debug "PZC_NVCC_HOST_COMPILER_BIN = ${PZC_NVCC_HOST_COMPILER_BIN} (unset)"
-      unset PZC_NVCC_HOST_COMPILER_BIN
-
-    fi
-
-    if [[ ! -v PZC_NVCC_HOST_COMPILER_BIN ]]
-    then
-
-      if [[ ${_PZC_GCC_AVAILABLE} = 1 ]]
-      then
-        PZC_NVCC_HOST_COMPILER_BIN=${PZC_CXX_GCC_BIN}
-        _PZC_NVCC_BIN_AVAILABLE=1
-        _pzc_debug "PZC_NVCC_HOST_COMPILER_BIN = ${PZC_NVCC_HOST_COMPILER_BIN} (G++) (in PATH)"
-
-      elif [[ ${_PZC_CLANG_AVAILABLE} = 1 ]]
-      then
-        PZC_NVCC_HOST_COMPILER_BIN=${PZC_CXX_CLANG_BIN}
-        _PZC_NVCC_BIN_AVAILABLE=1
-        _pzc_debug "PZC_NVCC_HOST_COMPILER_BIN = ${PZC_NVCC_HOST_COMPILER_BIN} (CLang++) (in PATH)"
-
-      else
-        _PZC_NVCC_BIN_AVAILABLE=0
-        _pzc_warning "Host compiler for nvcc is not found. You can disable nvcc search in pzcrc."
-
-      fi
-    fi
+  else
+    _pzc_error "Ninja not found, call 'pzc_regenerate_config' to update the internal config."
   fi
 else
-  _pzc_debug "NVCC disabled."
-
+  _pzc_debug "Ninja disabled"
+  _PZC_NINJA_AVAILABLE=0
 fi
 
-if [[ ${_PZC_SYCL_BIN_AVAILABLE} = 1 ]]
+
+
+# ------------------------------------------------------------------------------
+# CMake
+# ------------------------------------------------------------------------------
+
+if [[ "${PZC_CMAKE_BIN}" != "" ]]
 then
-
-  if [[ -v PZC_SYCL_BIN ]] && [[ -x "$(command -v ${PZC_SYCL_BIN})" ]]
+  if [[ -x "$(command -v ${PZC_CMAKE_BIN})" ]]
   then
-    _pzc_debug "PZC_SYCL_BIN = ${PZC_SYCL_BIN} (user defined)"
-
-  elif [[ -v PZC_SYCL_BIN ]]
-  then
-    _pzc_warning "Your sycl is not found. Search other sycl."
-    _pzc_debug "PZC_SYCL_BIN = ${PZC_SYCL_BIN} (unset)"
-    unset PZC_SYCL_BIN
-
-  fi
-
-  if [[ ! -v PZC_SYCL_BIN ]]
-  then
-
-    if [[ -x "$(command -v sycl)" ]]
+    _pzc_debug "CMake enable"
+    _PZC_CMAKE_AVAILABLE=1
+    local PZC_CMAKE_PATH=$(dirname "${PZC_CMAKE_BIN}")
+    if [[ "${PZC_CMAKE_PATH}" != "." ]]
     then
-      PZC_SYCL_BIN=sycl
-      _PZC_SYCL_BIN_AVAILABLE=1
-      _pzc_debug "PZC_SYCL_BIN = ${PZC_SYCL_BIN} (in PATH)"
-      
-    else
-      _PZC_SYCL_BIN_AVAILABLE=0
-      _pzc_warning "Sycl is not installed. You can disable sycl search in pzcrc."
-
+      export PATH=${PZC_CMAKE_PATH}:${PATH}
+      _pzc_debug "Edit PATH to add CMake"
     fi
+  else
+    _pzc_error "CMake not found, call 'pzc_regenerate_config' to update the internal config."
   fi
-
-  if [[ ${_PZC_SYCL_BIN_AVAILABLE} = 1 ]]
-  then
-
-    if [[ -v PZC_SYCL_HOST_COMPILER_BIN ]] && [[ -x "$(command -v ${PZC_SYCL_HOST_COMPILER_BIN})" ]]
-    then
-      _pzc_debug "PZC_SYCL_HOST_COMPILER_BIN = ${PZC_SYCL_HOST_COMPILER_BIN} (user defined)"
-
-    elif [[ -v PZC_SYCL_HOST_COMPILER_BIN ]]
-    then
-      _pzc_warning "Your host compiler for sycl is not found. Search other one."
-      _pzc_debug "PZC_SYCL_HOST_COMPILER_BIN = ${PZC_SYCL_HOST_COMPILER_BIN} (unset)"
-      unset PZC_SYCL_HOST_COMPILER_BIN
-
-    fi
-
-    if [[ ! -v PZC_SYCL_HOST_COMPILER_BIN ]]
-    then
-
-      if [[ ${_PZC_CLANG_AVAILABLE} = 1 ]]
-      then
-        PZC_SYCL_HOST_COMPILER_BIN=${PZC_CXX_CLANG_BIN}
-        _PZC_SYCL_BIN_AVAILABLE=1
-        _pzc_debug "PZC_SYCL_HOST_COMPILER_BIN = ${PZC_SYCL_HOST_COMPILER_BIN} (CLang++) (in PATH)"
-
-      elif [[ ${_PZC_GCC_AVAILABLE} = 1 ]]
-      then
-        PZC_SYCL_HOST_COMPILER_BIN=${PZC_CXX_GCC_BIN}
-        _PZC_SYCL_BIN_AVAILABLE=1
-        _pzc_debug "PZC_SYCL_HOST_COMPILER_BIN = ${PZC_SYCL_HOST_COMPILER_BIN} (G++) (in PATH)"
-
-      else
-        _PZC_SYCL_BIN_AVAILABLE=0
-        _pzc_warning "Host compiler for sycl is not found. You can disable sycl search in pzcrc."
-
-      fi
-    fi
-  fi
-
 else
-  _pzc_debug "SYCL disabled."
-
+  _pzc_debug "CMake disabled"
+  _PZC_CMAKE_AVAILABLE=0
 fi
+
+
+
+# ------------------------------------------------------------------------------
+# TASKWARRIOR
+# ------------------------------------------------------------------------------
+
+if [[ "${PZC_TASK_BIN}" != "" ]]
+then
+  if [[ -x "$(command -v ${PZC_TASK_BIN})" ]]
+  then
+    _pzc_debug "Taskwarrior enable"
+    _PZC_TASK_AVAILABLE=1
+    local PZC_TASK_PATH=$(dirname "${PZC_TASK_BIN}")
+    if [[ "${PZC_TASK_PATH}" != "." ]]
+    then
+      export PATH=${PZC_TASK_PATH}:${PATH}
+      _pzc_debug "Edit PATH to add Taskwarrior"
+    fi
+  else
+    _pzc_error "Taskwarrior not found, call 'pzc_regenerate_config' to update the internal config."
+  fi
+else
+  _pzc_debug "Taskwarrior disabled"
+  _PZC_TASK_AVAILABLE=0
+fi
+
+
+
+# ------------------------------------------------------------------------------
+# Atuin
+# ------------------------------------------------------------------------------
+
+if [[ "${PZC_ATUIN_BIN}" != "" ]]
+then
+  if [[ -x "$(command -v ${PZC_ATUIN_BIN})" ]]
+  then
+    _pzc_debug "Atuin enable"
+    _PZC_ATUIN_AVAILABLE=1
+  else
+    _pzc_error "Atuin not found, call 'pzc_regenerate_config' to update the internal config."
+  fi
+else
+  _pzc_debug "Atuin disabled"
+  _PZC_ATUIN_AVAILABLE=0
+fi
+
+
+
+# ------------------------------------------------------------------------------
+# Fzf
+# ------------------------------------------------------------------------------
+
+if [[ "${PZC_FZF_BIN}" != "" ]]
+then
+  if [[ -x "$(command -v ${PZC_FZF_BIN})" ]]
+  then
+    _pzc_debug "Fzf enable"
+    _PZC_FZF_AVAILABLE=1
+  else
+    _pzc_error "Fzf not found, call 'pzc_regenerate_config' to update the internal config."
+  fi
+else
+  _pzc_debug "Fzf disabled"
+  _PZC_FZF_AVAILABLE=0
+fi
+
+
+
+# ------------------------------------------------------------------------------
+# Yazi
+# ------------------------------------------------------------------------------
+
+if [[ "${PZC_YAZI_BIN}" != "" ]]
+then
+  if [[ -x "$(command -v ${PZC_YAZI_BIN})" ]]
+  then
+    _pzc_debug "Yazi enable"
+    _PZC_YAZI_AVAILABLE=1
+  else
+    _pzc_error "Yazi not found, call 'pzc_regenerate_config' to update the internal config."
+  fi
+else
+  _pzc_debug "Yazi disabled"
+  _PZC_YAZI_AVAILABLE=0
+fi
+
+
+
+# ------------------------------------------------------------------------------
+# Python
+# ------------------------------------------------------------------------------
+
+if [[ "${PZC_PYTHON_BIN}" != "" ]]
+then
+  if [[ -x "$(command -v ${PZC_PYTHON_BIN})" ]]
+  then
+    _pzc_debug "Python enable"
+    _PZC_PYTHON_AVAILABLE=1
+    local PZC_PYTHON_PATH=$(dirname "${PZC_PYTHON_BIN}")
+    if [[ "${PZC_PYTHON_PATH}" != "." ]]
+    then
+      export PATH=${PZC_PYTHON_PATH}:${PATH}
+      _pzc_debug "Edit PATH to add Python"
+    fi
+  else
+    _pzc_error "Python not found, call 'pzc_regenerate_config' to update the internal config."
+  fi
+else
+  _pzc_debug "Python disabled"
+  _PZC_PYTHON_AVAILABLE=0
+fi
+
+
+
+# ------------------------------------------------------------------------------
+# Mise-en-place
+# ------------------------------------------------------------------------------
+
+if [[ "${PZC_MISE_BIN}" != "" ]]
+then
+  if [[ -x "$(command -v ${PZC_MISE_BIN})" ]]
+  then
+    _pzc_debug "Mise enable"
+    _PZC_MISE_AVAILABLE=1
+  else
+    _pzc_error "Mise not found, call 'pzc_regenerate_config' to update the internal config."
+  fi
+else
+  _pzc_debug "Mise disabled"
+  _PZC_MISE_AVAILABLE=0
+fi
+
+
+
+# ------------------------------------------------------------------------------
+# Spack
+# ------------------------------------------------------------------------------
+
+if [[ "${PZC_SPACK_PATH}" != "" ]]
+then
+  if [[ -e ${PZC_SPACK_PATH}/share/spack/setup-env.sh ]]
+  then
+    _pzc_debug "Spack enable"
+    _PZC_SPACK_AVAILABLE=1
+  else
+    _pzc_error "The Spack install is not valid (\"${PZC_SPACK_PATH}/share/spack/setup-env.sh\" not found). You can delete it and reclone Spack."
+    _PZC_SPACK_AVAILABLE=0
+  fi
+else
+  _pzc_debug "Spack disabled"
+  _PZC_SPACK_AVAILABLE=0
+fi
+
+
+
+# ------------------------------------------------------------------------------
+# GCC/G++
+# ------------------------------------------------------------------------------
+
+if [[ "${PZC_C_GCC_BIN}" != "" ]]
+then
+  if [[ -x "$(command -v ${PZC_C_GCC_BIN})" ]] && [[ -x "$(command -v ${PZC_CXX_GCC_BIN})" ]]
+  then
+    _pzc_debug "GCC enable"
+    _PZC_GCC_AVAILABLE=1
+  else
+    _pzc_error "GCC not found, call 'pzc_regenerate_config' to update the internal config."
+  fi
+else
+  _pzc_debug "GCC disabled"
+  _PZC_GCC_AVAILABLE=0
+fi
+
+
+
+# ------------------------------------------------------------------------------
+# Clang/Clang++
+# ------------------------------------------------------------------------------
+
+if [[ "${PZC_C_CLANG_BIN}" != "" ]]
+then
+  if [[ -x "$(command -v ${PZC_C_CLANG_BIN})" ]] && [[ -x "$(command -v ${PZC_CXX_CLANG_BIN})" ]]
+  then
+    _pzc_debug "Clang enable"
+    _PZC_CLANG_AVAILABLE=1
+  else
+    _pzc_error "Clang not found, call 'pzc_regenerate_config' to update the internal config."
+  fi
+else
+  _pzc_debug "Clang disabled"
+  _PZC_CLANG_AVAILABLE=0
+fi
+
+
+
+# ------------------------------------------------------------------------------
+# NVCC
+# ------------------------------------------------------------------------------
+
+if [[ "${PZC_NVCC_BIN}" != "" ]]
+then
+  if [[ -x "$(command -v ${PZC_NVCC_BIN})" ]]
+  then
+    _pzc_debug "NVCC enable"
+    _PZC_NVCC_BIN_AVAILABLE=1
+  else
+    _pzc_error "NVCC not found, call 'pzc_regenerate_config' to update the internal config."
+  fi
+else
+  _pzc_debug "NVCC disabled"
+  _PZC_NVCC_BIN_AVAILABLE=0
+fi
+
+
+
+# ------------------------------------------------------------------------------
+# SYCL
+# ------------------------------------------------------------------------------
+
+if [[ "${PZC_SYCL_BIN}" != "" ]]
+then
+  if [[ -x "$(command -v ${PZC_SYCL_BIN})" ]]
+  then
+    _pzc_debug "SYCL enable"
+    _PZC_SYCL_BIN_AVAILABLE=1
+  else
+    _pzc_error "SYCL not found, call 'pzc_regenerate_config' to update the internal config."
+  fi
+else
+  _pzc_debug "SYCL disabled"
+  _PZC_SYCL_BIN_AVAILABLE=0
+fi
+
+
+
+# ------------------------------------------------------------------------------
+# Final check compilers
+# ------------------------------------------------------------------------------
 
 if [[ ${_PZC_GCC_AVAILABLE} = 1 ]] || [[ ${_PZC_CLANG_AVAILABLE} = 1 ]]
 then
@@ -329,646 +413,6 @@ then
 
 else
   PZC_GPU_AVAILABLE=0
-fi
-
-
-
-# ------------------------------------------------------------------------------
-# OhMyPosh
-# ------------------------------------------------------------------------------
-
-if [[ ${_PZC_OMP_AVAILABLE} = 1 ]]
-then
-
-  if [[ -v _PZC_OMP_BIN ]] && [[ -e ${_PZC_OMP_BIN} ]]
-  then
-    _pzc_debug "_PZC_OMP_BIN = ${_PZC_OMP_BIN} (user defined)"
-
-  elif [[ -v _PZC_OMP_BIN ]]
-  then
-    _pzc_warning "Your Oh-My-Posh is not found. Search other Oh-My-Posh."
-    _pzc_debug "_PZC_OMP_BIN = ${_PZC_OMP_BIN} (unset)"
-    unset _PZC_OMP_BIN
-
-  fi
-
-  if [[ ! -v _PZC_OMP_BIN ]]
-  then
-
-    if [[ -x "$(command -v oh-my-posh)" ]]
-    then
-      _PZC_OMP_BIN=oh-my-posh
-      _PZC_OMP_AVAILABLE=1
-      _pzc_debug "Oh-My-Posh found in PATH"
-
-    else
-
-      if [[ ${_PZC_MISE_AVAILABLE} = 1 ]]
-      then
-        _PZC_OMP_BIN=$(${PZC_MISE_BIN} which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" oh-my-posh 2&>/dev/null)
-      fi
-
-      if [[ -n ${_PZC_OMP_BIN} ]] && [[ -e ${_PZC_OMP_BIN} ]]
-      then
-        _PZC_OMP_AVAILABLE=1
-        _pzc_debug "_PZC_OMP_BIN = ${_PZC_OMP_BIN} (with Mise-en-place)"
-
-      elif [[ -e ${PZC_PZC_DIR}/progs/oh-my-posh/oh-my-posh ]]
-      then
-        _pzc_warning "Your installation of Oh-My-Posh is deprecated, please reinstall it with Mise-en-place and remove your actual install (${PZC_PZC_DIR}/progs/oh-my-posh/oh-my-posh)."
-        _pzc_info "You can install Oh-My-Posh with Mise-en-place with this command 'pzc_install_omp'."
-        _PZC_OMP_BIN=${PZC_PZC_DIR}/progs/oh-my-posh/oh-my-posh
-        _PZC_OMP_AVAILABLE=1
-        _pzc_debug "_PZC_OMP_BIN = ${_PZC_OMP_BIN} (in pzc)"
-
-      else
-        _PZC_OMP_AVAILABLE=0
-        _pzc_warning "Oh-My-Posh is not installed (https://github.com/JanDeDobbeleer/oh-my-posh). You can install Oh-My-Posh with Mise-en-place with the command 'pzc_install_omp' or disable Oh-My-Posh search in pzcrc."
-
-      fi
-    fi
-  fi
-
-else
-  _pzc_debug "Oh-My-Posh disabled"
-
-fi
-
-
-
-# ------------------------------------------------------------------------------
-# EZA-LS
-# ------------------------------------------------------------------------------
-
-if [[ ${_PZC_EZA_AVAILABLE} = 1 ]]
-then
-
-  if [[ -v PZC_EZA_BIN ]] && [[ -e ${PZC_EZA_BIN} ]]
-  then
-    _pzc_debug "PZC_EZA_BIN = ${PZC_EZA_BIN} (user defined)"
-    alias eza='${PZC_EZA_BIN}'
-    _pzc_debug "Define alias eza"
-
-  elif [[ -v PZC_EZA_BIN ]]
-  then
-    _pzc_warning "Your eza is not found. Search other eza."
-    _pzc_debug "PZC_EZA_BIN = ${PZC_EZA_BIN} (unset)"
-    unset PZC_EZA_BIN
-
-  fi
-
-  if [[ ! -v PZC_EZA_BIN ]]
-  then
-
-    if [[ -x "$(command -v eza)" ]]
-    then
-      PZC_EZA_BIN=eza
-      _PZC_EZA_AVAILABLE=1
-      _pzc_debug "EZA found in PATH"
-
-    else
-
-      if [[ ${_PZC_MISE_AVAILABLE} = 1 ]]
-      then
-        PZC_EZA_BIN=$(${PZC_MISE_BIN} which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" eza 2&>/dev/null)
-      fi
-
-      if [[ -n ${PZC_EZA_BIN} ]] && [[ -e ${PZC_EZA_BIN} ]]
-      then
-        _PZC_EZA_AVAILABLE=1
-        _pzc_debug "PZC_EZA_BIN = ${PZC_EZA_BIN} (with Mise-en-place)"
-        alias eza='${PZC_EZA_BIN}'
-        _pzc_debug "Define alias eza"
-
-      elif [[ -e ${PZC_PZC_DIR}/progs/eza/eza ]]
-      then
-        _pzc_warning "Your installation of EZA-LS is deprecated, please reinstall it with Mise-en-place and remove your actual EZA-LS install (${PZC_PZC_DIR}/progs/eza/eza)."
-        _pzc_info "You can install eza with Mise-en-place with this command 'pzc_install_eza'."
-        PZC_EZA_BIN=${PZC_PZC_DIR}/progs/eza/eza
-        _PZC_EZA_AVAILABLE=1
-        _pzc_debug "PZC_EZA_BIN = ${PZC_EZA_BIN} (in pzc)"
-        alias eza='${PZC_EZA_BIN}'
-        _pzc_debug "Define alias eza"
-        
-      else
-        _PZC_EZA_AVAILABLE=0
-        _pzc_warning "Eza is not installed (https://github.com/eza-community/eza). You can install eza with Mise-en-place with the command 'pzc_install_eza' or disable eza search in pzcrc."
-
-      fi
-    fi
-  fi
-
-else
-  _pzc_debug "Eza disabled."
-
-fi
-
-
-
-# ------------------------------------------------------------------------------
-# CCache
-# ------------------------------------------------------------------------------
-
-if [[ ${_PZC_CCACHE_AVAILABLE} = 1 ]]
-then
-
-  if [[ -v PZC_CCACHE_BIN ]] && [[ -e ${PZC_CCACHE_BIN} ]]
-  then
-    _pzc_debug "PZC_CCACHE_BIN = ${PZC_CCACHE_BIN} (user defined)"
-    alias ccache='${PZC_CCACHE_BIN}'
-    _pzc_debug "Define alias ccache"
-
-  elif [[ -v PZC_CCACHE_BIN ]]
-  then
-    _pzc_warning "Your ccache is not found. Search other ccache."
-    _pzc_debug "PZC_CCACHE_BIN = ${PZC_CCACHE_BIN} (unset)"
-    unset PZC_CCACHE_BIN
-
-  fi
-
-  if [[ ! -v PZC_CCACHE_BIN ]]
-  then
-
-    if [[ -x "$(command -v ccache)" ]]
-    then
-      PZC_CCACHE_BIN=ccache
-      _PZC_CCACHE_AVAILABLE=1
-      _pzc_debug "CCache found in PATH"
-
-    else
-
-      if [[ ${_PZC_MISE_AVAILABLE} = 1 ]]
-      then
-        PZC_CCACHE_BIN=$(${PZC_MISE_BIN} which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" ccache 2&>/dev/null)
-      fi
-
-      if [[ -n ${PZC_CCACHE_BIN} ]] && [[ -e ${PZC_CCACHE_BIN} ]]
-      then
-        _PZC_CCACHE_AVAILABLE=1
-        _pzc_debug "PZC_CCACHE_BIN = ${PZC_CCACHE_BIN} (with Mise-en-place)"
-        alias ccache='${PZC_CCACHE_BIN}'
-        _pzc_debug "Define alias ccache"
-
-      else
-        _PZC_CCACHE_AVAILABLE=0
-        _pzc_warning "CCache is not installed (https://github.com/ccache/ccache). You can install ccache with Mise-en-place with the command 'pzc_install_ccache' or disable ccache search in pzcrc."
-
-      fi
-    fi
-  fi
-
-else
-  _pzc_debug "CCache disabled."
-
-fi
-
-
-
-# ------------------------------------------------------------------------------
-# Mold
-# ------------------------------------------------------------------------------
-
-if [[ ${_PZC_MOLD_AVAILABLE} = 1 ]]
-then
-
-  if [[ -v _PZC_MOLD_PATH ]] && [[ -e ${_PZC_MOLD_PATH} ]]
-  then
-    _pzc_debug "_PZC_MOLD_PATH = ${_PZC_MOLD_PATH} (add in PATH)"
-    export PATH=${_PZC_MOLD_PATH}:$PATH
-
-  elif [[ -v _PZC_MOLD_PATH ]]
-  then
-    _pzc_warning "Your mold is not found. Search other mold."
-    _pzc_debug "_PZC_MOLD_PATH = ${_PZC_MOLD_PATH} (unset)"
-    unset _PZC_MOLD_PATH
-
-  fi
-
-  if [[ ! -v _PZC_MOLD_PATH ]]
-  then
-
-    if [[ -x "$(command -v mold)" ]]
-    then
-      _PZC_MOLD_AVAILABLE=1
-      _pzc_debug "Mold found in PATH"
-
-    else
-
-      if [[ ${_PZC_MISE_AVAILABLE} = 1 ]]
-      then
-        _PZC_MOLD_PATH=$(${PZC_MISE_BIN} which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" mold 2&>/dev/null)
-        if [[ -n ${_PZC_MOLD_PATH} ]]
-        then
-          _PZC_MOLD_PATH=$(dirname "${_PZC_MOLD_PATH}")
-        fi
-      fi
-
-      if [[ -n ${_PZC_MOLD_PATH} ]] && [[ -e ${_PZC_MOLD_PATH} ]]
-      then
-        _PZC_MOLD_AVAILABLE=1
-        _pzc_debug "_PZC_MOLD_PATH = ${_PZC_MOLD_PATH} (with Mise-en-place / add in PATH)"
-        export PATH=${_PZC_MOLD_PATH}:$PATH
-
-      else
-        _PZC_MOLD_AVAILABLE=0
-        _pzc_warning "Mold is not installed (https://github.com/rui314/mold). You can install mold with Mise-en-place with the command 'pzc_install_mold' or disable mold search in pzcrc."
-
-      fi
-    fi
-  fi
-
-else
-  _pzc_debug "Mold disabled."
-
-fi
-
-
-
-# ------------------------------------------------------------------------------
-# Ninja
-# ------------------------------------------------------------------------------
-
-if [[ ${_PZC_NINJA_AVAILABLE} = 1 ]]
-then
-
-  if [[ -v _PZC_NINJA_PATH ]] && [[ -e ${_PZC_NINJA_PATH} ]]
-  then
-    _pzc_debug "_PZC_NINJA_PATH = ${_PZC_NINJA_PATH} (add in PATH)"
-    export PATH=${_PZC_NINJA_PATH}:$PATH
-
-  elif [[ -v _PZC_NINJA_PATH ]]
-  then
-    _pzc_warning "Your ninja is not found. Search other ninja."
-    _pzc_debug "_PZC_NINJA_PATH = ${_PZC_NINJA_PATH} (unset)"
-    unset _PZC_NINJA_PATH
-
-  fi
-
-  if [[ ! -v _PZC_NINJA_PATH ]]
-  then
-
-    if [[ -x "$(command -v ninja)" ]]
-    then
-      _PZC_NINJA_AVAILABLE=1
-      _pzc_debug "Ninja found in PATH"
-
-    else
-
-      if [[ ${_PZC_MISE_AVAILABLE} = 1 ]]
-      then
-        _PZC_NINJA_PATH=$(${PZC_MISE_BIN} which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" ninja 2&>/dev/null)
-        if [[ -n ${_PZC_NINJA_PATH} ]]
-        then
-          _PZC_NINJA_PATH=$(dirname "${_PZC_NINJA_PATH}")
-        fi
-      fi
-
-      if [[ -n ${_PZC_NINJA_PATH} ]] && [[ -e ${_PZC_NINJA_PATH} ]]
-      then
-        _PZC_NINJA_AVAILABLE=1
-        _pzc_debug "_PZC_NINJA_PATH = ${_PZC_NINJA_PATH} (with Mise-en-place / add in PATH)"
-        export PATH=${_PZC_NINJA_PATH}:$PATH
-      
-      else
-        _PZC_NINJA_AVAILABLE=0
-        _pzc_warning "Ninja is not installed (https://github.com/ninja-build/ninja). You can install ninja with Mise-en-place with the command 'pzc_install_ninja' or disable ninja search in pzcrc."
-
-      fi
-    fi
-  fi
-
-else
-  _pzc_debug "Ninja disabled."
-
-fi
-
-
-
-# ------------------------------------------------------------------------------
-# CMake
-# ------------------------------------------------------------------------------
-
-if [[ ${_PZC_CMAKE_AVAILABLE} = 1 ]]
-then
-
-  if [[ -v _PZC_CMAKE_PATH ]] && [[ -e ${_PZC_CMAKE_PATH} ]]
-  then
-    _pzc_debug "_PZC_CMAKE_PATH = ${_PZC_CMAKE_PATH} (add in PATH)"
-    export PATH=${_PZC_CMAKE_PATH}:$PATH
-
-  elif [[ -v _PZC_CMAKE_PATH ]]
-  then
-    _pzc_warning "Your cmake is not found. Search other cmake."
-    _pzc_debug "_PZC_CMAKE_PATH = ${_PZC_CMAKE_PATH} (unset)"
-    unset _PZC_CMAKE_PATH
-
-  fi
-
-  if [[ ! -v _PZC_CMAKE_PATH ]]
-  then
-
-    if [[ -x "$(command -v cmake)" ]]
-    then
-      _PZC_CMAKE_AVAILABLE=1
-      _pzc_debug "CMake found in PATH"
-
-    else
-
-      if [[ ${_PZC_MISE_AVAILABLE} = 1 ]]
-      then
-        _PZC_CMAKE_PATH=$(${PZC_MISE_BIN} which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" cmake 2&>/dev/null)
-        if [[ -n ${_PZC_CMAKE_PATH} ]]
-        then
-          _PZC_CMAKE_PATH=$(dirname "${_PZC_CMAKE_PATH}")
-        fi
-      fi
-
-      if [[ -n ${_PZC_CMAKE_PATH} ]] && [[ -e ${_PZC_CMAKE_PATH} ]]
-      then
-        _PZC_CMAKE_AVAILABLE=1
-        _pzc_debug "_PZC_CMAKE_PATH = ${_PZC_CMAKE_PATH} (with Mise-en-place / add in PATH)"
-        export PATH=${_PZC_CMAKE_PATH}:$PATH
-      
-      else
-        _PZC_CMAKE_AVAILABLE=0
-        _pzc_warning "CMake is not installed (https://github.com/Kitware/CMake). You can install cmake with Mise-en-place with the command 'pzc_install_cmake' or disable cmake search in pzcrc."
-
-      fi
-    fi
-  fi
-
-else
-  _pzc_debug "CMake disabled."
-
-fi
-
-
-
-# ------------------------------------------------------------------------------
-# TASKWARRIOR
-# ------------------------------------------------------------------------------
-
-if [[ ${_PZC_TASK_AVAILABLE} = 1 ]]
-then
-
-  if [[ -v _PZC_TASK_PATH ]] && [[ -e ${_PZC_TASK_PATH} ]]
-  then
-    _pzc_debug "_PZC_TASK_PATH = ${_PZC_TASK_PATH} (add in PATH)"
-    export PATH=${_PZC_TASK_PATH}:$PATH
-
-  elif [[ -v _PZC_TASK_PATH ]]
-  then
-    _pzc_warning "Your taskwarrior binary is not found. Search other taskwarrior."
-    _pzc_debug "_PZC_TASK_PATH = ${_PZC_TASK_PATH} (unset)"
-    unset _PZC_TASK_PATH
-
-  fi
-
-  if [[ ! -v _PZC_TASK_PATH ]]
-  then
-
-    if [[ -x "$(command -v task)" ]]
-    then
-      _PZC_TASK_AVAILABLE=1
-      _pzc_debug "Taskwarrior found in PATH"
-      
-    else
-      _PZC_TASK_AVAILABLE=0
-      _pzc_warning "Taskwarrior is not installed (https://github.com/GothenburgBitFactory/taskwarrior). You can disable taskwarrior search in pzcrc."
-
-    fi
-  fi
-
-else
-  _pzc_debug "Taskwarrior disabled."
-
-fi
-
-
-
-# ------------------------------------------------------------------------------
-# Atuin
-# ------------------------------------------------------------------------------
-
-if [[ ${_PZC_ATUIN_AVAILABLE} = 1 ]]
-then
-
-  if [[ -v PZC_ATUIN_BIN ]] && [[ -e ${PZC_ATUIN_BIN} ]]
-  then
-    _pzc_debug "PZC_ATUIN_BIN = ${PZC_ATUIN_BIN} (user defined)"
-    alias atuin='${PZC_ATUIN_BIN}'
-    _pzc_debug "Define alias atuin"
-
-  elif [[ -v PZC_ATUIN_BIN ]]
-  then
-    _pzc_warning "Your atuin is not found. Search other atuin."
-    _pzc_debug "PZC_ATUIN_BIN = ${PZC_ATUIN_BIN} (unset)"
-    unset PZC_ATUIN_BIN
-
-  fi
-
-  if [[ ! -v PZC_ATUIN_BIN ]]
-  then
-
-    if [[ -x "$(command -v atuin)" ]]
-    then
-      PZC_ATUIN_BIN=atuin
-      _PZC_ATUIN_AVAILABLE=1
-      _pzc_debug "Atuin found in PATH"
-      
-    else
-
-      if [[ ${_PZC_MISE_AVAILABLE} = 1 ]]
-      then
-        PZC_ATUIN_BIN=$(${PZC_MISE_BIN} which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" atuin 2&>/dev/null)
-      fi
-
-      if [[ -n ${PZC_ATUIN_BIN} ]] && [[ -e ${PZC_ATUIN_BIN} ]]
-      then
-        _PZC_ATUIN_AVAILABLE=1
-        _pzc_debug "PZC_ATUIN_BIN = ${PZC_ATUIN_BIN} (with Mise-en-place)"
-        alias atuin='${PZC_ATUIN_BIN}'
-        _pzc_debug "Define alias atuin"
-
-      else
-        _PZC_ATUIN_AVAILABLE=0
-        _pzc_warning "Atuin is not installed (https://github.com/atuinsh/atuin). You can install atuin with Mise-en-place with the command 'pzc_install_atuin' or disable atuin search in pzcrc."
-
-      fi
-    fi
-  fi
-
-else
-  _pzc_debug "Atuin disabled."
-
-fi
-
-
-
-# ------------------------------------------------------------------------------
-# Fzf
-# ------------------------------------------------------------------------------
-
-if [[ ${_PZC_FZF_AVAILABLE} = 1 ]]
-then
-
-  if [[ -v PZC_FZF_BIN ]] && [[ -e ${PZC_FZF_BIN} ]]
-  then
-    _pzc_debug "PZC_FZF_BIN = ${PZC_FZF_BIN} (user defined)"
-    alias fzf='${PZC_FZF_BIN}'
-    _pzc_debug "Define alias fzf"
-
-  elif [[ -v PZC_FZF_BIN ]]
-  then
-    _pzc_warning "Your fzf is not found. Search other fzf."
-    _pzc_debug "PZC_FZF_BIN = ${PZC_FZF_BIN} (unset)"
-    unset PZC_FZF_BIN
-
-  fi
-
-  if [[ ! -v PZC_FZF_BIN ]]
-  then
-
-    if [[ -x "$(command -v fzf)" ]]
-    then
-      PZC_FZF_BIN=fzf
-      _PZC_FZF_AVAILABLE=1
-      _pzc_debug "Fzf found in PATH"
-
-    else
-
-      if [[ ${_PZC_MISE_AVAILABLE} = 1 ]]
-      then
-        PZC_FZF_BIN=$(${PZC_MISE_BIN} which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" fzf 2&>/dev/null)
-      fi
-
-      if [[ -n ${PZC_FZF_BIN} ]] && [[ -e ${PZC_FZF_BIN} ]]
-      then
-        _PZC_FZF_AVAILABLE=1
-        _pzc_debug "PZC_FZF_BIN = ${PZC_FZF_BIN} (with Mise-en-place)"
-        alias fzf='${PZC_FZF_BIN}'
-        _pzc_debug "Define alias fzf"
-
-      else
-        _PZC_FZF_AVAILABLE=0
-        _pzc_warning "Fzf is not installed (https://github.com/junegunn/fzf). You can install fzf with Mise-en-place with the command 'pzc_install_fzf' or disable fzf search in pzcrc."
-
-      fi
-    fi
-  fi
-
-else
-  _pzc_debug "Fzf disabled."
-
-fi
-
-
-
-# ------------------------------------------------------------------------------
-# Yazi
-# ------------------------------------------------------------------------------
-
-if [[ ${_PZC_YAZI_AVAILABLE} = 1 ]]
-then
-
-  if [[ -v PZC_YAZI_BIN ]] && [[ -e ${PZC_YAZI_BIN} ]]
-  then
-    _pzc_debug "PZC_YAZI_BIN = ${PZC_YAZI_BIN} (user defined)"
-    alias yazi='${PZC_YAZI_BIN}'
-    _pzc_debug "Define alias yazi"
-
-  elif [[ -v PZC_YAZI_BIN ]]
-  then
-    _pzc_warning "Your yazi bin is not found. Search an other."
-    _pzc_debug "PZC_YAZI_BIN = ${PZC_YAZI_BIN} (unset)"
-    unset PZC_YAZI_BIN
-
-  fi
-
-  if [[ ! -v PZC_YAZI_BIN ]]
-  then
-
-    if [[ -x "$(command -v yazi)" ]]
-    then
-      PZC_YAZI_BIN=yazi
-      _PZC_YAZI_AVAILABLE=1
-      _pzc_debug "Yazi found in PATH"
-
-    else
-
-      if [[ ${_PZC_MISE_AVAILABLE} = 1 ]]
-      then
-        PZC_YAZI_BIN=$(${PZC_MISE_BIN} which --raw -E ${HOST} -C "${ENVI_DIR}/pzc/progs/mise" yazi 2&>/dev/null)
-      fi
-
-      if [[ -n ${PZC_YAZI_BIN} ]] && [[ -e ${PZC_YAZI_BIN} ]]
-      then
-        _PZC_YAZI_AVAILABLE=1
-        _pzc_debug "PZC_YAZI_BIN = ${PZC_YAZI_BIN} (with Mise-en-place)"
-        alias yazi='${PZC_YAZI_BIN}'
-        _pzc_debug "Define alias yazi"
-
-      else
-        _PZC_YAZI_AVAILABLE=0
-        _pzc_warning "Yazi is not installed (https://github.com/sxyazi/yazi). You can install yazi with Mise-en-place with the command 'pzc_install_yazi' or disable yazi search in pzcrc."
-
-      fi
-    fi
-  fi
-
-else
-  _pzc_debug "Yazi disabled."
-
-fi
-
-
-
-# ------------------------------------------------------------------------------
-# Python
-# ------------------------------------------------------------------------------
-
-if [[ ${_PZC_PYTHON_AVAILABLE} = 1 ]]
-then
-
-  _PZC_PYTHON_BIN=python
-
-  if [[ -v _PZC_PYTHON_PATH ]] && [[ -e ${_PZC_PYTHON_PATH} ]]
-  then
-    _pzc_debug "_PZC_PYTHON_PATH = ${_PZC_PYTHON_PATH} (add in PATH)"
-    export PATH=${_PZC_PYTHON_PATH}:$PATH
-
-  elif [[ -v _PZC_PYTHON_PATH ]]
-  then
-    _pzc_warning "Your python is not found. Search other python."
-    _pzc_debug "_PZC_PYTHON_PATH = ${_PZC_PYTHON_PATH} (unset)"
-    unset _PZC_PYTHON_PATH
-
-  fi
-
-  if [[ ! -v _PZC_PYTHON_PATH ]]
-  then
-
-    if [[ -x "$(command -v python)" ]]
-    then
-      _PZC_PYTHON_AVAILABLE=1
-      _pzc_debug "Python found in PATH (_PZC_PYTHON_BIN = ${_PZC_PYTHON_BIN})"
-
-    elif [[ -x "$(command -v python3)" ]]
-    then
-      _PZC_PYTHON_AVAILABLE=1
-      _PZC_PYTHON_BIN=python3
-      _pzc_debug "Python found in PATH (_PZC_PYTHON_BIN = ${_PZC_PYTHON_BIN})"
-
-    else
-      _PZC_PYTHON_AVAILABLE=0
-      _pzc_warning "Python is not installed. You can disable python search in pzcrc."
-
-    fi
-  fi
-
-else
-  _pzc_debug "Python disabled."
-
 fi
 
 
@@ -996,15 +440,18 @@ then
       if [[ $? = 0 ]]
       then
         _pzc_info "Enabling Oh-My-Posh..."
-        _pzc_coal_eval "sed -i 's/local _PZC_OMP_AVAILABLE=0/local _PZC_OMP_AVAILABLE=1/g' ${PZC_PZC_CONFIG_FILE}"
+        ${PZC_JQ_BIN} '.pzc_config_pkgs.oh_my_posh.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
+        if [[ $? = 0 ]]
+        then
+          \mv "${PZC_PZC_CONFIG_FILE_V8}.tmp" "${PZC_PZC_CONFIG_FILE_V8}"
+        fi
 
         _pzc_info "Update PZC's mise.toml..."
         _pzc_coal_eval "${PZC_MISE_BIN} use -p \"${ENVI_DIR}/pzc/progs/mise/mise.${HOST}.toml\" oh-my-posh"
 
         if [[ ! -n ${_PZC_PKG_RESTART} ]] || [[ ${_PZC_PKG_RESTART} = 1 ]]
         then
-          _pzc_info "Reloading ZSH..."
-          exec zsh
+          pzc_regenerate_config
         fi
       else
         _pzc_error "Error with Mise-en-place."
@@ -1034,15 +481,18 @@ then
       if [[ $? = 0 ]]
       then
         _pzc_info "Enabling EZA..."
-        _pzc_coal_eval "sed -i 's/local _PZC_EZA_AVAILABLE=0/local _PZC_EZA_AVAILABLE=1/g' ${PZC_PZC_CONFIG_FILE}"
+        ${PZC_JQ_BIN} '.pzc_config_pkgs.eza.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
+        if [[ $? = 0 ]]
+        then
+          \mv "${PZC_PZC_CONFIG_FILE_V8}.tmp" "${PZC_PZC_CONFIG_FILE_V8}"
+        fi
 
         _pzc_info "Update PZC's mise.toml..."
         _pzc_coal_eval "${PZC_MISE_BIN} use -p \"${ENVI_DIR}/pzc/progs/mise/mise.${HOST}.toml\" eza"
 
         if [[ ! -n ${_PZC_PKG_RESTART} ]] || [[ ${_PZC_PKG_RESTART} = 1 ]]
         then
-          _pzc_info "Reloading ZSH..."
-          exec zsh
+          pzc_regenerate_config
         fi
       else
         _pzc_error "Error with Mise-en-place."
@@ -1072,15 +522,18 @@ then
       if [[ $? = 0 ]]
       then
         _pzc_info "Enabling CCache..."
-        _pzc_coal_eval "sed -i 's/local _PZC_CCACHE_AVAILABLE=0/local _PZC_CCACHE_AVAILABLE=1/g' ${PZC_PZC_CONFIG_FILE}"
+        ${PZC_JQ_BIN} '.pzc_config_pkgs.ccache.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
+        if [[ $? = 0 ]]
+        then
+          \mv "${PZC_PZC_CONFIG_FILE_V8}.tmp" "${PZC_PZC_CONFIG_FILE_V8}"
+        fi
 
         _pzc_info "Update PZC's mise.toml..."
         _pzc_coal_eval "${PZC_MISE_BIN} use -p \"${ENVI_DIR}/pzc/progs/mise/mise.${HOST}.toml\" ccache"
 
         if [[ ! -n ${_PZC_PKG_RESTART} ]] || [[ ${_PZC_PKG_RESTART} = 1 ]]
         then
-          _pzc_info "Reloading ZSH..."
-          exec zsh
+          pzc_regenerate_config
         fi
       else
         _pzc_error "Error with Mise-en-place."
@@ -1110,15 +563,18 @@ then
       if [[ $? = 0 ]]
       then
         _pzc_info "Enabling Mold..."
-        _pzc_coal_eval "sed -i 's/local _PZC_MOLD_AVAILABLE=0/local _PZC_MOLD_AVAILABLE=1/g' ${PZC_PZC_CONFIG_FILE}"
+        ${PZC_JQ_BIN} '.pzc_config_pkgs.mold.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
+        if [[ $? = 0 ]]
+        then
+          \mv "${PZC_PZC_CONFIG_FILE_V8}.tmp" "${PZC_PZC_CONFIG_FILE_V8}"
+        fi
 
         _pzc_info "Update PZC's mise.toml..."
         _pzc_coal_eval "${PZC_MISE_BIN} use -p \"${ENVI_DIR}/pzc/progs/mise/mise.${HOST}.toml\" mold"
 
         if [[ ! -n ${_PZC_PKG_RESTART} ]] || [[ ${_PZC_PKG_RESTART} = 1 ]]
         then
-          _pzc_info "Reloading ZSH..."
-          exec zsh
+          pzc_regenerate_config
         fi
       else
         _pzc_error "Error with Mise-en-place."
@@ -1148,15 +604,18 @@ then
       if [[ $? = 0 ]]
       then
         _pzc_info "Enabling Ninja..."
-        _pzc_coal_eval "sed -i 's/local _PZC_NINJA_AVAILABLE=0/local _PZC_NINJA_AVAILABLE=1/g' ${PZC_PZC_CONFIG_FILE}"
+        ${PZC_JQ_BIN} '.pzc_config_pkgs.ninja.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
+        if [[ $? = 0 ]]
+        then
+          \mv "${PZC_PZC_CONFIG_FILE_V8}.tmp" "${PZC_PZC_CONFIG_FILE_V8}"
+        fi
 
         _pzc_info "Update PZC's mise.toml..."
         _pzc_coal_eval "${PZC_MISE_BIN} use -p \"${ENVI_DIR}/pzc/progs/mise/mise.${HOST}.toml\" ninja"
 
         if [[ ! -n ${_PZC_PKG_RESTART} ]] || [[ ${_PZC_PKG_RESTART} = 1 ]]
         then
-          _pzc_info "Reloading ZSH..."
-          exec zsh
+          pzc_regenerate_config
         fi
       else
         _pzc_error "Error with Mise-en-place."
@@ -1186,15 +645,18 @@ then
       if [[ $? = 0 ]]
       then
         _pzc_info "Enabling CMake..."
-        _pzc_coal_eval "sed -i 's/local _PZC_CMAKE_AVAILABLE=0/local _PZC_CMAKE_AVAILABLE=1/g' ${PZC_PZC_CONFIG_FILE}"
+        ${PZC_JQ_BIN} '.pzc_config_pkgs.cmake.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
+        if [[ $? = 0 ]]
+        then
+          \mv "${PZC_PZC_CONFIG_FILE_V8}.tmp" "${PZC_PZC_CONFIG_FILE_V8}"
+        fi
 
         _pzc_info "Update PZC's mise.toml..."
         _pzc_coal_eval "${PZC_MISE_BIN} use -p \"${ENVI_DIR}/pzc/progs/mise/mise.${HOST}.toml\" cmake"
 
         if [[ ! -n ${_PZC_PKG_RESTART} ]] || [[ ${_PZC_PKG_RESTART} = 1 ]]
         then
-          _pzc_info "Reloading ZSH..."
-          exec zsh
+          pzc_regenerate_config
         fi
       else
         _pzc_error "Error with Mise-en-place."
@@ -1224,15 +686,18 @@ then
       if [[ $? = 0 ]]
       then
         _pzc_info "Enabling Atuin..."
-        _pzc_coal_eval "sed -i 's/local _PZC_ATUIN_AVAILABLE=0/local _PZC_ATUIN_AVAILABLE=1/g' ${PZC_PZC_CONFIG_FILE}"
+        ${PZC_JQ_BIN} '.pzc_config_pkgs.atuin.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
+        if [[ $? = 0 ]]
+        then
+          \mv "${PZC_PZC_CONFIG_FILE_V8}.tmp" "${PZC_PZC_CONFIG_FILE_V8}"
+        fi
 
         _pzc_info "Update PZC's mise.toml..."
         _pzc_coal_eval "${PZC_MISE_BIN} use -p \"${ENVI_DIR}/pzc/progs/mise/mise.${HOST}.toml\" atuin"
 
         if [[ ! -n ${_PZC_PKG_RESTART} ]] || [[ ${_PZC_PKG_RESTART} = 1 ]]
         then
-          _pzc_info "Reloading ZSH..."
-          exec zsh
+          pzc_regenerate_config
         fi
       else
         _pzc_error "Error with Mise-en-place."
@@ -1262,15 +727,18 @@ then
       if [[ $? = 0 ]]
       then
         _pzc_info "Enabling Fzf..."
-        _pzc_coal_eval "sed -i 's/local _PZC_FZF_AVAILABLE=0/local _PZC_FZF_AVAILABLE=1/g' ${PZC_PZC_CONFIG_FILE}"
+        ${PZC_JQ_BIN} '.pzc_config_pkgs.fzf.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
+        if [[ $? = 0 ]]
+        then
+          \mv "${PZC_PZC_CONFIG_FILE_V8}.tmp" "${PZC_PZC_CONFIG_FILE_V8}"
+        fi
 
         _pzc_info "Update PZC's mise.toml..."
         _pzc_coal_eval "${PZC_MISE_BIN} use -p \"${ENVI_DIR}/pzc/progs/mise/mise.${HOST}.toml\" fzf"
 
         if [[ ! -n ${_PZC_PKG_RESTART} ]] || [[ ${_PZC_PKG_RESTART} = 1 ]]
         then
-          _pzc_info "Reloading ZSH..."
-          exec zsh
+          pzc_regenerate_config
         fi
       else
         _pzc_error "Error with Mise-en-place."
@@ -1295,15 +763,18 @@ then
       if [[ $? = 0 ]]
       then
         _pzc_info "Enabling Yazi..."
-        _pzc_coal_eval "sed -i 's/local _PZC_YAZI_AVAILABLE=0/local _PZC_YAZI_AVAILABLE=1/g' ${PZC_PZC_CONFIG_FILE}"
+        ${PZC_JQ_BIN} '.pzc_config_pkgs.yazi.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
+        if [[ $? = 0 ]]
+        then
+          \mv "${PZC_PZC_CONFIG_FILE_V8}.tmp" "${PZC_PZC_CONFIG_FILE_V8}"
+        fi
 
         _pzc_info "Update PZC's mise.toml..."
         _pzc_coal_eval "${PZC_MISE_BIN} use -p \"${ENVI_DIR}/pzc/progs/mise/mise.${HOST}.toml\" yazi"
 
         if [[ ! -n ${_PZC_PKG_RESTART} ]] || [[ ${_PZC_PKG_RESTART} = 1 ]]
         then
-          _pzc_info "Reloading ZSH..."
-          exec zsh
+          pzc_regenerate_config
         fi
       else
         _pzc_error "Error with Mise-en-place."
@@ -1326,8 +797,7 @@ then
     pzc_install_fzf
     pzc_install_yazi
 
-    _pzc_info "Reloading ZSH..."
-    exec zsh
+    pzc_regenerate_config
   }
 
 fi

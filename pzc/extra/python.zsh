@@ -58,7 +58,7 @@ pyenvnew()
   fi
 
   _pzc_info "Creating python venv '${NAME}'... The command to activate it is: 'pyenv ${NAME}'"
-  _pzc_coal_eval "${_PZC_PYTHON_BIN} -m venv ${PYTHON_ENV}/${NAME}"
+  _pzc_coal_eval "${PZC_PYTHON_BIN} -m venv ${PYTHON_ENV}/${NAME}"
 }
 
 pyenvrem()

@@ -265,7 +265,7 @@ function _pzc_common_generate_user_preset()
     return ${RET_CODE}
   fi
 
-  jq -r '.vendor.pzc.cmpDependencies[] | @tsv' "${_PZC_TMP_GEN_USER_PRESET_PATH}" | while read -r var1 var2 var3 var4
+  ${PZC_JQ_BIN} -r '.vendor.pzc.cmpDependencies[] | @tsv' "${_PZC_TMP_GEN_USER_PRESET_PATH}" | while read -r var1 var2 var3 var4
   do
     _pzc_info "Add dependency -- Name : ${var1} -- Type : ${var2} -- Variant : ${var3} -- Preset : ${var4}"
 
@@ -281,12 +281,12 @@ function _pzc_common_generate_user_preset()
       _pzc_warning "Dependency install preset not found. Check dependency install dir or execute 'bidep' command (${_PZC_INSTALL_PRESET})."
     fi
 
-    jq \
+    ${PZC_JQ_BIN} \
       ".include += [\"${_PZC_INSTALL_PRESET}\"]" \
       "${_PZC_TMP_GEN_USER_PRESET_PATH}" > "${_PZC_TMP_GEN_USER_PRESET_PATH}.tmp"
     \mv "${_PZC_TMP_GEN_USER_PRESET_PATH}.tmp" "${_PZC_TMP_GEN_USER_PRESET_PATH}"
 
-    jq \
+    ${PZC_JQ_BIN} \
       ".configurePresets[].inherits += [\"${var1}_${var2}_${var3}\"]" \
       "${_PZC_TMP_GEN_USER_PRESET_PATH}" > "${_PZC_TMP_GEN_USER_PRESET_PATH}.tmp"
     \mv "${_PZC_TMP_GEN_USER_PRESET_PATH}.tmp" "${_PZC_TMP_GEN_USER_PRESET_PATH}"
@@ -425,7 +425,7 @@ function _pzc_common_find_project()
   if [[ -e "${_PZC_SOURCE_PRESET}" ]]
   then
     _pzc_info "To reload project detection, remove '${CMP_SOURCE_DIR}/CMakeUserPresets.json' file."
-    CMP_PROJECT=$(jq -r '.vendor.pzc.cmpProject' ${_PZC_SOURCE_PRESET})
+    CMP_PROJECT=$(${PZC_JQ_BIN} -r '.vendor.pzc.cmpProject' ${_PZC_SOURCE_PRESET})
     if [[ ${CMP_PROJECT} == "null" ]]
     then
       _pzc_error "An error occurred while detecting the project. Remove '${CMP_SOURCE_DIR}/CMakeUserPresets.json' file and try again."
@@ -438,7 +438,7 @@ function _pzc_common_find_project()
 
   CMP_PROJECT="generic"
 
-  jq -r '.projects[] | .name as $p | .find_files[] | "\($p)\t\(.)"' ${_PZC_FIND_PROJECT_JSON} | while IFS=$'\t' read -r PROJECT_NAME FILE_PATH; do
+  ${PZC_JQ_BIN} -r '.projects[] | .name as $p | .find_files[] | "\($p)\t\(.)"' ${_PZC_FIND_PROJECT_JSON} | while IFS=$'\t' read -r PROJECT_NAME FILE_PATH; do
     _pzc_debug "Search ${FILE_PATH}"
 
     if [[ -e "${CMP_SOURCE_DIR}/${FILE_PATH}" ]]
@@ -532,7 +532,7 @@ function _pzc_common_initcmp()
   if [[ -e ${_PZC_SAVED_USER_PRESET_GENERIC_GENERIC_PATH} ]]
   then
     _pzc_info "A saved general general configuration user preset found. Overwrite default initialization."
-    local _PZC_CMP_SOURCE_DIR=$(jq -r '.vendor.pzc.cmpSourceDir' ${_PZC_SAVED_USER_PRESET_GENERIC_GENERIC_PATH})
+    local _PZC_CMP_SOURCE_DIR=$(${PZC_JQ_BIN} -r '.vendor.pzc.cmpSourceDir' ${_PZC_SAVED_USER_PRESET_GENERIC_GENERIC_PATH})
 
     if [[ ${_PZC_CMP_SOURCE_DIR} != "null" ]]
     then
@@ -544,7 +544,7 @@ function _pzc_common_initcmp()
   if [[ -e ${_PZC_SAVED_USER_PRESET_GENERIC_PATH} ]]
   then
     _pzc_info "A saved general configuration user preset found. Overwrite default initialization."
-    local _PZC_CMP_SOURCE_DIR=$(jq -r '.vendor.pzc.cmpSourceDir' ${_PZC_SAVED_USER_PRESET_GENERIC_PATH})
+    local _PZC_CMP_SOURCE_DIR=$(${PZC_JQ_BIN} -r '.vendor.pzc.cmpSourceDir' ${_PZC_SAVED_USER_PRESET_GENERIC_PATH})
 
     if [[ ${_PZC_CMP_SOURCE_DIR} != "null" ]]
     then
@@ -556,9 +556,9 @@ function _pzc_common_initcmp()
   if [[ -e ${_PZC_SAVED_USER_PRESET_PATH} ]]
   then
     _pzc_info "A saved configuration user preset found. Overwrite default initialization."
-    local _PZC_CMP_SOURCE_DIR=$(jq -r '.vendor.pzc.cmpSourceDir' ${_PZC_SAVED_USER_PRESET_PATH})
-    local _PZC_CMP_BUILD_DIR=$(jq -r '.vendor.pzc.cmpBuildDir' ${_PZC_SAVED_USER_PRESET_PATH})
-    local _PZC_CMP_INSTALL_DIR=$(jq -r '.vendor.pzc.cmpInstallDir' ${_PZC_SAVED_USER_PRESET_PATH})
+    local _PZC_CMP_SOURCE_DIR=$(${PZC_JQ_BIN} -r '.vendor.pzc.cmpSourceDir' ${_PZC_SAVED_USER_PRESET_PATH})
+    local _PZC_CMP_BUILD_DIR=$(${PZC_JQ_BIN} -r '.vendor.pzc.cmpBuildDir' ${_PZC_SAVED_USER_PRESET_PATH})
+    local _PZC_CMP_INSTALL_DIR=$(${PZC_JQ_BIN} -r '.vendor.pzc.cmpInstallDir' ${_PZC_SAVED_USER_PRESET_PATH})
 
     if [[ ${_PZC_CMP_SOURCE_DIR} != "null" ]]
     then
@@ -579,9 +579,9 @@ function _pzc_common_initcmp()
   if [[ -e ${_PZC_TMP_USER_PRESET_PATH} ]]
   then
     _pzc_info "A configuration user preset found. Overwrite default initialization."
-    local _PZC_CMP_SOURCE_DIR=$(jq -r '.vendor.pzc.cmpSourceDir' ${_PZC_TMP_USER_PRESET_PATH})
-    local _PZC_CMP_BUILD_DIR=$(jq -r '.vendor.pzc.cmpBuildDir' ${_PZC_TMP_USER_PRESET_PATH})
-    local _PZC_CMP_INSTALL_DIR=$(jq -r '.vendor.pzc.cmpInstallDir' ${_PZC_TMP_USER_PRESET_PATH})
+    local _PZC_CMP_SOURCE_DIR=$(${PZC_JQ_BIN} -r '.vendor.pzc.cmpSourceDir' ${_PZC_TMP_USER_PRESET_PATH})
+    local _PZC_CMP_BUILD_DIR=$(${PZC_JQ_BIN} -r '.vendor.pzc.cmpBuildDir' ${_PZC_TMP_USER_PRESET_PATH})
+    local _PZC_CMP_INSTALL_DIR=$(${PZC_JQ_BIN} -r '.vendor.pzc.cmpInstallDir' ${_PZC_TMP_USER_PRESET_PATH})
 
     if [[ ${_PZC_CMP_SOURCE_DIR} != "null" ]]
     then
@@ -853,13 +853,13 @@ function _pzc_common_depcmp()
     if [[ ${5} == 1 ]]
     then
       # Ajout
-      jq \
+      ${PZC_JQ_BIN} \
         ".vendor.pzc.cmpDependencies = (.vendor.pzc.cmpDependencies + [[\"${ADD_CMP_PROJECT_NAME}\", \"${ADD_CMP_BUILD_TYPE}\", \"${ADD_CMP_VARIANT}\", \"${ADD_CMP_PRESET_VARIANT}\"]] | unique)" \
         "${_PZC_TMP_USER_PRESET_PATH}" > "${_PZC_TMP_USER_PRESET_PATH}.tmp"
     elif [[ ${5} == 2 ]]
     then
       # Suppression
-      jq \
+      ${PZC_JQ_BIN} \
         ".vendor.pzc.cmpDependencies -= [[\"${ADD_CMP_PROJECT_NAME}\", \"${ADD_CMP_BUILD_TYPE}\", \"${ADD_CMP_VARIANT}\", \"${ADD_CMP_PRESET_VARIANT}\"]]" \
         "${_PZC_TMP_USER_PRESET_PATH}" > "${_PZC_TMP_USER_PRESET_PATH}.tmp"
     fi
@@ -909,7 +909,7 @@ function _pzc_common_bidep()
   local ACTUAL_CMP_BUILD_TYPE=${CMP_BUILD_TYPE}
   local ACTUAL_CMP_VARIANT=${CMP_VARIANT}
 
-  jq -r '.vendor.pzc.cmpDependencies[] | @tsv' "${_PZC_TMP_GEN_USER_PRESET_PATH}" | while read -r var1 var2 var3 var4
+  ${PZC_JQ_BIN} -r '.vendor.pzc.cmpDependencies[] | @tsv' "${_PZC_TMP_GEN_USER_PRESET_PATH}" | while read -r var1 var2 var3 var4
   do
     echo ""
     _pzc_info "Build and install dependency -- Name : ${var1} -- Type : ${var2} -- Variant : ${var3} -- Preset : ${var4}"

@@ -271,7 +271,7 @@ function savepcmpg()
 
   _pzc_warning "Removing cmpBuildDir/cmpInstallDir if present..."
 
-  jq \
+  ${PZC_JQ_BIN} \
     'del(.vendor.pzc.cmpBuildDir, .vendor.pzc.cmpInstallDir, .vendor.pzc.cmpArcaneInstallDir)' \
     ${_PZC_TMP_USER_PRESET_PATH} > ${_PZC_TMP_USER_PRESET_PATH}.tmp
 
@@ -317,7 +317,7 @@ function savepcmpgg()
 
   _pzc_warning "Removing cmpBuildDir/cmpInstallDir if present..."
 
-  jq \
+  ${PZC_JQ_BIN} \
     'del(.vendor.pzc.cmpBuildDir, .vendor.pzc.cmpInstallDir, .vendor.pzc.cmpArcaneInstallDir)' \
     ${_PZC_TMP_USER_PRESET_PATH} > ${_PZC_TMP_USER_PRESET_PATH}.tmp
 
