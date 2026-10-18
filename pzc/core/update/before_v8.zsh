@@ -788,53 +788,53 @@ _pzc_launch_pzc_update_to_v800()
 
 
 
-  PZC_NEW_JSON_V8=$(jq --argjson values '[8, 0, 0]' '.pzc_config_general.version = $values' <<<"${PZC_NEW_JSON_V8}")
+  PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson values '[8, 0, 0]' '.pzc_config_general.version = $values' <<<"${PZC_NEW_JSON_V8}")
 
 
 
   if [[ -v _PZC_FILE_EDITOR ]]
   then
-    PZC_NEW_JSON_V8=$(jq --arg name "${_PZC_FILE_EDITOR}" '.pzc_config_general.file_editor = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name "${_PZC_FILE_EDITOR}" '.pzc_config_general.file_editor = $name' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --arg name 'vim' '.pzc_config_general.file_editor = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name 'vim' '.pzc_config_general.file_editor = $name' <<<"${PZC_NEW_JSON_V8}")
   fi
 
 
 
   if [[ ${_PZC_DISABLE_WELCOME} = 1 ]]
   then
-    PZC_NEW_JSON_V8=$(jq --argjson enabled true '.pzc_config_general.disable_welcome = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled true '.pzc_config_general.disable_welcome = $enabled' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --argjson enabled false '.pzc_config_general.disable_welcome = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled false '.pzc_config_general.disable_welcome = $enabled' <<<"${PZC_NEW_JSON_V8}")
   fi
 
 
   if [[ ${PZC_LOG_INFO} = 0 ]]
   then
-    PZC_NEW_JSON_V8=$(jq --argjson enabled false '.pzc_config_general.log_info = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled false '.pzc_config_general.log_info = $enabled' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --argjson enabled true '.pzc_config_general.log_info = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled true '.pzc_config_general.log_info = $enabled' <<<"${PZC_NEW_JSON_V8}")
   fi
 
   if [[ ${PZC_LOG_WARNING} = 0 ]]
   then
-    PZC_NEW_JSON_V8=$(jq --argjson enabled false '.pzc_config_general.log_warning = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled false '.pzc_config_general.log_warning = $enabled' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --argjson enabled true '.pzc_config_general.log_warning = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled true '.pzc_config_general.log_warning = $enabled' <<<"${PZC_NEW_JSON_V8}")
   fi
 
   if [[ ${PZC_LOG_ERROR} = 0 ]]
   then
-    PZC_NEW_JSON_V8=$(jq --argjson enabled false '.pzc_config_general.log_error = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled false '.pzc_config_general.log_error = $enabled' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --argjson enabled true '.pzc_config_general.log_error = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled true '.pzc_config_general.log_error = $enabled' <<<"${PZC_NEW_JSON_V8}")
   fi
 
   if [[ ${PZC_LOG_DEBUG} = 1 ]]
   then
-    PZC_NEW_JSON_V8=$(jq --argjson enabled true '.pzc_config_general.log_debug = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled true '.pzc_config_general.log_debug = $enabled' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --argjson enabled false '.pzc_config_general.log_debug = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled false '.pzc_config_general.log_debug = $enabled' <<<"${PZC_NEW_JSON_V8}")
   fi
 
 
@@ -842,132 +842,132 @@ _pzc_launch_pzc_update_to_v800()
 
   if [[ -v _PZC_LARGE_DIR ]] && [[ ${_PZC_LARGE_DIR} != "${HOME}" ]]
   then
-    PZC_NEW_JSON_V8=$(jq --arg name "${_PZC_LARGE_DIR}" '.pzc_config_dirs.large_dir = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name "${_PZC_LARGE_DIR}" '.pzc_config_dirs.large_dir = $name' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --arg name '${HOME}' '.pzc_config_dirs.large_dir = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name '${HOME}' '.pzc_config_dirs.large_dir = $name' <<<"${PZC_NEW_JSON_V8}")
   fi
 
 
 
   if [[ -v TMP_DIR ]]
   then
-    PZC_NEW_JSON_V8=$(jq --arg name "${TMP_DIR}" '.pzc_config_dirs.tmp_dir = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name "${TMP_DIR}" '.pzc_config_dirs.tmp_dir = $name' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --arg name '/tmp/pzc' '.pzc_config_dirs.tmp_dir = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name '/tmp/pzc' '.pzc_config_dirs.tmp_dir = $name' <<<"${PZC_NEW_JSON_V8}")
   fi
 
   if [[ -v WORK_DIR ]] && [[ ${WORK_DIR} != "${_PZC_LARGE_DIR}/work" ]]
   then
-    PZC_NEW_JSON_V8=$(jq --arg name "${WORK_DIR}" '.pzc_config_dirs.work_dir = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name "${WORK_DIR}" '.pzc_config_dirs.work_dir = $name' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --arg name '${LARGE_DIR}/work' '.pzc_config_dirs.work_dir = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name '${LARGE_DIR}/work' '.pzc_config_dirs.work_dir = $name' <<<"${PZC_NEW_JSON_V8}")
   fi
 
   if [[ -v BUILD_DIR ]] && [[ ${BUILD_DIR} != "${_PZC_LARGE_DIR}/build" ]]
   then
-    PZC_NEW_JSON_V8=$(jq --arg name "${BUILD_DIR}" '.pzc_config_dirs.build_dir = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name "${BUILD_DIR}" '.pzc_config_dirs.build_dir = $name' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --arg name '${LARGE_DIR}/build' '.pzc_config_dirs.build_dir = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name '${LARGE_DIR}/build' '.pzc_config_dirs.build_dir = $name' <<<"${PZC_NEW_JSON_V8}")
   fi
 
   if [[ -v INSTALL_DIR ]] && [[ ${INSTALL_DIR} != "${_PZC_LARGE_DIR}/install" ]]
   then
-    PZC_NEW_JSON_V8=$(jq --arg name "${INSTALL_DIR}" '.pzc_config_dirs.install_dir = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name "${INSTALL_DIR}" '.pzc_config_dirs.install_dir = $name' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --arg name '${LARGE_DIR}/install' '.pzc_config_dirs.install_dir = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name '${LARGE_DIR}/install' '.pzc_config_dirs.install_dir = $name' <<<"${PZC_NEW_JSON_V8}")
   fi
 
   if [[ -v ENVI_DIR ]] && [[ ${ENVI_DIR} != "${_PZC_LARGE_DIR}/environment" ]]
   then
-    PZC_NEW_JSON_V8=$(jq --arg name "${ENVI_DIR}" '.pzc_config_dirs.envi_dir = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name "${ENVI_DIR}" '.pzc_config_dirs.envi_dir = $name' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --arg name '${LARGE_DIR}/environment' '.pzc_config_dirs.envi_dir = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name '${LARGE_DIR}/environment' '.pzc_config_dirs.envi_dir = $name' <<<"${PZC_NEW_JSON_V8}")
   fi
 
   if [[ -v CCACHE_DIR ]] && [[ ${CCACHE_DIR} != "${BUILD_DIR}/ccache" ]]
   then
-    PZC_NEW_JSON_V8=$(jq --arg name "${CCACHE_DIR}" '.pzc_config_dirs.ccache_dir = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name "${CCACHE_DIR}" '.pzc_config_dirs.ccache_dir = $name' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --arg name '${BUILD_DIR}/ccache' '.pzc_config_dirs.ccache_dir = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name '${BUILD_DIR}/ccache' '.pzc_config_dirs.ccache_dir = $name' <<<"${PZC_NEW_JSON_V8}")
   fi
 
 
 
-  PZC_NEW_JSON_V8=$(jq --arg name 'GCC or CLANG' '.pzc_config_compilers."#1" = $name' <<<"${PZC_NEW_JSON_V8}")
+  PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name 'GCC or CLANG' '.pzc_config_compilers."#1" = $name' <<<"${PZC_NEW_JSON_V8}")
 
 
 
   if [[ ${_PZC_C_CXX_DEFAULT_COMPILER} == "CLANG" ]]
   then
-    PZC_NEW_JSON_V8=$(jq --arg name 'CLANG' '.pzc_config_compilers.c_cxx_default_compiler = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name 'CLANG' '.pzc_config_compilers.c_cxx_default_compiler = $name' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --arg name 'GCC' '.pzc_config_compilers.c_cxx_default_compiler = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name 'GCC' '.pzc_config_compilers.c_cxx_default_compiler = $name' <<<"${PZC_NEW_JSON_V8}")
   fi
 
 
 
   if [[ ${_PZC_GCC_AVAILABLE} = 1 ]]
   then
-    PZC_NEW_JSON_V8=$(jq --argjson enabled true '.pzc_config_compilers.gcc.available = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled true '.pzc_config_compilers.gcc.available = $enabled' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --argjson enabled false '.pzc_config_compilers.gcc.available = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled false '.pzc_config_compilers.gcc.available = $enabled' <<<"${PZC_NEW_JSON_V8}")
   fi
 
   if [[ -v PZC_C_GCC_BIN ]]
   then
-    PZC_NEW_JSON_V8=$(jq --arg name "${PZC_C_GCC_BIN}" '.pzc_config_compilers.gcc.c_executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name "${PZC_C_GCC_BIN}" '.pzc_config_compilers.gcc.c_executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --arg name 'gcc' '.pzc_config_compilers.gcc.c_executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name 'gcc' '.pzc_config_compilers.gcc.c_executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   fi
 
   if [[ -v PZC_CXX_GCC_BIN ]]
   then
-    PZC_NEW_JSON_V8=$(jq --arg name "${PZC_CXX_GCC_BIN}" '.pzc_config_compilers.gcc.cc_executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name "${PZC_CXX_GCC_BIN}" '.pzc_config_compilers.gcc.cc_executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --arg name 'g++' '.pzc_config_compilers.gcc.cc_executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name 'g++' '.pzc_config_compilers.gcc.cc_executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   fi
 
 
 
   if [[ ${_PZC_CLANG_AVAILABLE} = 1 ]]
   then
-    PZC_NEW_JSON_V8=$(jq --argjson enabled true '.pzc_config_compilers.clang.available = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled true '.pzc_config_compilers.clang.available = $enabled' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --argjson enabled false '.pzc_config_compilers.clang.available = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled false '.pzc_config_compilers.clang.available = $enabled' <<<"${PZC_NEW_JSON_V8}")
   fi
 
   if [[ -v PZC_C_CLANG_BIN ]]
   then
-    PZC_NEW_JSON_V8=$(jq --arg name "${PZC_C_CLANG_BIN}" '.pzc_config_compilers.clang.c_executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name "${PZC_C_CLANG_BIN}" '.pzc_config_compilers.clang.c_executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --arg name 'clang' '.pzc_config_compilers.clang.c_executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name 'clang' '.pzc_config_compilers.clang.c_executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   fi
 
   if [[ -v PZC_CXX_CLANG_BIN ]]
   then
-    PZC_NEW_JSON_V8=$(jq --arg name "${PZC_CXX_CLANG_BIN}" '.pzc_config_compilers.clang.cc_executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name "${PZC_CXX_CLANG_BIN}" '.pzc_config_compilers.clang.cc_executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --arg name 'clang++' '.pzc_config_compilers.clang.cc_executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name 'clang++' '.pzc_config_compilers.clang.cc_executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   fi
 
 
-  PZC_NEW_JSON_V8=$(jq --arg name 'NVCC or SYCL' '.pzc_config_compilers."#2" = $name' <<<"${PZC_NEW_JSON_V8}")
+  PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name 'NVCC or SYCL' '.pzc_config_compilers."#2" = $name' <<<"${PZC_NEW_JSON_V8}")
 
 
 
   if [[ ${PZC_GPU_DEFAULT_COMPILER} == "SYCL" ]]
   then
-    PZC_NEW_JSON_V8=$(jq --arg name 'SYCL' '.pzc_config_compilers.gpu_default_compiler = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name 'SYCL' '.pzc_config_compilers.gpu_default_compiler = $name' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --arg name 'NVCC' '.pzc_config_compilers.gpu_default_compiler = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name 'NVCC' '.pzc_config_compilers.gpu_default_compiler = $name' <<<"${PZC_NEW_JSON_V8}")
   fi
 
 
   if [[ -v PZC_GPU_TARGET_ARCH ]]
   then
-    PZC_NEW_JSON_V8=$(jq --arg name "${PZC_GPU_TARGET_ARCH}" '.pzc_config_compilers.gpu_target_arch = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name "${PZC_GPU_TARGET_ARCH}" '.pzc_config_compilers.gpu_target_arch = $name' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --arg name '89' '.pzc_config_compilers.gpu_target_arch = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name '89' '.pzc_config_compilers.gpu_target_arch = $name' <<<"${PZC_NEW_JSON_V8}")
   fi
 
 
@@ -975,46 +975,46 @@ _pzc_launch_pzc_update_to_v800()
 
   if [[ ${_PZC_NVCC_BIN_AVAILABLE} = 1 ]]
   then
-    PZC_NEW_JSON_V8=$(jq --argjson enabled true '.pzc_config_compilers.nvcc.available = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled true '.pzc_config_compilers.nvcc.available = $enabled' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --argjson enabled false '.pzc_config_compilers.nvcc.available = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled false '.pzc_config_compilers.nvcc.available = $enabled' <<<"${PZC_NEW_JSON_V8}")
   fi
 
   if [[ -v PZC_NVCC_BIN ]]
   then
-    PZC_NEW_JSON_V8=$(jq --arg name "${PZC_NVCC_BIN}" '.pzc_config_compilers.nvcc.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name "${PZC_NVCC_BIN}" '.pzc_config_compilers.nvcc.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --arg name 'nvcc' '.pzc_config_compilers.nvcc.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name 'nvcc' '.pzc_config_compilers.nvcc.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   fi
 
   if [[ -v PZC_NVCC_HOST_COMPILER_BIN ]]
   then
-    PZC_NEW_JSON_V8=$(jq --arg name "${PZC_NVCC_HOST_COMPILER_BIN}" '.pzc_config_compilers.nvcc.host_executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name "${PZC_NVCC_HOST_COMPILER_BIN}" '.pzc_config_compilers.nvcc.host_executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --arg name 'g++' '.pzc_config_compilers.nvcc.host_executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name 'g++' '.pzc_config_compilers.nvcc.host_executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   fi
 
 
 
   if [[ ${_PZC_SYCL_BIN_AVAILABLE} = 1 ]]
   then
-    PZC_NEW_JSON_V8=$(jq --argjson enabled true '.pzc_config_compilers.sycl.available = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled true '.pzc_config_compilers.sycl.available = $enabled' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --argjson enabled false '.pzc_config_compilers.sycl.available = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled false '.pzc_config_compilers.sycl.available = $enabled' <<<"${PZC_NEW_JSON_V8}")
   fi
 
   if [[ -v PZC_SYCL_BIN ]]
   then
-    PZC_NEW_JSON_V8=$(jq --arg name "${PZC_SYCL_BIN}" '.pzc_config_compilers.sycl.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name "${PZC_SYCL_BIN}" '.pzc_config_compilers.sycl.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --arg name 'sycl' '.pzc_config_compilers.sycl.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name 'sycl' '.pzc_config_compilers.sycl.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   fi
 
   if [[ -v PZC_SYCL_HOST_COMPILER_BIN ]]
   then
-    PZC_NEW_JSON_V8=$(jq --arg name "${PZC_SYCL_HOST_COMPILER_BIN}" '.pzc_config_compilers.sycl.host_executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name "${PZC_SYCL_HOST_COMPILER_BIN}" '.pzc_config_compilers.sycl.host_executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --arg name 'clang++' '.pzc_config_compilers.sycl.host_executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name 'clang++' '.pzc_config_compilers.sycl.host_executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   fi
 
 
@@ -1022,16 +1022,16 @@ _pzc_launch_pzc_update_to_v800()
 
   if [[ ${_PZC_MISE_AVAILABLE} = 1 ]]
   then
-    PZC_NEW_JSON_V8=$(jq --argjson enabled true '.pzc_config_pkgs.mise_en_place.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled true '.pzc_config_pkgs.mise_en_place.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --argjson enabled false '.pzc_config_pkgs.mise_en_place.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled false '.pzc_config_pkgs.mise_en_place.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
   fi
 
   if [[ -v PZC_MISE_BIN ]]
   then
-    PZC_NEW_JSON_V8=$(jq --arg name "${PZC_MISE_BIN}" '.pzc_config_pkgs.mise_en_place.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name "${PZC_MISE_BIN}" '.pzc_config_pkgs.mise_en_place.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --arg name '' '.pzc_config_pkgs.mise_en_place.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name '' '.pzc_config_pkgs.mise_en_place.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   fi
 
 
@@ -1039,23 +1039,23 @@ _pzc_launch_pzc_update_to_v800()
 
   if [[ ${_PZC_SPACK_AVAILABLE} = 1 ]]
   then
-    PZC_NEW_JSON_V8=$(jq --argjson enabled true '.pzc_config_pkgs.spack.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled true '.pzc_config_pkgs.spack.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --argjson enabled false '.pzc_config_pkgs.spack.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled false '.pzc_config_pkgs.spack.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
   fi
 
   if [[ -v PZC_SPACK_PATH ]]
   then
-    PZC_NEW_JSON_V8=$(jq --arg name "${PZC_SPACK_PATH}" '.pzc_config_pkgs.spack.src_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name "${PZC_SPACK_PATH}" '.pzc_config_pkgs.spack.src_path = $name' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --arg name '' '.pzc_config_pkgs.spack.src_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name '' '.pzc_config_pkgs.spack.src_path = $name' <<<"${PZC_NEW_JSON_V8}")
   fi
 
   if [[ ${_PZC_SPACK_START_AT_LAUNCH} = 1 ]]
   then
-    PZC_NEW_JSON_V8=$(jq --argjson enabled true '.pzc_config_pkgs.spack.start_at_launch = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled true '.pzc_config_pkgs.spack.start_at_launch = $enabled' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --argjson enabled false '.pzc_config_pkgs.spack.start_at_launch = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled false '.pzc_config_pkgs.spack.start_at_launch = $enabled' <<<"${PZC_NEW_JSON_V8}")
   fi
 
 
@@ -1063,23 +1063,23 @@ _pzc_launch_pzc_update_to_v800()
 
   if [[ ${_PZC_OMP_AVAILABLE} = 1 ]]
   then
-    PZC_NEW_JSON_V8=$(jq --argjson enabled true '.pzc_config_pkgs.oh_my_posh.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled true '.pzc_config_pkgs.oh_my_posh.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --argjson enabled false '.pzc_config_pkgs.oh_my_posh.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled false '.pzc_config_pkgs.oh_my_posh.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
   fi
 
   if [[ -v _PZC_OMP_BIN ]]
   then
-    PZC_NEW_JSON_V8=$(jq --arg name "${_PZC_OMP_BIN}" '.pzc_config_pkgs.oh_my_posh.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name "${_PZC_OMP_BIN}" '.pzc_config_pkgs.oh_my_posh.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --arg name '' '.pzc_config_pkgs.oh_my_posh.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name '' '.pzc_config_pkgs.oh_my_posh.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   fi
 
   if [[ -v _PZC_OMP_THEME_FILE ]]
   then
-    PZC_NEW_JSON_V8=$(jq --arg name "${_PZC_OMP_THEME_FILE}" '.pzc_config_pkgs.oh_my_posh.theme_file = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name "${_PZC_OMP_THEME_FILE}" '.pzc_config_pkgs.oh_my_posh.theme_file = $name' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --arg name '' '.pzc_config_pkgs.oh_my_posh.theme_file = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name '' '.pzc_config_pkgs.oh_my_posh.theme_file = $name' <<<"${PZC_NEW_JSON_V8}")
   fi
 
 
@@ -1087,23 +1087,23 @@ _pzc_launch_pzc_update_to_v800()
 
   if [[ ${_PZC_EZA_AVAILABLE} = 1 ]]
   then
-    PZC_NEW_JSON_V8=$(jq --argjson enabled true '.pzc_config_pkgs.eza.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled true '.pzc_config_pkgs.eza.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --argjson enabled false '.pzc_config_pkgs.eza.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled false '.pzc_config_pkgs.eza.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
   fi
 
   if [[ -v PZC_EZA_BIN ]]
   then
-    PZC_NEW_JSON_V8=$(jq --arg name "${PZC_EZA_BIN}" '.pzc_config_pkgs.eza.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name "${PZC_EZA_BIN}" '.pzc_config_pkgs.eza.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --arg name '' '.pzc_config_pkgs.eza.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name '' '.pzc_config_pkgs.eza.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   fi
 
   if [[ -v _PZC_EZA_CONFIG_DIR ]]
   then
-    PZC_NEW_JSON_V8=$(jq --arg name "${_PZC_EZA_CONFIG_DIR}" '.pzc_config_pkgs.eza.config_dir = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name "${_PZC_EZA_CONFIG_DIR}" '.pzc_config_pkgs.eza.config_dir = $name' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --arg name '' '.pzc_config_pkgs.eza.config_dir = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name '' '.pzc_config_pkgs.eza.config_dir = $name' <<<"${PZC_NEW_JSON_V8}")
   fi
 
 
@@ -1111,16 +1111,16 @@ _pzc_launch_pzc_update_to_v800()
 
   if [[ ${_PZC_CCACHE_AVAILABLE} = 1 ]]
   then
-    PZC_NEW_JSON_V8=$(jq --argjson enabled true '.pzc_config_pkgs.ccache.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled true '.pzc_config_pkgs.ccache.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --argjson enabled false '.pzc_config_pkgs.ccache.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled false '.pzc_config_pkgs.ccache.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
   fi
 
   if [[ -v PZC_CCACHE_BIN ]]
   then
-    PZC_NEW_JSON_V8=$(jq --arg name "${PZC_CCACHE_BIN}" '.pzc_config_pkgs.ccache.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name "${PZC_CCACHE_BIN}" '.pzc_config_pkgs.ccache.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --arg name '' '.pzc_config_pkgs.ccache.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name '' '.pzc_config_pkgs.ccache.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   fi
 
 
@@ -1128,16 +1128,16 @@ _pzc_launch_pzc_update_to_v800()
 
   if [[ ${_PZC_MOLD_AVAILABLE} = 1 ]]
   then
-    PZC_NEW_JSON_V8=$(jq --argjson enabled true '.pzc_config_pkgs.mold.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled true '.pzc_config_pkgs.mold.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --argjson enabled false '.pzc_config_pkgs.mold.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled false '.pzc_config_pkgs.mold.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
   fi
 
   if [[ -v _PZC_MOLD_PATH ]]
   then
-    PZC_NEW_JSON_V8=$(jq --arg name "${_PZC_MOLD_PATH}/mold" '.pzc_config_pkgs.mold.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name "${_PZC_MOLD_PATH}/mold" '.pzc_config_pkgs.mold.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --arg name '' '.pzc_config_pkgs.mold.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name '' '.pzc_config_pkgs.mold.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   fi
 
 
@@ -1145,16 +1145,16 @@ _pzc_launch_pzc_update_to_v800()
 
   if [[ ${_PZC_NINJA_AVAILABLE} = 1 ]]
   then
-    PZC_NEW_JSON_V8=$(jq --argjson enabled true '.pzc_config_pkgs.ninja.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled true '.pzc_config_pkgs.ninja.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --argjson enabled false '.pzc_config_pkgs.ninja.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled false '.pzc_config_pkgs.ninja.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
   fi
 
   if [[ -v _PZC_NINJA_PATH ]]
   then
-    PZC_NEW_JSON_V8=$(jq --arg name "${_PZC_NINJA_PATH}/ninja" '.pzc_config_pkgs.ninja.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name "${_PZC_NINJA_PATH}/ninja" '.pzc_config_pkgs.ninja.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --arg name '' '.pzc_config_pkgs.ninja.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name '' '.pzc_config_pkgs.ninja.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   fi
 
 
@@ -1164,16 +1164,16 @@ _pzc_launch_pzc_update_to_v800()
 
   if [[ ${_PZC_CMAKE_AVAILABLE} = 1 ]]
   then
-    PZC_NEW_JSON_V8=$(jq --argjson enabled true '.pzc_config_pkgs.cmake.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled true '.pzc_config_pkgs.cmake.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --argjson enabled false '.pzc_config_pkgs.cmake.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled false '.pzc_config_pkgs.cmake.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
   fi
 
   if [[ -v _PZC_CMAKE_PATH ]]
   then
-    PZC_NEW_JSON_V8=$(jq --arg name "${_PZC_CMAKE_PATH}/cmake" '.pzc_config_pkgs.cmake.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name "${_PZC_CMAKE_PATH}/cmake" '.pzc_config_pkgs.cmake.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --arg name '' '.pzc_config_pkgs.cmake.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name '' '.pzc_config_pkgs.cmake.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   fi
 
 
@@ -1181,16 +1181,16 @@ _pzc_launch_pzc_update_to_v800()
 
   if [[ ${_PZC_TASK_AVAILABLE} = 1 ]]
   then
-    PZC_NEW_JSON_V8=$(jq --argjson enabled true '.pzc_config_pkgs.taskwarrior.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled true '.pzc_config_pkgs.taskwarrior.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --argjson enabled false '.pzc_config_pkgs.taskwarrior.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled false '.pzc_config_pkgs.taskwarrior.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
   fi
 
   if [[ -v _PZC_TASK_PATH ]]
   then
-    PZC_NEW_JSON_V8=$(jq --arg name "${_PZC_TASK_PATH}/task" '.pzc_config_pkgs.taskwarrior.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name "${_PZC_TASK_PATH}/task" '.pzc_config_pkgs.taskwarrior.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --arg name '' '.pzc_config_pkgs.taskwarrior.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name '' '.pzc_config_pkgs.taskwarrior.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   fi
 
 
@@ -1202,20 +1202,20 @@ _pzc_launch_pzc_update_to_v800()
 
   if [[ ${_PZC_ATUIN_AVAILABLE} = 1 ]]
   then
-    PZC_NEW_JSON_V8=$(jq --argjson enabled true '.pzc_config_pkgs.atuin.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled true '.pzc_config_pkgs.atuin.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --argjson enabled false '.pzc_config_pkgs.atuin.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled false '.pzc_config_pkgs.atuin.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
   fi
 
   if [[ -v PZC_ATUIN_BIN ]]
   then
-    PZC_NEW_JSON_V8=$(jq --arg name "${PZC_ATUIN_BIN}" '.pzc_config_pkgs.atuin.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name "${PZC_ATUIN_BIN}" '.pzc_config_pkgs.atuin.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --arg name '' '.pzc_config_pkgs.atuin.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name '' '.pzc_config_pkgs.atuin.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   fi
 
 
-  PZC_NEW_JSON_V8=$(jq --arg name '' '.pzc_config_pkgs.atuin.config_dir = $name' <<<"${PZC_NEW_JSON_V8}")
+  PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name '' '.pzc_config_pkgs.atuin.config_dir = $name' <<<"${PZC_NEW_JSON_V8}")
 
 
 
@@ -1225,16 +1225,16 @@ _pzc_launch_pzc_update_to_v800()
 
   if [[ ${_PZC_FZF_AVAILABLE} = 1 ]]
   then
-    PZC_NEW_JSON_V8=$(jq --argjson enabled true '.pzc_config_pkgs.fzf.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled true '.pzc_config_pkgs.fzf.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --argjson enabled false '.pzc_config_pkgs.fzf.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled false '.pzc_config_pkgs.fzf.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
   fi
 
   if [[ -v PZC_FZF_BIN ]]
   then
-    PZC_NEW_JSON_V8=$(jq --arg name "${PZC_FZF_BIN}" '.pzc_config_pkgs.fzf.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name "${PZC_FZF_BIN}" '.pzc_config_pkgs.fzf.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --arg name '' '.pzc_config_pkgs.fzf.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name '' '.pzc_config_pkgs.fzf.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   fi
 
 
@@ -1246,16 +1246,16 @@ _pzc_launch_pzc_update_to_v800()
 
   if [[ ${_PZC_YAZI_AVAILABLE} = 1 ]]
   then
-    PZC_NEW_JSON_V8=$(jq --argjson enabled true '.pzc_config_pkgs.yazi.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled true '.pzc_config_pkgs.yazi.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --argjson enabled false '.pzc_config_pkgs.yazi.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled false '.pzc_config_pkgs.yazi.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
   fi
 
   if [[ -v PZC_YAZI_BIN ]]
   then
-    PZC_NEW_JSON_V8=$(jq --arg name "${PZC_YAZI_BIN}" '.pzc_config_pkgs.yazi.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name "${PZC_YAZI_BIN}" '.pzc_config_pkgs.yazi.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --arg name '' '.pzc_config_pkgs.yazi.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name '' '.pzc_config_pkgs.yazi.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   fi
 
 
@@ -1264,16 +1264,16 @@ _pzc_launch_pzc_update_to_v800()
 
   if [[ ${_PZC_PYTHON_AVAILABLE} = 1 ]]
   then
-    PZC_NEW_JSON_V8=$(jq --argjson enabled true '.pzc_config_pkgs.python.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled true '.pzc_config_pkgs.python.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --argjson enabled false '.pzc_config_pkgs.python.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --argjson enabled false '.pzc_config_pkgs.python.enable = $enabled' <<<"${PZC_NEW_JSON_V8}")
   fi
 
   if [[ -v _PZC_PYTHON_PATH ]]
   then
-    PZC_NEW_JSON_V8=$(jq --arg name "${_PZC_PYTHON_PATH}/python3" '.pzc_config_pkgs.python.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name "${_PZC_PYTHON_PATH}/python3" '.pzc_config_pkgs.python.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   else
-    PZC_NEW_JSON_V8=$(jq --arg name '' '.pzc_config_pkgs.python.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
+    PZC_NEW_JSON_V8=$(${PZC_JQ_BIN} --arg name '' '.pzc_config_pkgs.python.executable_path = $name' <<<"${PZC_NEW_JSON_V8}")
   fi
 
 

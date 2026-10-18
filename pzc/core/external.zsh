@@ -440,7 +440,7 @@ then
       if [[ $? = 0 ]]
       then
         _pzc_info "Enabling Oh-My-Posh..."
-        jq '.pzc_config_pkgs.oh_my_posh.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
+        ${PZC_JQ_BIN} '.pzc_config_pkgs.oh_my_posh.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
         if [[ $? = 0 ]]
         then
           \mv "${PZC_PZC_CONFIG_FILE_V8}.tmp" "${PZC_PZC_CONFIG_FILE_V8}"
@@ -481,7 +481,7 @@ then
       if [[ $? = 0 ]]
       then
         _pzc_info "Enabling EZA..."
-        jq '.pzc_config_pkgs.eza.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
+        ${PZC_JQ_BIN} '.pzc_config_pkgs.eza.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
         if [[ $? = 0 ]]
         then
           \mv "${PZC_PZC_CONFIG_FILE_V8}.tmp" "${PZC_PZC_CONFIG_FILE_V8}"
@@ -522,7 +522,7 @@ then
       if [[ $? = 0 ]]
       then
         _pzc_info "Enabling CCache..."
-        jq '.pzc_config_pkgs.ccache.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
+        ${PZC_JQ_BIN} '.pzc_config_pkgs.ccache.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
         if [[ $? = 0 ]]
         then
           \mv "${PZC_PZC_CONFIG_FILE_V8}.tmp" "${PZC_PZC_CONFIG_FILE_V8}"
@@ -563,7 +563,7 @@ then
       if [[ $? = 0 ]]
       then
         _pzc_info "Enabling Mold..."
-        jq '.pzc_config_pkgs.mold.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
+        ${PZC_JQ_BIN} '.pzc_config_pkgs.mold.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
         if [[ $? = 0 ]]
         then
           \mv "${PZC_PZC_CONFIG_FILE_V8}.tmp" "${PZC_PZC_CONFIG_FILE_V8}"
@@ -604,7 +604,7 @@ then
       if [[ $? = 0 ]]
       then
         _pzc_info "Enabling Ninja..."
-        jq '.pzc_config_pkgs.ninja.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
+        ${PZC_JQ_BIN} '.pzc_config_pkgs.ninja.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
         if [[ $? = 0 ]]
         then
           \mv "${PZC_PZC_CONFIG_FILE_V8}.tmp" "${PZC_PZC_CONFIG_FILE_V8}"
@@ -645,7 +645,7 @@ then
       if [[ $? = 0 ]]
       then
         _pzc_info "Enabling CMake..."
-        jq '.pzc_config_pkgs.cmake.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
+        ${PZC_JQ_BIN} '.pzc_config_pkgs.cmake.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
         if [[ $? = 0 ]]
         then
           \mv "${PZC_PZC_CONFIG_FILE_V8}.tmp" "${PZC_PZC_CONFIG_FILE_V8}"
@@ -686,7 +686,7 @@ then
       if [[ $? = 0 ]]
       then
         _pzc_info "Enabling Atuin..."
-        jq '.pzc_config_pkgs.atuin.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
+        ${PZC_JQ_BIN} '.pzc_config_pkgs.atuin.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
         if [[ $? = 0 ]]
         then
           \mv "${PZC_PZC_CONFIG_FILE_V8}.tmp" "${PZC_PZC_CONFIG_FILE_V8}"
@@ -727,7 +727,7 @@ then
       if [[ $? = 0 ]]
       then
         _pzc_info "Enabling Fzf..."
-        jq '.pzc_config_pkgs.fzf.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
+        ${PZC_JQ_BIN} '.pzc_config_pkgs.fzf.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
         if [[ $? = 0 ]]
         then
           \mv "${PZC_PZC_CONFIG_FILE_V8}.tmp" "${PZC_PZC_CONFIG_FILE_V8}"
@@ -763,7 +763,7 @@ then
       if [[ $? = 0 ]]
       then
         _pzc_info "Enabling Yazi..."
-        jq '.pzc_config_pkgs.yazi.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
+        ${PZC_JQ_BIN} '.pzc_config_pkgs.yazi.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
         if [[ $? = 0 ]]
         then
           \mv "${PZC_PZC_CONFIG_FILE_V8}.tmp" "${PZC_PZC_CONFIG_FILE_V8}"

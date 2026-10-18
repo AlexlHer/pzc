@@ -15,7 +15,7 @@
 function _pzc_generate_config_pkgs_mng()
 {
 
-  local LARGE_DIR=$(jq -r '.pzc_config_dirs.large_dir' ${PZC_PZC_CONFIG_FILE_V8})
+  local LARGE_DIR=$(${PZC_JQ_BIN} -r '.pzc_config_dirs.large_dir' ${PZC_PZC_CONFIG_FILE_V8})
   if [[ "${LARGE_DIR}" == "" ]] || [[ "${LARGE_DIR}" == "null" ]]
   then
     LARGE_DIR="${HOME}"
@@ -23,7 +23,7 @@ function _pzc_generate_config_pkgs_mng()
     LARGE_DIR=$(eval "echo \"${LARGE_DIR}\"")
   fi
 
-  local PZC_ENVI_DIR=$(jq -r '.pzc_config_dirs.envi_dir' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_ENVI_DIR=$(${PZC_JQ_BIN} -r '.pzc_config_dirs.envi_dir' ${PZC_PZC_CONFIG_FILE_V8})
   if [[ "${PZC_ENVI_DIR}" == "" ]] || [[ "${PZC_ENVI_DIR}" == "null" ]]
   then
     PZC_ENVI_DIR="${LARGE_DIR}/environment"
@@ -35,12 +35,12 @@ function _pzc_generate_config_pkgs_mng()
   # Mise-en-place
   # ---------------------------------------
 
-  local PZC_ENABLE_MISE=$(jq -r '.pzc_config_pkgs.mise_en_place.enable' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_ENABLE_MISE=$(${PZC_JQ_BIN} -r '.pzc_config_pkgs.mise_en_place.enable' ${PZC_PZC_CONFIG_FILE_V8})
   local PZC_ALIAS_MISE=0
   if [[ ${PZC_ENABLE_MISE} = true ]]
   then
     # Attention : Ici, PZC_MISE_BIN et _PZC_MISE_AVAILABLE sortent de la fonction. Mise peut être nécessaire pour trouver les autres packages ! 
-    PZC_MISE_BIN=$(jq -r '.pzc_config_pkgs.mise_en_place.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    PZC_MISE_BIN=$(${PZC_JQ_BIN} -r '.pzc_config_pkgs.mise_en_place.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_MISE_BIN}" == "null" ]]
     then
       PZC_MISE_BIN=""
@@ -90,11 +90,11 @@ function _pzc_generate_config_pkgs_mng()
   # Spack
   # ---------------------------------------
 
-  local PZC_ENABLE_SPACK=$(jq -r '.pzc_config_pkgs.spack.enable' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_ENABLE_SPACK=$(${PZC_JQ_BIN} -r '.pzc_config_pkgs.spack.enable' ${PZC_PZC_CONFIG_FILE_V8})
   if [[ ${PZC_ENABLE_SPACK} = true ]]
   then
     # Attention : Ici, PZC_SPACK_PATH et _PZC_SPACK_AVAILABLE sortent de la fonction. Spack peut être nécessaire pour trouver les autres packages ! 
-    PZC_SPACK_PATH=$(jq -r '.pzc_config_pkgs.spack.src_path' ${PZC_PZC_CONFIG_FILE_V8})
+    PZC_SPACK_PATH=$(${PZC_JQ_BIN} -r '.pzc_config_pkgs.spack.src_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_SPACK_PATH}" == "null" ]]
     then
       PZC_SPACK_PATH=""
@@ -124,7 +124,7 @@ function _pzc_generate_config_pkgs_mng()
     then
       _pzc_info "To initialise Spack, you can call pzc_install_spack function."
     else
-      local PZC_SPACK_START_AT_LAUNCH=$(jq -r '.pzc_config_pkgs.spack.start_at_launch' ${PZC_PZC_CONFIG_FILE_V8})
+      local PZC_SPACK_START_AT_LAUNCH=$(${PZC_JQ_BIN} -r '.pzc_config_pkgs.spack.start_at_launch' ${PZC_PZC_CONFIG_FILE_V8})
       if [[ ${PZC_SPACK_START_AT_LAUNCH} = true ]]
       then
         echo "local _PZC_SPACK_START_AT_LAUNCH=1" >> ${PZC_PZC_CONFIG_FILE}

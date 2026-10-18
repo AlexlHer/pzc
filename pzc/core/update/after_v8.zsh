@@ -47,7 +47,7 @@ _pzc_launch_pzc_update_json()
 
 _pzc_check_update_json()
 {
-  local _PZC_CONFIG_VERSION=("${(@f)$(jq -r '.pzc_config_general.version[]' ${PZC_PZC_CONFIG_FILE_V8})}")
+  local _PZC_CONFIG_VERSION=("${(@f)$(${PZC_JQ_BIN} -r '.pzc_config_general.version[]' ${PZC_PZC_CONFIG_FILE_V8})}")
 
   source ${PZC_PZC_DIR}/pzc/version.zsh
   source ${PZC_PZC_DIR}/pzc/core/update/version_checker.zsh
@@ -68,10 +68,6 @@ _pzc_check_update_json()
 
   elif [[ ${_PZC_VERSION_CHECKER_RET} = 1 ]]
   then
-    PZC_LOG_INFO=1
-    PZC_LOG_WARNING=1
-    PZC_LOG_ERROR=1
-
     _pzc_launch_pzc_update_json
 
   else

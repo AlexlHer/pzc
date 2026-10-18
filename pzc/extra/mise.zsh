@@ -52,7 +52,7 @@ then
     if [[ $? = 0 ]]
     then
       _pzc_info "Enabling Mise..."
-      jq '.pzc_config_pkgs.mise_en_place.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
+      ${PZC_JQ_BIN} '.pzc_config_pkgs.mise_en_place.enable = true' "${PZC_PZC_CONFIG_FILE_V8}" > "${PZC_PZC_CONFIG_FILE_V8}.tmp"
       if [[ $? = 0 ]]
       then
         \mv "${PZC_PZC_CONFIG_FILE_V8}.tmp" "${PZC_PZC_CONFIG_FILE_V8}"

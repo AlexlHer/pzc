@@ -18,7 +18,7 @@ function _pzc_generate_config_general()
   # file_editor
   # ---------------------------------------
 
-  local PZC_FILE_EDITOR=$(jq -r '.pzc_config_general.file_editor' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_FILE_EDITOR=$(${PZC_JQ_BIN} -r '.pzc_config_general.file_editor' ${PZC_PZC_CONFIG_FILE_V8})
   if [[ "${PZC_FILE_EDITOR}" == "" ]] || [[ "${PZC_FILE_EDITOR}" == "null" ]]
   then
     PZC_FILE_EDITOR='vim'
@@ -31,7 +31,7 @@ function _pzc_generate_config_general()
   # disable_welcome
   # ---------------------------------------
 
-  local PZC_DISABLE_WELCOME=$(jq -r '.pzc_config_general.disable_welcome' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_DISABLE_WELCOME=$(${PZC_JQ_BIN} -r '.pzc_config_general.disable_welcome' ${PZC_PZC_CONFIG_FILE_V8})
   if [[ ${PZC_DISABLE_WELCOME} = true ]]
   then
     echo "local _PZC_DISABLE_WELCOME=1" >> ${PZC_PZC_CONFIG_FILE}
@@ -43,7 +43,7 @@ function _pzc_generate_config_general()
   # log_info
   # ---------------------------------------
 
-  local PZC_LOG_INFO=$(jq -r '.pzc_config_general.log_info' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_LOG_INFO=$(${PZC_JQ_BIN} -r '.pzc_config_general.log_info' ${PZC_PZC_CONFIG_FILE_V8})
   if [[ ${PZC_LOG_INFO} = false ]]
   then
     echo "PZC_LOG_INFO=0" >> ${PZC_PZC_CONFIG_FILE}
@@ -57,7 +57,7 @@ function _pzc_generate_config_general()
   # log_warning
   # ---------------------------------------
 
-  local PZC_LOG_WARNING=$(jq -r '.pzc_config_general.log_warning' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_LOG_WARNING=$(${PZC_JQ_BIN} -r '.pzc_config_general.log_warning' ${PZC_PZC_CONFIG_FILE_V8})
   if [[ ${PZC_LOG_WARNING} = false ]]
   then
     echo "PZC_LOG_WARNING=0" >> ${PZC_PZC_CONFIG_FILE}
@@ -71,7 +71,7 @@ function _pzc_generate_config_general()
   # log_error
   # ---------------------------------------
 
-  local PZC_LOG_ERROR=$(jq -r '.pzc_config_general.log_error' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_LOG_ERROR=$(${PZC_JQ_BIN} -r '.pzc_config_general.log_error' ${PZC_PZC_CONFIG_FILE_V8})
   if [[ ${PZC_LOG_ERROR} = false ]]
   then
     echo "PZC_LOG_ERROR=0" >> ${PZC_PZC_CONFIG_FILE}
@@ -85,7 +85,7 @@ function _pzc_generate_config_general()
   # log_debug
   # ---------------------------------------
 
-  local PZC_LOG_DEBUG=$(jq -r '.pzc_config_general.log_debug' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_LOG_DEBUG=$(${PZC_JQ_BIN} -r '.pzc_config_general.log_debug' ${PZC_PZC_CONFIG_FILE_V8})
   if [[ ${PZC_LOG_DEBUG} = true ]]
   then
     echo "PZC_LOG_DEBUG=1" >> ${PZC_PZC_CONFIG_FILE}
@@ -99,7 +99,7 @@ function _pzc_generate_config_general()
   # large_dir
   # ---------------------------------------
 
-  local PZC_LARGE_DIR=$(jq -r '.pzc_config_dirs.large_dir' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_LARGE_DIR=$(${PZC_JQ_BIN} -r '.pzc_config_dirs.large_dir' ${PZC_PZC_CONFIG_FILE_V8})
   if [[ "${PZC_LARGE_DIR}" == "" ]] || [[ "${PZC_LARGE_DIR}" == "null" ]]
   then
     PZC_LARGE_DIR='${HOME}'
@@ -112,7 +112,7 @@ function _pzc_generate_config_general()
   # tmp_dir
   # ---------------------------------------
 
-  local PZC_TMP_DIR=$(jq -r '.pzc_config_dirs.tmp_dir' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_TMP_DIR=$(${PZC_JQ_BIN} -r '.pzc_config_dirs.tmp_dir' ${PZC_PZC_CONFIG_FILE_V8})
   if [[ "${PZC_TMP_DIR}" == "" ]] || [[ "${PZC_TMP_DIR}" == "null" ]]
   then
     if [[ -v TMPDIR ]]
@@ -130,7 +130,7 @@ function _pzc_generate_config_general()
   # work_dir
   # ---------------------------------------
 
-  local PZC_WORK_DIR=$(jq -r '.pzc_config_dirs.work_dir' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_WORK_DIR=$(${PZC_JQ_BIN} -r '.pzc_config_dirs.work_dir' ${PZC_PZC_CONFIG_FILE_V8})
   if [[ "${PZC_WORK_DIR}" == "" ]] || [[ "${PZC_WORK_DIR}" == "null" ]]
   then
     PZC_WORK_DIR='${LARGE_DIR}/work'
@@ -143,7 +143,7 @@ function _pzc_generate_config_general()
   # build_dir
   # ---------------------------------------
 
-  local PZC_BUILD_DIR=$(jq -r '.pzc_config_dirs.build_dir' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_BUILD_DIR=$(${PZC_JQ_BIN} -r '.pzc_config_dirs.build_dir' ${PZC_PZC_CONFIG_FILE_V8})
   if [[ "${PZC_BUILD_DIR}" == "" ]] || [[ "${PZC_BUILD_DIR}" == "null" ]]
   then
     PZC_BUILD_DIR='${LARGE_DIR}/build'
@@ -156,7 +156,7 @@ function _pzc_generate_config_general()
   # install_dir
   # ---------------------------------------
 
-  local PZC_INSTALL_DIR=$(jq -r '.pzc_config_dirs.install_dir' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_INSTALL_DIR=$(${PZC_JQ_BIN} -r '.pzc_config_dirs.install_dir' ${PZC_PZC_CONFIG_FILE_V8})
   if [[ "${PZC_INSTALL_DIR}" == "" ]] || [[ "${PZC_INSTALL_DIR}" == "null" ]]
   then
     PZC_INSTALL_DIR='${LARGE_DIR}/install'
@@ -169,7 +169,7 @@ function _pzc_generate_config_general()
   # envi_dir
   # ---------------------------------------
 
-  local PZC_ENVI_DIR=$(jq -r '.pzc_config_dirs.envi_dir' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_ENVI_DIR=$(${PZC_JQ_BIN} -r '.pzc_config_dirs.envi_dir' ${PZC_PZC_CONFIG_FILE_V8})
   if [[ "${PZC_ENVI_DIR}" == "" ]] || [[ "${PZC_ENVI_DIR}" == "null" ]]
   then
     PZC_ENVI_DIR='${LARGE_DIR}/environment'
@@ -182,7 +182,7 @@ function _pzc_generate_config_general()
   # ccache_dir
   # ---------------------------------------
 
-  local PZC_CCACHE_DIR=$(jq -r '.pzc_config_dirs.ccache_dir' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_CCACHE_DIR=$(${PZC_JQ_BIN} -r '.pzc_config_dirs.ccache_dir' ${PZC_PZC_CONFIG_FILE_V8})
   if [[ "${PZC_CCACHE_DIR}" == "" ]] || [[ "${PZC_CCACHE_DIR}" == "null" ]]
   then
     PZC_CCACHE_DIR='${BUILD_DIR}/ccache'

@@ -33,6 +33,10 @@ git pull
 git stash pop
 ```
 
+## Dependences
+
+- jq (https://github.com/jqlang/jq)
+
 ## Optional progs
 - oh-my-posh (https://github.com/JanDeDobbeleer/oh-my-posh)
 - eza (https://github.com/eza-community/eza)

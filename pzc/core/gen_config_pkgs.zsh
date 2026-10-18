@@ -18,10 +18,10 @@ function _pzc_generate_config_pkgs()
   # OhMyPosh
   # ---------------------------------------
 
-  local PZC_ENABLE_OMP=$(jq -r '.pzc_config_pkgs.oh_my_posh.enable' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_ENABLE_OMP=$(${PZC_JQ_BIN} -r '.pzc_config_pkgs.oh_my_posh.enable' ${PZC_PZC_CONFIG_FILE_V8})
   if [[ ${PZC_ENABLE_OMP} = true ]]
   then
-    local PZC_OMP_BIN=$(jq -r '.pzc_config_pkgs.oh_my_posh.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    local PZC_OMP_BIN=$(${PZC_JQ_BIN} -r '.pzc_config_pkgs.oh_my_posh.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_OMP_BIN}" == "null" ]]
     then
       PZC_OMP_BIN=""
@@ -60,7 +60,7 @@ function _pzc_generate_config_pkgs()
       _pzc_warning "Oh-My-Posh is not installed (https://github.com/JanDeDobbeleer/oh-my-posh). You can install Oh-My-Posh with Mise-en-place with the command 'pzc_install_omp' or disable Oh-My-Posh search in pzcrc."
     fi
 
-    local PZC_OMP_THEME_FILE=$(jq -r '.pzc_config_pkgs.oh_my_posh.theme_file' ${PZC_PZC_CONFIG_FILE_V8})
+    local PZC_OMP_THEME_FILE=$(${PZC_JQ_BIN} -r '.pzc_config_pkgs.oh_my_posh.theme_file' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_OMP_THEME_FILE}" == "null" ]]
     then
       PZC_OMP_THEME_FILE=""
@@ -91,11 +91,11 @@ function _pzc_generate_config_pkgs()
   # EZA-LS
   # ---------------------------------------
 
-  local PZC_ENABLE_EZA=$(jq -r '.pzc_config_pkgs.eza.enable' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_ENABLE_EZA=$(${PZC_JQ_BIN} -r '.pzc_config_pkgs.eza.enable' ${PZC_PZC_CONFIG_FILE_V8})
   local PZC_ALIAS_EZA=0
   if [[ ${PZC_ENABLE_EZA} = true ]]
   then
-    local PZC_EZA_BIN=$(jq -r '.pzc_config_pkgs.eza.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    local PZC_EZA_BIN=$(${PZC_JQ_BIN} -r '.pzc_config_pkgs.eza.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_EZA_BIN}" == "null" ]]
     then
       PZC_EZA_BIN=""
@@ -136,7 +136,7 @@ function _pzc_generate_config_pkgs()
       _pzc_warning "Eza is not installed (https://github.com/eza-community/eza). You can install eza with Mise-en-place with the command 'pzc_install_eza' or disable eza search in pzcrc."
     fi
 
-    local PZC_EZA_CONFIG_DIR=$(jq -r '.pzc_config_pkgs.eza.config_dir' ${PZC_PZC_CONFIG_FILE_V8})
+    local PZC_EZA_CONFIG_DIR=$(${PZC_JQ_BIN} -r '.pzc_config_pkgs.eza.config_dir' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_EZA_CONFIG_DIR}" == "null" ]]
     then
       PZC_EZA_CONFIG_DIR=""
@@ -172,11 +172,11 @@ function _pzc_generate_config_pkgs()
   # CCache
   # ---------------------------------------
 
-  local PZC_ENABLE_CCACHE=$(jq -r '.pzc_config_pkgs.ccache.enable' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_ENABLE_CCACHE=$(${PZC_JQ_BIN} -r '.pzc_config_pkgs.ccache.enable' ${PZC_PZC_CONFIG_FILE_V8})
   local PZC_ALIAS_CCACHE=0
   if [[ ${PZC_ENABLE_CCACHE} = true ]]
   then
-    local PZC_CCACHE_BIN=$(jq -r '.pzc_config_pkgs.ccache.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    local PZC_CCACHE_BIN=$(${PZC_JQ_BIN} -r '.pzc_config_pkgs.ccache.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_CCACHE_BIN}" == "null" ]]
     then
       PZC_CCACHE_BIN=""
@@ -230,11 +230,11 @@ function _pzc_generate_config_pkgs()
   # Mold
   # ---------------------------------------
 
-  local PZC_ENABLE_MOLD=$(jq -r '.pzc_config_pkgs.mold.enable' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_ENABLE_MOLD=$(${PZC_JQ_BIN} -r '.pzc_config_pkgs.mold.enable' ${PZC_PZC_CONFIG_FILE_V8})
 
   if [[ ${PZC_ENABLE_MOLD} = true ]]
   then
-    local PZC_MOLD_BIN=$(jq -r '.pzc_config_pkgs.mold.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    local PZC_MOLD_BIN=$(${PZC_JQ_BIN} -r '.pzc_config_pkgs.mold.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_MOLD_BIN}" == "null" ]]
     then
       PZC_MOLD_BIN=""
@@ -282,11 +282,11 @@ function _pzc_generate_config_pkgs()
   # Ninja
   # ---------------------------------------
 
-  local PZC_ENABLE_NINJA=$(jq -r '.pzc_config_pkgs.ninja.enable' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_ENABLE_NINJA=$(${PZC_JQ_BIN} -r '.pzc_config_pkgs.ninja.enable' ${PZC_PZC_CONFIG_FILE_V8})
 
   if [[ ${PZC_ENABLE_NINJA} = true ]]
   then
-    local PZC_NINJA_BIN=$(jq -r '.pzc_config_pkgs.ninja.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    local PZC_NINJA_BIN=$(${PZC_JQ_BIN} -r '.pzc_config_pkgs.ninja.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_NINJA_BIN}" == "null" ]]
     then
       PZC_NINJA_BIN=""
@@ -334,11 +334,11 @@ function _pzc_generate_config_pkgs()
   # CMake
   # ---------------------------------------
 
-  local PZC_ENABLE_CMAKE=$(jq -r '.pzc_config_pkgs.cmake.enable' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_ENABLE_CMAKE=$(${PZC_JQ_BIN} -r '.pzc_config_pkgs.cmake.enable' ${PZC_PZC_CONFIG_FILE_V8})
 
   if [[ ${PZC_ENABLE_CMAKE} = true ]]
   then
-    local PZC_CMAKE_BIN=$(jq -r '.pzc_config_pkgs.cmake.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    local PZC_CMAKE_BIN=$(${PZC_JQ_BIN} -r '.pzc_config_pkgs.cmake.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_CMAKE_BIN}" == "null" ]]
     then
       PZC_CMAKE_BIN=""
@@ -386,11 +386,11 @@ function _pzc_generate_config_pkgs()
   # Taskwarrior
   # ---------------------------------------
 
-  local PZC_ENABLE_TASK=$(jq -r '.pzc_config_pkgs.taskwarrior.enable' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_ENABLE_TASK=$(${PZC_JQ_BIN} -r '.pzc_config_pkgs.taskwarrior.enable' ${PZC_PZC_CONFIG_FILE_V8})
 
   if [[ ${PZC_ENABLE_TASK} = true ]]
   then
-    local PZC_TASK_BIN=$(jq -r '.pzc_config_pkgs.taskwarrior.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    local PZC_TASK_BIN=$(${PZC_JQ_BIN} -r '.pzc_config_pkgs.taskwarrior.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_TASK_BIN}" == "null" ]]
     then
       PZC_TASK_BIN=""
@@ -427,11 +427,11 @@ function _pzc_generate_config_pkgs()
   # Atuin
   # ---------------------------------------
 
-  local PZC_ENABLE_ATUIN=$(jq -r '.pzc_config_pkgs.atuin.enable' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_ENABLE_ATUIN=$(${PZC_JQ_BIN} -r '.pzc_config_pkgs.atuin.enable' ${PZC_PZC_CONFIG_FILE_V8})
   local PZC_ALIAS_ATUIN=0
   if [[ ${PZC_ENABLE_ATUIN} = true ]]
   then
-    local PZC_ATUIN_BIN=$(jq -r '.pzc_config_pkgs.atuin.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    local PZC_ATUIN_BIN=$(${PZC_JQ_BIN} -r '.pzc_config_pkgs.atuin.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_ATUIN_BIN}" == "null" ]]
     then
       PZC_ATUIN_BIN=""
@@ -472,7 +472,7 @@ function _pzc_generate_config_pkgs()
       _pzc_warning "Atuin is not installed (https://github.com/atuinsh/atuin). You can install atuin with Mise-en-place with the command 'pzc_install_atuin' or disable atuin search in pzcrc."
     fi
 
-    local PZC_ATUIN_CONFIG_DIR=$(jq -r '.pzc_config_pkgs.atuin.config_dir' ${PZC_PZC_CONFIG_FILE_V8})
+    local PZC_ATUIN_CONFIG_DIR=$(${PZC_JQ_BIN} -r '.pzc_config_pkgs.atuin.config_dir' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_ATUIN_CONFIG_DIR}" == "null" ]]
     then
       PZC_ATUIN_CONFIG_DIR=""
@@ -508,11 +508,11 @@ function _pzc_generate_config_pkgs()
   # Fzf
   # ---------------------------------------
 
-  local PZC_ENABLE_FZF=$(jq -r '.pzc_config_pkgs.fzf.enable' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_ENABLE_FZF=$(${PZC_JQ_BIN} -r '.pzc_config_pkgs.fzf.enable' ${PZC_PZC_CONFIG_FILE_V8})
   local PZC_ALIAS_FZF=0
   if [[ ${PZC_ENABLE_FZF} = true ]]
   then
-    local PZC_FZF_BIN=$(jq -r '.pzc_config_pkgs.fzf.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    local PZC_FZF_BIN=$(${PZC_JQ_BIN} -r '.pzc_config_pkgs.fzf.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_FZF_BIN}" == "null" ]]
     then
       PZC_FZF_BIN=""
@@ -566,11 +566,11 @@ function _pzc_generate_config_pkgs()
   # Yazi
   # ---------------------------------------
 
-  local PZC_ENABLE_YAZI=$(jq -r '.pzc_config_pkgs.yazi.enable' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_ENABLE_YAZI=$(${PZC_JQ_BIN} -r '.pzc_config_pkgs.yazi.enable' ${PZC_PZC_CONFIG_FILE_V8})
   local PZC_ALIAS_YAZI=0
   if [[ ${PZC_ENABLE_YAZI} = true ]]
   then
-    local PZC_YAZI_BIN=$(jq -r '.pzc_config_pkgs.yazi.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    local PZC_YAZI_BIN=$(${PZC_JQ_BIN} -r '.pzc_config_pkgs.yazi.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_YAZI_BIN}" == "null" ]]
     then
       PZC_YAZI_BIN=""
@@ -624,10 +624,10 @@ function _pzc_generate_config_pkgs()
   # Python
   # ---------------------------------------
 
-  local PZC_ENABLE_PYTHON=$(jq -r '.pzc_config_pkgs.python.enable' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_ENABLE_PYTHON=$(${PZC_JQ_BIN} -r '.pzc_config_pkgs.python.enable' ${PZC_PZC_CONFIG_FILE_V8})
   if [[ ${PZC_ENABLE_PYTHON} = true ]]
   then
-    local PZC_PYTHON_BIN=$(jq -r '.pzc_config_pkgs.python.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    local PZC_PYTHON_BIN=$(${PZC_JQ_BIN} -r '.pzc_config_pkgs.python.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_PYTHON_BIN}" == "null" ]]
     then
       PZC_PYTHON_BIN=""
@@ -679,7 +679,7 @@ function _pzc_generate_config_pkgs()
   # c_cxx_default_compiler
   # ---------------------------------------
 
-  local PZC_C_CXX_DEFAULT_COMPILER=$(jq -r '.pzc_config_compilers.c_cxx_default_compiler' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_C_CXX_DEFAULT_COMPILER=$(${PZC_JQ_BIN} -r '.pzc_config_compilers.c_cxx_default_compiler' ${PZC_PZC_CONFIG_FILE_V8})
   if [[ "${PZC_C_CXX_DEFAULT_COMPILER}" == "GCC" ]]
   then
     echo "local _PZC_C_CXX_DEFAULT_COMPILER=\"GCC\"" >> ${PZC_PZC_CONFIG_FILE}
@@ -695,13 +695,13 @@ function _pzc_generate_config_pkgs()
   # gcc
   # ---------------------------------------
 
-  local PZC_ENABLE_GCC=$(jq -r '.pzc_config_compilers.gcc.available' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_ENABLE_GCC=$(${PZC_JQ_BIN} -r '.pzc_config_compilers.gcc.available' ${PZC_PZC_CONFIG_FILE_V8})
   local PZC_C_GCC_BIN=""
   local PZC_CXX_GCC_BIN=""
 
   if [[ ${PZC_ENABLE_GCC} = true ]]
   then
-    PZC_C_GCC_BIN=$(jq -r '.pzc_config_compilers.gcc.c_executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    PZC_C_GCC_BIN=$(${PZC_JQ_BIN} -r '.pzc_config_compilers.gcc.c_executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_C_GCC_BIN}" == "null" ]]
     then
       PZC_C_GCC_BIN=""
@@ -733,7 +733,7 @@ function _pzc_generate_config_pkgs()
 
   if [[ ${PZC_ENABLE_GCC} = true ]]
   then
-    PZC_CXX_GCC_BIN=$(jq -r '.pzc_config_compilers.gcc.cc_executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    PZC_CXX_GCC_BIN=$(${PZC_JQ_BIN} -r '.pzc_config_compilers.gcc.cc_executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_CXX_GCC_BIN}" == "null" ]]
     then
       PZC_CXX_GCC_BIN=""
@@ -775,13 +775,13 @@ function _pzc_generate_config_pkgs()
   # clang
   # ---------------------------------------
 
-  local PZC_ENABLE_CLANG=$(jq -r '.pzc_config_compilers.clang.available' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_ENABLE_CLANG=$(${PZC_JQ_BIN} -r '.pzc_config_compilers.clang.available' ${PZC_PZC_CONFIG_FILE_V8})
   local PZC_C_CLANG_BIN=""
   local PZC_CXX_CLANG_BIN=""
 
   if [[ ${PZC_ENABLE_CLANG} = true ]]
   then
-    PZC_C_CLANG_BIN=$(jq -r '.pzc_config_compilers.clang.c_executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    PZC_C_CLANG_BIN=$(${PZC_JQ_BIN} -r '.pzc_config_compilers.clang.c_executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_C_CLANG_BIN}" == "null" ]]
     then
       PZC_C_CLANG_BIN=""
@@ -813,7 +813,7 @@ function _pzc_generate_config_pkgs()
   
   if [[ ${PZC_ENABLE_CLANG} = true ]]
   then
-    PZC_CXX_CLANG_BIN=$(jq -r '.pzc_config_compilers.clang.cc_executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    PZC_CXX_CLANG_BIN=$(${PZC_JQ_BIN} -r '.pzc_config_compilers.clang.cc_executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_CXX_CLANG_BIN}" == "null" ]]
     then
       PZC_CXX_CLANG_BIN=""
@@ -855,7 +855,7 @@ function _pzc_generate_config_pkgs()
   # gpu_default_compiler
   # ---------------------------------------
 
-  local PZC_GPU_DEFAULT_COMPILER=$(jq -r '.pzc_config_compilers.gpu_default_compiler' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_GPU_DEFAULT_COMPILER=$(${PZC_JQ_BIN} -r '.pzc_config_compilers.gpu_default_compiler' ${PZC_PZC_CONFIG_FILE_V8})
   if [[ "${PZC_GPU_DEFAULT_COMPILER}" == "NVCC" ]]
   then
     echo "PZC_GPU_DEFAULT_COMPILER=\"NVCC\"" >> ${PZC_PZC_CONFIG_FILE}
@@ -870,7 +870,7 @@ function _pzc_generate_config_pkgs()
   # gpu_target_arch
   # ---------------------------------------
 
-  local PZC_GPU_TARGET_ARCH=$(jq -r '.pzc_config_compilers.gpu_target_arch' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_GPU_TARGET_ARCH=$(${PZC_JQ_BIN} -r '.pzc_config_compilers.gpu_target_arch' ${PZC_PZC_CONFIG_FILE_V8})
   if [[ "${PZC_GPU_TARGET_ARCH}" != "" ]] && [[ "${PZC_GPU_TARGET_ARCH}" != "null" ]]
   then
     echo "PZC_GPU_TARGET_ARCH=\"${PZC_GPU_TARGET_ARCH}\"" >> ${PZC_PZC_CONFIG_FILE}
@@ -883,12 +883,12 @@ function _pzc_generate_config_pkgs()
   # nvcc
   # ---------------------------------------
 
-  local PZC_ENABLE_NVCC=$(jq -r '.pzc_config_compilers.nvcc.available' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_ENABLE_NVCC=$(${PZC_JQ_BIN} -r '.pzc_config_compilers.nvcc.available' ${PZC_PZC_CONFIG_FILE_V8})
   local PZC_NVCC_BIN=""
 
   if [[ ${PZC_ENABLE_NVCC} = true ]]
   then
-    PZC_NVCC_BIN=$(jq -r '.pzc_config_compilers.nvcc.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    PZC_NVCC_BIN=$(${PZC_JQ_BIN} -r '.pzc_config_compilers.nvcc.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_NVCC_BIN}" == "null" ]]
     then
       PZC_NVCC_BIN=""
@@ -925,7 +925,7 @@ function _pzc_generate_config_pkgs()
 
   if [[ ${PZC_ENABLE_NVCC} = true ]]
   then
-    local PZC_NVCC_HOST_COMPILER_BIN=$(jq -r '.pzc_config_compilers.nvcc.host_executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    local PZC_NVCC_HOST_COMPILER_BIN=$(${PZC_JQ_BIN} -r '.pzc_config_compilers.nvcc.host_executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_NVCC_HOST_COMPILER_BIN}" != "" ]] && [[ "${PZC_NVCC_HOST_COMPILER_BIN}" != "null" ]]
     then
       if [[ -e ${PZC_NVCC_HOST_COMPILER_BIN} ]] || [[ -x "$(command -v ${PZC_NVCC_HOST_COMPILER_BIN})" ]]
@@ -948,12 +948,12 @@ function _pzc_generate_config_pkgs()
   # sycl
   # ---------------------------------------
 
-  local PZC_ENABLE_SYCL=$(jq -r '.pzc_config_compilers.sycl.available' ${PZC_PZC_CONFIG_FILE_V8})
+  local PZC_ENABLE_SYCL=$(${PZC_JQ_BIN} -r '.pzc_config_compilers.sycl.available' ${PZC_PZC_CONFIG_FILE_V8})
   local PZC_SYCL_BIN=""
 
   if [[ ${PZC_ENABLE_SYCL} = true ]]
   then
-    PZC_SYCL_BIN=$(jq -r '.pzc_config_compilers.sycl.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    PZC_SYCL_BIN=$(${PZC_JQ_BIN} -r '.pzc_config_compilers.sycl.executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_SYCL_BIN}" == "null" ]]
     then
       PZC_SYCL_BIN=""
@@ -990,7 +990,7 @@ function _pzc_generate_config_pkgs()
 
   if [[ ${PZC_ENABLE_SYCL} = true ]]
   then
-    local PZC_SYCL_HOST_COMPILER_BIN=$(jq -r '.pzc_config_compilers.sycl.host_executable_path' ${PZC_PZC_CONFIG_FILE_V8})
+    local PZC_SYCL_HOST_COMPILER_BIN=$(${PZC_JQ_BIN} -r '.pzc_config_compilers.sycl.host_executable_path' ${PZC_PZC_CONFIG_FILE_V8})
     if [[ "${PZC_SYCL_HOST_COMPILER_BIN}" != "" ]] && [[ "${PZC_SYCL_HOST_COMPILER_BIN}" != "null" ]]
     then
       if [[ -e ${PZC_SYCL_HOST_COMPILER_BIN} ]] || [[ -x "$(command -v ${PZC_SYCL_HOST_COMPILER_BIN})" ]]

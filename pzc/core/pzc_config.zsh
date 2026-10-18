@@ -109,9 +109,42 @@ function pzc_config
 
 
 
+function _pzc_detect_jq
+{
+  if [[ -v PZC_JQ_BIN ]] && [[ -e ${PZC_JQ_BIN} ]]
+  then
+    _pzc_debug "PZC_JQ_BIN = ${PZC_JQ_BIN} (user defined)"
+    return 0
+
+  elif [[ -v PZC_JQ_BIN ]]
+  then
+    _pzc_warning "Your jq is not found. Search other jq."
+  fi
+
+  if [[ -x "$(command -v jq)" ]]
+  then
+    PZC_JQ_BIN=jq
+    _pzc_debug "jq found in PATH"
+    return 0
+  fi
+  
+  _PZC_FATAL_ERROR=1
+  return 0
+}
+
+
 
 function _pzc_config()
 {
+  _pzc_detect_jq
+  if [[ ${_PZC_FATAL_ERROR} = 1 ]]
+  then
+    _pzc_error "Error : jq must be installed"
+    _PZC_FATAL_ERROR=1
+    return 0
+  fi
+  unfunction _pzc_detect_jq
+
   if [[ ${_PZC_IS_DEV_VERSION} = 1 ]]
   then
     _pzc_warning "You using a development version of PZC, save your config files before continuing."
